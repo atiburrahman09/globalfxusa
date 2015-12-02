@@ -1,0 +1,16 @@
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\bin\globalfx.dll.config
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\bin\globalfx.dll
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\bin\globalfx.pdb
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\bin\Global.Core.dll
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\bin\Global.Core.pdb
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.csprojResolveAssemblyReference.cache
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.dll
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.pdb
+E:\Atib\Projects\globalfx\globalfx\globalfx\bin\globalfx.dll.config
+E:\Atib\Projects\globalfx\globalfx\globalfx\bin\globalfx.dll
+E:\Atib\Projects\globalfx\globalfx\globalfx\bin\globalfx.pdb
+E:\Atib\Projects\globalfx\globalfx\globalfx\bin\Global.Core.dll
+E:\Atib\Projects\globalfx\globalfx\globalfx\bin\Global.Core.pdb
+E:\Atib\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.csprojResolveAssemblyReference.cache
+E:\Atib\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.dll
+E:\Atib\Projects\globalfx\globalfx\globalfx\obj\Debug\globalfx.pdb

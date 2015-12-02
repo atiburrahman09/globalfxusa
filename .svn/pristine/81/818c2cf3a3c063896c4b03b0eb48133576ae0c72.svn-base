@@ -1,0 +1,357 @@
+﻿using System;
+using System.Data;
+using System.Web.UI;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+using System.Web.UI.WebControls;
+using System.Web;
+using System.IO;
+namespace globalfx.setting.User
+{
+    public partial class create : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                msgbox.Visible = false;
+
+                if (!IsPostBack)
+                {
+                    //  LoadUserGroups();
+                    // GetBranch();
+                    txtbxUserName.Focus();
+                    GetUserByGroupId();
+
+                }
+                if (GridViewForUser.Rows.Count > 0)
+                {
+                    GridViewForUser.UseAccessibleHeader = true;
+                    GridViewForUser.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+        private void GridviewHeadStyle()
+        {
+            if (GridViewForUser.Rows.Count > 0)
+            {
+                GridViewForUser.UseAccessibleHeader = true;
+                GridViewForUser.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+            }
+        }
+
+        private void GetUserByGroupId()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                UserBLL aUserBll = new UserBLL();
+                aUserBll.UserGroupId = "UG001";
+                dt = aUserBll.GetUserByGroupId(aUserBll);
+                if (dt.Rows.Count > 0)
+                {
+                    GridViewForUser.DataSource = dt;
+                    GridViewForUser.DataBind();
+                }
+                GridViewStyle();
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
+        }
+        private void GridViewStyle()
+        {
+            if (GridViewForUser.Rows.Count > 0)
+            {
+                GridViewForUser.UseAccessibleHeader = true;
+                GridViewForUser.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+
+
+        private void LoadUserGroups()
+        {
+
+            try
+            {
+
+                UserGroupBLL usergroupbll = new UserGroupBLL();
+                DataTable dt = usergroupbll.GetActiveUserGroupList();
+                drpdownGroup.DataTextField = "UserGroupName";
+                drpdownGroup.DataValueField = "UserGroupId";
+                drpdownGroup.DataSource = dt;
+                drpdownGroup.DataBind();
+                drpdownGroup.Items.Insert(0, "Select Group");
+                drpdownGroup.SelectedIndex = 0;
+                drpdownGroup.Items[0].Value = "";
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+
+        }
+
+        protected void txtbxEmailTextchanged(object sender, EventArgs e)
+        {
+            bool st = checkDuplicateUser();
+
+        }
+        private bool checkDuplicateUser()
+        {
+            bool isExits = false;
+            try
+            {
+                UserBLL userbll = new UserBLL();
+                if (userbll.CheckDuplicateUser(txtbxUserName.Text))
+                {
+                    msgbox.Attributes.Add("Class", "alert alert-warning");
+                    msgTitleLabel.Text = "Error!!";
+                    msgDetailLabel.Text = "User ID alredy exits!!!";
+                    msgbox.Visible = true;
+                    isExits = true;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+            return isExits;
+        }
+        protected void btnUserCreate_click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!checkDuplicateUser())
+                {
+
+                    UserBLL aUser = new UserBLL();
+                    LoginBll login = new LoginBll();
+                    aUser.UserId = txtbxUserName.Text.Trim();
+                    aUser.FirstName = txtbxUserName.Text.Trim();
+                    aUser.LastName = "";
+                    aUser.PassportNo = "";
+                    aUser.Address = "";
+                    aUser.Country = "";
+                    aUser.House = "";
+                    aUser.Street = "";
+                    aUser.Area = "";
+                    aUser.MobileNo = txtbxmobile.Text.Trim();
+                    aUser.Email = txtbxemail.Text.Trim();
+                    aUser.EmrName = "";
+                    aUser.EmrRelation = "";
+                    aUser.EmrAddress = "";
+                    aUser.EmrMobile = "";
+                    aUser.EmeEmail = "";
+                    aUser.EmeCountry = "";
+                    aUser.ActualPass = "";
+                    aUser.UserPin = passwordTextBox.Text;
+                    aUser.IsActive = "No";
+                    aUser.Isvarified = "Yes";
+                    aUser.Createdby = "";
+                    aUser.UserGroupId = drpdownGroup.SelectedValue;
+                    aUser.Certificate = "";
+                    aUser.Password = LumexLibraryManager.EncodeIntoMd5Hash("LTSsL[" + passwordTextBox.Text + "]0");
+                    aUser.ActualPass = passwordTextBox.Text;
+                    string IsUpload = photoUploadfn(aUser.Email);
+
+
+                    if (IsUpload == "")
+                    {
+                        msgbox.Attributes.Add("Class", "alert alert-warning");
+                        msgTitleLabel.Text = "Error!!!!";
+                        msgDetailLabel.Text = "Pleace Check File Extention or File size.You can only upload Image and size less than 128Kb";
+                        msgbox.Visible = true;
+                        string message = " <span class='actionTopic'>" + " Pleace Check File Extention or File size.You can only upload Image and size less than 128Kb</span>.";
+                        MyAlertBox("var callbackOk = function () { window.location = \"/setting/user/create.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                    }
+                    else
+                    {
+
+                        aUser.PerPhoto = IsUpload;
+                        bool status = aUser.SaveUserInfo();
+                        if (status)
+                        {
+
+                            //bool st = SendConformationEmail(userbll);
+                            //if (st)
+                            //{
+
+                            string message = " <span class='actionTopic'>" + "User Create Successfully</span>.";
+                            MyAlertBox("var callbackOk = function () { window.location = \"/setting/user/create.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                       
+                        
+                        
+                        }
+                        //else
+                        //{
+                        //    string message = " <span class='actionTopic'>" + "User Create Successfully.But Not Send Please Contact Your Admistration.</span>.";
+                        //    MyAlertBox("var callbackOk = function () { window.location = \"/setting/user/list.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                        //}
+                        //  }
+
+                        //    }
+
+
+
+
+
+                        //}
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+
+        }
+        //private bool SendConformationEmail(UserBLL userBll)
+        //{
+        //    bool mailSend = false;
+        //    try
+        //    {
+        //        Random random = new Random();
+        //        userBll.varifycode = random.Next(100000, 999998) + 1;
+        //        string key = lumexEncryptbll.addforvarifycore;
+        //        string encrypeteduid = lumexEncryptbll.EncryptRijndael(userBll.UserId + "#" + userBll.varifycode, key);
+        //        string url = HttpContext.Current.Request.Url.AbsoluteUri;
+        //        string[] Partsofurl = url.Split('/');
+        //        userBll.ActivationUrl = Server.HtmlEncode("http://" + Partsofurl[2] + "/varify/?uid=" + encrypeteduid);
+
+
+        //        MailContactBLL mail = new MailContactBLL();
+        //        mailSend = mail.sendemailtocompleteResigtration(userBll);
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string message = ex.Message;
+        //        if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+        //        MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+        //    }
+        //    return mailSend;
+        //}
+
+        private string photoUploadfn(string userId)
+        {
+            string result = "";
+            try
+            {
+
+
+                FileUpload FilePP = new FileUpload();
+                FilePP = fileupload;
+                if (FilePP.HasFile && FilePP.PostedFile.ContentLength <= 131072)
+                {
+
+                    string getExtention = Path.GetExtension(FilePP.FileName);
+
+                    if (getExtention == ".jpg" || getExtention == ".jpeg" || getExtention == ".png" || getExtention == ".gif")
+                    {
+
+                        // hidFileName.Value = filename;
+                        // string path = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings["AttachmentPath"] + "/ModuleContents/");
+                        string loc = "/UsersContents/" + userId + "/";
+                        string path = HttpContext.Current.Server.MapPath(loc);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        path = path + "profilephoto" + getExtention;
+
+                        FilePP.PostedFile.SaveAs(path);
+                        result = "profilephoto" + getExtention;
+
+                    }
+
+
+                }
+
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return result;
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+        protected void viewLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkBtn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+                Label lblUserId = (Label)GridViewForUser.Rows[row.RowIndex].FindControl("lblUserId");
+                LumexSessionManager.Add("UserIdForView", lblUserId.Text);
+                Response.Redirect("~/setting/User/userProfile.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning");
+                msgbox.Visible = true;
+                msgTitleLabel.Text = "Exception!!!";
+                msgDetailLabel.Text = ex.Message;
+            }
+        }
+        protected void EditLinkButton_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                UserBLL aUser = new UserBLL();
+                LinkButton lnkBtn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+
+
+                Label lblUserId = (Label)GridViewForUser.Rows[row.RowIndex].FindControl("lblUserId");
+                LumexSessionManager.Add("UserIdForUpdate", lblUserId.Text);
+                Response.Redirect("~/setting/User/UserInfoList.aspx");
+
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+    }
+}

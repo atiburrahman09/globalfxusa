@@ -1,0 +1,57 @@
+﻿using System.Data;
+using Lumex.Tech;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace globalfx
+{
+    public partial class Admin : System.Web.UI.MasterPage
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            string ActiveUser = (string)LumexSessionManager.Get("ActiveUserId");
+            string ActiveUserName = (string)LumexSessionManager.Get("ActiveUserName");
+            // lblloginby.Text = ActiveUserName;
+
+            //   string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            //  string path = HttpContext.Current.Request.Url.AbsolutePath;
+            //  string host = HttpContext.Current.Request.Url.Host;
+
+            if (!IsPostBack)
+            {
+                if (string.IsNullOrEmpty(ActiveUser))
+                {
+                    Response.Redirect("~/login.aspx");
+                }
+                else
+                {
+                    // ImgbtnHr_Click();
+                 //   PopulatSideberemenu();
+                    string userID = LumexSessionManager.Get("ActiveUserId").ToString();
+                  //  GetUserById(userID);
+
+                    DataTable dt = new DataTable();
+                    // TaskBLL taskbll = new TaskBLL();
+                    //dt = (DataTable)Session["MyTask"];
+                    //   dt = taskbll.GetMyTaskNotify();
+
+                    if (dt.Rows.Count > 0)
+                    {
+
+                        //rptrtasknotify.DataSource = dt;
+                        //rptrtasknotify.DataBind();
+                        //lblTaskToComplete.Text = dt.Rows.Count.ToString();
+                        //lblTaskNotify.Text = lblTaskToComplete.Text;
+
+                    }
+                    //   getNotification();
+                }
+            }
+        }
+    }
+}

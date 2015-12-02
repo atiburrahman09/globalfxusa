@@ -1,0 +1,178 @@
+﻿using Lumex.Tech;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Global.Core.DAL
+{
+    class StakeInfoDAL
+    {
+        //            @StakeName	nvarchar(100)	,
+        //@DailyAwardFrom	decimal(18, 2)	,
+        //@DailyAwardTo	decimal(18, 2)	,
+        //@Avarage	decimal(18, 2)	,
+        //@TotalDuration	decimal(18, 2)	,
+        //@BinaryCap	decimal(18, 2)	,
+        //@Parcentage	decimal(18, 2)	,
+        //@CreatedBy	varchar(50)	,
+        //@CreatedFrom	varchar(50)	
+        internal System.Data.DataTable SaveStaKeInfo(BLL.StakeInfoBLL stakeInfoBLL, LumexDBPlayer db)
+        {
+
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@StakeName", stakeInfoBLL.StakeName);
+                db.AddParameters("@Amount", stakeInfoBLL.Amount);
+                db.AddParameters("@DailyAwardFrom", stakeInfoBLL.DailyAwardFrom);
+                db.AddParameters("@DailyAwardTo", stakeInfoBLL.DailyAwardTo);
+                db.AddParameters("@Avarage", stakeInfoBLL.AvgAward);
+                db.AddParameters("@TotalDuration", stakeInfoBLL.TotalDuration);
+                db.AddParameters("@BinaryCap", stakeInfoBLL.BinaryCap);
+                db.AddParameters("@Parcentage", stakeInfoBLL.Parcentage);
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                dt = db.ExecuteDataTable("[INSERT_STAKE_INFO]", true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal void UpdateStakeInfo(BLL.StakeInfoBLL stakeInfoBLL, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@StakeId", stakeInfoBLL.StakeId);
+                db.AddParameters("@StakeName", stakeInfoBLL.StakeName);
+                db.AddParameters("@Amount", stakeInfoBLL.Amount);
+                db.AddParameters("@DailyAwardFrom", stakeInfoBLL.DailyAwardFrom);
+                db.AddParameters("@DailyAwardTo", stakeInfoBLL.DailyAwardTo);
+                db.AddParameters("@Avarage", stakeInfoBLL.AvgAward);
+                db.AddParameters("@TotalDuration", stakeInfoBLL.TotalDuration);
+                db.AddParameters("@BinaryCap", stakeInfoBLL.BinaryCap);
+                db.AddParameters("@Parcentage", stakeInfoBLL.Parcentage);
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                db.ExecuteDataTable("[UPDATE_STAKE_INFO]", true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        internal DataTable GetStakeInfoList(LumexDBPlayer db)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = db.ExecuteDataTable("[GET_STAKE_INFO_LIST]", false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal void SaveGeneratedPin(DataTable dt, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@StakeGen", dt);
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                db.ExecuteDataTable("INSERT_STAKE_PIN", true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        internal DataTable getGeneratedPinList(LumexDBPlayer db)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = db.ExecuteDataTable("[GET_STAKE_PIN_LIST]", false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal bool CheckDuplicateKey(string pinserial, LumexDBPlayer db)
+        {
+            bool status = false;
+            try
+            {
+                db.AddParameters("@StakeKey", pinserial);
+                DataTable dt = db.ExecuteDataTable("CHECK_DUPLICATE_STAKET_KEY", true);
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return status;
+        }
+
+        internal void UpdateStakePinActivation(string serial, string IsActive, LumexDBPlayer db)
+        {
+
+            try
+            {
+                db.AddParameters("@Serial", serial);
+                db.AddParameters("@IsActive", IsActive);
+                int i = db.ExecuteNonQuery("Update tblStakePin Set IsActive=@IsActive Where Serial = @Serial");
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        internal DataTable getStakePinListByOwner(string UserId, LumexDBPlayer db)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+                dt = db.ExecuteDataTable("SELECT [Serial],[StakeId],[dbo].[GetStakeNameByID]([StakeId]) as StakeName,[StakePin],[PinOwner],[SentTo],[IsActive],[IsUsed],[SendSMS] from tblStakePin where PinOwner=@UserId");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+
+    }
+}

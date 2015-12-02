@@ -1,0 +1,146 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.setting.User
+{
+    public partial class pinset : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                msgbox.Visible = false;
+
+                currentPinTextBox.Attributes.Add("autocomplete", "off");
+                newPinTextBox.Attributes.Add("autocomplete", "off");
+                confirmNewPinTextBox.Attributes.Add("autocomplete", "off");
+                checkuserPinchangevalidity();
+
+                if (!IsPostBack)
+                {
+                    currentPinTextBox.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+
+        private void checkuserPinchangevalidity()
+        {
+            try
+            {
+                UserBLL user = new UserBLL();
+
+                DataTable dt = user.checkuserPinchangevalidity((string)LumexSessionManager.Get("ActiveUserId"));
+
+                lblChangeCout.Text = dt.Rows[0]["ModifyCount"].ToString();
+                if (Convert.ToInt32(lblChangeCout.Text) > 3)
+                {
+                    if (dt.Rows[0]["IsPaid"].ToString() == "Yes")
+                    {
+                        currentPinTextBox.Enabled = false;  
+                    }
+                    
+                }
+                /// Check change conditaion now.
+
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void UpdatePin_Click(object sender, EventArgs e)
+        {
+            UserBLL user = new UserBLL();
+
+            try
+            {
+                if (string.IsNullOrEmpty(currentPinTextBox.Text.Trim()))
+                {
+                    msgbox.Visible = true; msgTitleLabel.Text = "Validation!!!"; msgDetailLabel.Text = "Current Pin field is required.";
+                    msgbox.Attributes.Add("Class", "alert alert-warning");
+                }
+                else if (string.IsNullOrEmpty(newPinTextBox.Text.Trim()))
+                {
+                    msgbox.Visible = true; msgTitleLabel.Text = "Validation!!!"; msgDetailLabel.Text = "New Pin field is required.";
+
+                    msgbox.Attributes.Add("Class", "alert alert-warning");
+                }
+                else if (string.IsNullOrEmpty(confirmNewPinTextBox.Text.Trim()))
+                {
+                    msgbox.Visible = true; msgTitleLabel.Text = "Validation!!!"; msgDetailLabel.Text = "Confirm New Pin field is required.";
+                    msgbox.Attributes.Add("Class", "alert alert-warning");
+                }
+                else if (newPinTextBox.Text.Trim() != confirmNewPinTextBox.Text.Trim())
+                {
+                    msgbox.Visible = true; msgTitleLabel.Text = "Validation!!!"; msgDetailLabel.Text = "New Pin & Confirm New Pin do not match.";
+                    msgbox.Attributes.Add("Class", "alert alert-warning");
+                }
+                else
+                {
+                    // user.UserId = LumexSessionManager.Get("ActiveLoginId").ToString();
+
+                    /*need to modify this validateUser. */
+                    if (user.varifypin((string)LumexSessionManager.Get("ActiveUserId"), currentPinTextBox.Text.Trim()))
+                    {
+
+                        string message = "Pin <span class='actionTopic'>Updated</span> Successfully.";
+                        MyAlertBox("var callbackOk = function () { MyOverlayStart(); window.location = \"/Logout.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                    }
+                    else
+                    {
+                        string message = "<span class='actionTopic'>Invalid</span> Current Pin. You can't change your pin.";
+                        MyAlertBox("ErrorAlert(\"" + "Process Failed" + "\", \"" + message + "\");");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+            finally
+            {
+                user = null;
+            }
+        }
+
+        protected void btnPayforPinGenerate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserAccountBLL AccountBll = new UserAccountBLL();
+
+                if (AccountBll.checkUserIncomeAmounttoActin(5,(string)LumexSessionManager.Get("ActiveUserId")))
+                {
+                    AccountBll.InsertReceivePaymentWhenPinChange();
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                //throw;
+            }
+        }
+    }
+}

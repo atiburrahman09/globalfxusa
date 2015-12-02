@@ -1,0 +1,155 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class activation : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsPostBack)
+                {
+
+
+
+                    loadtStakeList();
+                    GetUserPlacementInfoById((string) LumexSessionManager.Get("ActiveUserId"));
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+        }
+
+      
+
+        private void GetUserPlacementInfoById(string UserId)
+        {
+            try
+            {
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.GetUserPlacementInfoById(UserId);
+                if (dt.Rows.Count > 0)
+                {
+                    txtbxPlacementId.Text = dt.Rows[0]["PleacementId"].ToString();
+                    txtbxReferId.Text = dt.Rows[0]["RefferId"].ToString();
+                    ddlPosition.SelectedValue = dt.Rows[0]["PlacePosition"].ToString();
+
+                }
+                else
+                {
+                    // To do job
+                }
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void loadtStakeList()
+        {
+            DataTable dt = new DataTable();
+            StakeInfoBLL stakeInfo = new StakeInfoBLL();
+            try
+            {
+                dt = stakeInfo.GetStakeInfoList();
+                ddlStakeList.DataSource = dt;
+                ddlStakeList.DataTextField = "StakeName";
+                ddlStakeList.DataValueField = "StakeId";
+                ddlStakeList.DataBind();
+                ddlStakeList.Items.Insert(0, "Select Here..");
+                ddlStakeList.SelectedIndex = 0;
+                ddlStakeList.Items[0].Value = "";
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void txtbxStakeKey_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                StakeInfoBLL stakeInfo = new StakeInfoBLL();
+                if (stakeInfo.CheckStakeKeyAvailability(txtbxStakeKey.Text, (string)LumexSessionManager.Get("ActiveUserId"), ddlStakeList.SelectedValue))
+                {
+                    //  iconuserName.Attributes.Remove("class");
+                    iconStakeKey.Attributes.Add("class", "icon icon-ban-circle text-error");
+                    hdnStakeKey.Value = "1";
+                    txtbxStakeKey.Focus();
+                }
+                else
+                {
+                    // iconuserName.Attributes.Remove("class");
+                    iconStakeKey.Attributes.Add("class", "icon icon-ok-sign text-success");
+                    hdnStakeKey.Value = "0";
+                    txtbxUserPin.Focus();
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        protected void btnActivation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserBLL user = new UserBLL();
+                if (user.varifypin((string)LumexSessionManager.Get("ActiveUserId"), txtbxUserPin.Text))
+                {
+
+                    StakeInfoBLL aUser = new StakeInfoBLL();
+                    aUser.StakeId = LumexSessionManager.Get("ActiveUserId").ToString();
+                    aUser.Pin = txtbxUserPin.Text;
+                    aUser.Position = ddlPosition.SelectedValue;
+                    aUser.StakeName = ddlStakeList.SelectedValue;
+                    //                    [dbo].[Update_USER_ACCOUNT_ACTIVATION_BY_STAKE_KEY] 
+                    //@UserId	varchar(50)	,
+                    //@StakeId	nvarchar(10)	,
+                    //@StakeKey varchar(10),
+                    //@ActiveFrom varchar(50)
+
+                    //                [dbo].[INSERT_RECEIVE_PAYMENT_WHEN_COMMISSION] 
+
+                    //@UserId varchar(30),
+                    //@RefferId varchar(30),
+                    //@Commission decimal(18,2),
+                    //@CreatedFrom varchar(50)
+
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+    }
+}

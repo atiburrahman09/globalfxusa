@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Lumex.Tech;
+using Global.Core.BLL;
+
+namespace globalfx.a.initialdata
+{
+    public partial class initialDataElement : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                txtbxElementName.Focus();
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int check = 0;
+                initialDataBLL initialData = new initialDataBLL();
+
+                initialData.ElementDataName = txtbxElementName.Text.Trim();
+                initialData.ElementDataDescp = txtbxDescription.Text.Trim();
+                initialData.ElementGroupId = "";
+
+                if (checkDuplicateElementData(initialData))
+                {
+                    initialData.SaveLookUpElementData();
+                    check = 1;
+
+                }
+                if (check == 1)
+                {
+                    MyAlertBox("Data has been saved successfully!!");
+                }
+                else
+                {
+                    MyAlertBox("Data save failed");
+                }
+
+
+            }
+            catch (Exception)
+            {
+                    
+                throw;
+            }
+
+        }
+
+        private bool checkDuplicateElementData(initialDataBLL initialData)
+        {
+            bool status = false;
+            try
+            {
+
+                status = initialData.checkDuplicateLookupData();
+            }
+            catch (Exception)
+            {
+                    
+                //throw;
+            }
+            return status;
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void btnReject_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(Request.RawUrl);
+            txtbxElementName.Text = "";
+            txtbxDescription.Text = "";
+        }
+
+
+    }
+}

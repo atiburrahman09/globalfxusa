@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx
+{
+    public partial class passwordrecovary : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+
+        protected void btnSave_OnClick_Click(object sender, EventArgs e)
+        {
+            UserBLL aUser=new UserBLL();
+            aUser.UserId = txtbxUserId.Text.Trim();
+            aUser.MobileNo = txtbxMobileNo.Text.Trim();
+            DataTable dt=new DataTable();
+            dt= aUser.GetUserInfoById(aUser.UserId);
+            if (dt.Rows.Count > 0)
+            {
+                if (txtbxMobileNo.Text == dt.Rows[0]["MobileNo"].ToString()) 
+                {
+                    string message = " <span class='actionTopic'>" + " Your password has been sent to your email. " +
+                                          "</span>.";
+                    MyAlertBox(
+                        "var callbackOk = function () { window.location = \"passwordrecovary.aspx\"; }; SuccessAlert(\"" +
+                        "Process Succeed" + "\", \"" + message + "\", \"\");");
+                }
+                else
+                {
+                    string message = " <span class='actionTopic'>" + " Invalid Mobile Number " +
+                                          "</span>.";
+                    MyAlertBox(
+                        "var callbackOk = function () { window.location = \"passwordrecovary.aspx\"; }; SuccessAlert(\"" +
+                        "Process Succeed" + "\", \"" + message + "\", \"\");");
+                }
+            }
+            else
+            {
+                string message = " <span class='actionTopic'>" + " User Id Invalid " +
+                                          "</span>.";
+                MyAlertBox(
+                    "var callbackOk = function () { window.location = \"passwordrecovary.aspx\"; }; SuccessAlert(\"" +
+                    "Process Succeed" + "\", \"" + message + "\", \"\");");
+            }
+
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+    }
+}

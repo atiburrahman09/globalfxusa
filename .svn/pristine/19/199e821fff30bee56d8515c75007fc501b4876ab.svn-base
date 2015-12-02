@@ -1,0 +1,89 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="affiliate.aspx.cs" Inherits="globalfx.page.affiliate" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="aboutus investment">
+                <h2 class="text-center semi-bold">Affiliate program </h2>
+
+                <p>
+                    We developed a profitable and flexible affiliate program, which will allow you to earn, attracting new customers to <span class="semi-bold">GlobalFX</span> Company.
+                             It is enough to <a href="registration.aspx" class="more">sign up</a>, and sign in to your Profile.
+                </p>
+                <p>
+                    In «My affiliate program» section you will find everything you need for work:<br>
+                    1. <span class="semi-bold">GlobalFX</span> Company’s advertising banners.<br>
+                    2. Your affiliate link. Each person, who will access <span class="semi-bold">GlobalFX</span> Company website following your affiliate link and then sign up will be considered as your involved client (referral), and you will receive the relevant commission on every deposit made by your referrals. Ways to attract clients:<br>
+                    • On-line. Affiliate link can be used by you for attracting new clients via the Internet. You can place our banners, articles and other materials on your personal web site or blog,  paste affiliate link or advertisements in your messages (in e-mails, blogs, social nets, on forums etc.).
+                    <br>
+                    • Off-line. You can tell about <span class="semi-bold">GlobalFX</span> services to your friends, relatives, co-workers or other people, consult them and assist in signing up on our site.
+                       
+                </p>
+                <h4 class="semi-bold">Getting the affiliate fee.</h4>
+
+                <p>Detailed statistics on the attracted referrals and affiliate fee accrued on their deposits can be seen in your Profile.</p>
+
+                <p>
+                    The affiliate fee arrives to you automatically right at the moment when the referral’s deposit is credited on <span class="semi-bold">GlobalFX</span> Company account. The fee arrives directly to the Available account balance and can be withdrawn immediately.
+                       
+                </p>
+                <h4 class="semi-bold">Partnership categories.</h4>
+
+                <p>
+                    <span class="semi-bold">GlobalFX</span> Company developed different categories of partnership. We can offer you to select one of them: «Partner», «Consultant» or «Regional representative». The amount of fee is exactly the same for all categories of partners. However, «Consultants», and furthermore «Regional representatives» have much more opportunities to attract new clients, and, accordingly, to get more profit.
+                       
+                </p>
+                <p>
+                    <b class="semi-bold">Partner</b>. By registering on our site you will automatically receive the status of "Partner". In your Profile in «My affiliate program» section you will find an affiliate link, <span class="semi-bold">GlobalFX</span> Company banners, as well as detailed instructions and recommendations on advertising and promotion of our services to potential clients.
+                       
+                </p>
+                <p>
+                    <b class="semi-bold">Consultant</b>. To become a «Consultant» you need to make an application in your Profile on the page «My affiliate program». After that, you will get an appropriate status.
+                       
+                </p>
+                <p>
+                    What does the possession of the «Consultant» status give: on the page 
+                           
+                    <a href="contact.aspx" class="more">Contact Us</a> of our website there is a list of <span class="semi-bold">GlobalFX</span>  Company Consultants. Your contact details will be included in this list; there also will be a button placed for client registration via your affiliate link. When a potential client from your country (or even from your city) will need some advice on <span class="semi-bold">GlobalFX</span>  services (how to open an account, how to deposit/withdraw etc.) – he or she will appeal for informational support directly to you. And so you've already got your first referral!
+                       
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="getway">
+        <div class="container text-center ">
+            <ul>
+                <li><a href="#">
+                    <img src="../assets/img/cc/ico-american-express.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="../assets/img/cc/ico-discover.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="../assets/img/cc/ico-mastercard.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="../assets/img/cc/ico-paypal.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="../assets/img/cc/ico-visa.jpg" />
+                </a></li>
+            </ul>
+            <p>
+                Risk Warning: Trading on financial markets carries risks. Contracts for Difference (‘CFDs’) 
+                        are complex financial products that are traded on margin. Trading CFDs carries a high level 
+                        of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all
+                        investors because you may lose all your invested capital. You should not risk more than you are prepared to lose.
+                        Before deciding to trade, you need to ensure that you understand the risks involved taking into account your investment 
+                        objectives and level of experience
+                   
+            </p>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

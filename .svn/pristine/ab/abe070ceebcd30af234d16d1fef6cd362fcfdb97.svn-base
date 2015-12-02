@@ -1,0 +1,156 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="tree.aspx.cs" Inherits="globalfx.generic.tree" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <h3 class="text-center semi-bold">Geneology</h3>
+        <div class="row-fluid pop">
+
+            <p class="text-center">
+
+                <asp:ImageButton src="assets/img/user.png" ID="btnover" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn img-responsive" runat="server" />
+
+            </p>
+            <p class="text-center popname"><asp:Label ID="lvlpopName1" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+             
+            
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <p class="text-center">
+                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover1" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn popover1" runat="server" Text="" />
+
+                </p>
+                <p class="text-center popname"><asp:Label ID="lvlpopName2" runat="server" Text="Ayon Sikder"></asp:Label></p>
+               
+                <div class="row-fluid">
+                    <div class="span6">
+                        <p class="text-center">
+                            <asp:ImageButton src="assets/img/user.png" ID="btnpopover2" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+                        </p>
+                        <p class="text-center popname"><asp:Label ID="lvlpopName3" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                        
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover3" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName4" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="popover4" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName5" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <p class="text-center">
+                            <asp:ImageButton src="assets/img/user.png" ID="btnpopover5" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                        </p>
+                        <p class="text-center popname"><asp:Label ID="lvlpopName6" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                        
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover6" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName7" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover7" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName8" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="span6">
+                <p class="text-center">
+                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover8" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                </p>
+                <p class="text-center popname"><asp:Label ID="lvlpopName9" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+               
+                <div class="row-fluid">
+                    <div class="span6">
+                        <p class="text-center">
+                            <asp:ImageButton src="assets/img/user.png" ID="btnpopover9" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                        </p>
+                        <p class="text-center popname"><asp:Label ID="lvlpopName10" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                        
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover10" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName11" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover11" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName12" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span6">
+                        <p class="text-center">
+                            <asp:ImageButton src="assets/img/user.png" ID="btnpopover13" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                        </p>
+                        <p class="text-center popname"><asp:Label ID="lvlpopName13" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                        
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover14" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                  <p class="text-center popname">  <asp:Label ID="lvlpopName14" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                                
+                            </div>
+
+                            <div class="span6">
+                                <p class="text-center">
+                                    <asp:ImageButton src="assets/img/user.png" ID="btnpopover15" data-original-title="Name: Ayon Sikde" data-content="ID: 003, Email:abc@gmail.com" data-toggle="popover" class="btn" runat="server" Text="" />
+
+                                </p>
+                                <p class="text-center popname"><asp:Label ID="lvlpopName15" class="text-center popname" runat="server" Text="Ayon Sikder"></asp:Label></p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

@@ -1,0 +1,785 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E4AF606-8295-490B-A1B9-0D736EFB68CA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>globalfx</RootNamespace>
+    <AssemblyName>globalfx</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lumex.Tech, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\Document &amp; ETC\Document &amp; ETC\Content\DBBackup\Lumex.Tech_Secure (Default-develop)\Lumex.Tech.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\img\cover_pic.png" />
+    <Content Include="assets\img\others\bangladesh-flag.jpg" />
+    <Content Include="assets\css\AlertBox.css" />
+    <Content Include="assets\css\animate.min.css" />
+    <Content Include="assets\css\custom-icon-set.css" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\forex.css" />
+    <Content Include="assets\css\icon\1.png" />
+    <Content Include="assets\css\icon\2.png" />
+    <Content Include="assets\css\icon\top-tray.png" />
+    <Content Include="assets\css\icon\views.png" />
+    <Content Include="assets\css\responsive.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\img\1.png" />
+    <Content Include="assets\img\add_user.png" />
+    <Content Include="assets\img\advantage-arrow.png" />
+    <Content Include="assets\img\affilite1.png" />
+    <Content Include="assets\img\affilite2.png" />
+    <Content Include="assets\img\affilite3.png" />
+    <Content Include="assets\img\annual.png" />
+    <Content Include="assets\img\arrow-10x10.png" />
+    <Content Include="assets\img\arrows.png" />
+    <Content Include="assets\img\bankwire.png" />
+    <Content Include="assets\img\bb-block1.png" />
+    <Content Include="assets\img\big-horizontal-sep.png" />
+    <Content Include="assets\img\call.png" />
+    <Content Include="assets\img\carousel_item.png" />
+    <Content Include="assets\img\cc\ico-american-express.jpg" />
+    <Content Include="assets\img\cc\ico-discover.jpg" />
+    <Content Include="assets\img\cc\ico-mastercard.jpg" />
+    <Content Include="assets\img\cc\ico-paypal.jpg" />
+    <Content Include="assets\img\cc\ico-visa.jpg" />
+    <Content Include="assets\img\check.png" />
+    <Content Include="assets\img\chose.png" />
+    <Content Include="assets\img\egopay.png" />
+    <Content Include="assets\img\fin_stat.png" />
+    <Content Include="assets\img\footer.jpg" />
+    <Content Include="assets\img\header.jpg" />
+    <Content Include="assets\img\ico-stat.png" />
+    <Content Include="assets\img\ico-stat2.png" />
+    <Content Include="assets\img\icon_top.png" />
+    <Content Include="assets\img\invoicelogo.png" />
+    <Content Include="assets\img\livechat.png" />
+    <Content Include="assets\img\log.png" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo1.png" />
+    <Content Include="assets\img\mail.png" />
+    <Content Include="assets\img\men.png" />
+    <Content Include="assets\img\money2.png" />
+    <Content Include="assets\img\open-account.jpg" />
+    <Content Include="assets\img\others\acadia.jpg" />
+    <Content Include="assets\img\others\arches.jpg" />
+    <Content Include="assets\img\others\crater.jpg" />
+    <Content Include="assets\img\others\denali.jpg" />
+    <Content Include="assets\img\others\excommission.png" />
+    <Content Include="assets\img\others\flag-russia.gif" />
+    <Content Include="assets\img\others\Flag_of_Canada.svg.png" />
+    <Content Include="assets\img\others\Flag_of_Malaysia.png" />
+    <Content Include="assets\img\others\glacier.jpg" />
+    <Content Include="assets\img\others\grand.jpg" />
+    <Content Include="assets\img\others\great.jpg" />
+    <Content Include="assets\img\others\haleakala.jpg" />
+    <Content Include="assets\img\others\prcommission.png" />
+    <Content Include="assets\img\others\yellowstone.jpg" />
+    <Content Include="assets\img\others\zion.jpg" />
+    <Content Include="assets\img\percent.png" />
+    <Content Include="assets\img\pm.png" />
+    <Content Include="assets\img\portfolio2.png" />
+    <Content Include="assets\img\profiles\1.png" />
+    <Content Include="assets\img\profiles\2.png" />
+    <Content Include="assets\img\profiles\avatar.jpg" />
+    <Content Include="assets\img\profiles\avatar_small.jpg" />
+    <Content Include="assets\img\profiles\b.jpg" />
+    <Content Include="assets\img\profiles\c.jpg" />
+    <Content Include="assets\img\profiles\d.jpg" />
+    <Content Include="assets\img\profiles\e.jpg" />
+    <Content Include="assets\img\profiles\h.jpg" />
+    <Content Include="assets\img\regional.png" />
+    <Content Include="assets\img\romb.png" />
+    <Content Include="assets\img\run2.png" />
+    <Content Include="assets\img\safe2.png" />
+    <Content Include="assets\img\scalping-wars-home-banner_en.jpg" />
+    <Content Include="assets\img\Search.png" />
+    <Content Include="assets\img\slider\gold_banner.jpg" />
+    <Content Include="assets\img\slider\safe_big_cricket.jpg" />
+    <Content Include="assets\img\slider\scalping-wars.jpg" />
+    <Content Include="assets\img\social\social_icon1.png" />
+    <Content Include="assets\img\social\social_icon2.png" />
+    <Content Include="assets\img\social\social_icon3.png" />
+    <Content Include="assets\img\social\social_icon4.png" />
+    <Content Include="assets\img\solid.png" />
+    <Content Include="assets\img\tf.png" />
+    <Content Include="assets\img\user.png" />
+    <Content Include="assets\js\calender.js" />
+    <Content Include="assets\js\charts.js" />
+    <Content Include="assets\js\core.js" />
+    <Content Include="assets\js\dashboard.js" />
+    <Content Include="assets\js\datatables.js" />
+    <Content Include="assets\js\demo.js" />
+    <Content Include="assets\js\email_comman.js" />
+    <Content Include="assets\js\form_elements.js" />
+    <Content Include="assets\js\form_validations.js" />
+    <Content Include="assets\js\google_maps.js" />
+    <Content Include="assets\js\group_list.js" />
+    <Content Include="assets\js\icon.js" />
+    <Content Include="assets\js\JSLib.js" />
+    <Content Include="assets\js\login.js" />
+    <Content Include="assets\js\messages_notifications.js" />
+    <Content Include="assets\js\search_results.js" />
+    <Content Include="assets\js\tabs_accordian.js" />
+    <Content Include="assets\js\vector_maps.js" />
+    <Content Include="assets\plugins\boostrap-checkbox\css\bootstrap-checkbox.css" />
+    <Content Include="assets\plugins\boostrap-form-wizard\js\jquery.bootstrap.wizard.min.js" />
+    <Content Include="assets\plugins\boostrap-slider\css\slider.css" />
+    <Content Include="assets\plugins\boostrap-slider\js\bootstrap-slider.js" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\css\datepicker.css" />
+    <Content Include="assets\plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="assets\plugins\bootstrap-select2\select2.css" />
+    <Content Include="assets\plugins\bootstrap-select2\select2.min.js" />
+    <Content Include="assets\plugins\bootstrap-tag\bootstrap-tagsinput.css" />
+    <Content Include="assets\plugins\bootstrap-tag\bootstrap-tagsinput.min.js" />
+    <Content Include="assets\plugins\bootstrap-timepicker\css\bootstrap-timepicker.css" />
+    <Content Include="assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.min.js" />
+    <Content Include="assets\plugins\bootstrap-wysihtml5\bootstrap-wysihtml5.css" />
+    <Content Include="assets\plugins\bootstrap-wysihtml5\bootstrap-wysihtml5.js" />
+    <Content Include="assets\plugins\bootstrap-wysihtml5\wysihtml5-0.3.0.js" />
+    <Content Include="assets\plugins\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="assets\plugins\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\plugins\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\plugins\breakpoints.js" />
+    <Content Include="assets\plugins\datatables-responsive\css\datatables.responsive.css" />
+    <Content Include="assets\plugins\datatables-responsive\js\datatables.responsive.js" />
+    <Content Include="assets\plugins\datatables-responsive\js\lodash.min.js" />
+    <Content Include="assets\plugins\dropzone\css\dropzone.css" />
+    <Content Include="assets\plugins\dropzone\dropzone.min.js" />
+    <Content Include="assets\plugins\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\plugins\font-awesome\font\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="assets\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="assets\plugins\gritter\css\jquery.gritter.css" />
+    <Content Include="assets\plugins\ios-switch\ios7-switch.css" />
+    <Content Include="assets\plugins\ios-switch\ios7-switch.js" />
+    <Content Include="assets\plugins\jquery-1.8.3.min.js" />
+    <Content Include="assets\plugins\jquery-autonumeric\autoNumeric.js" />
+    <Content Include="assets\plugins\jquery-block-ui\jqueryblockui.js" />
+    <Content Include="assets\plugins\jquery-datatable\css\jquery.dataTables.css" />
+    <Content Include="assets\plugins\jquery-datatable\extra\js\TableTools.min.js" />
+    <Content Include="assets\plugins\jquery-datatable\js\jquery.dataTables.min.js" />
+    <Content Include="assets\plugins\jquery-easy-pie-chart\js\jquery.easypiechart.min.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.animator.min.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.min.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.orderBars.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.selection.min.js" />
+    <Content Include="assets\plugins\jquery-flot\jquery.flot.time.min.js" />
+    <Content Include="assets\plugins\jquery-gmap\gmaps.js" />
+    <Content Include="assets\plugins\jquery-inputmask\jquery.inputmask.min.js" />
+    <Content Include="assets\plugins\jquery-jvectormap\css\jquery-jvectormap-1.2.2.css" />
+    <Content Include="assets\plugins\jquery-jvectormap\js\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="assets\plugins\jquery-jvectormap\js\jquery-jvectormap-us-lcc-en.js" />
+    <Content Include="assets\plugins\jquery-jvectormap\js\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="assets\plugins\jquery-mixitup\jquery.mixitup.min.js" />
+    <Content Include="assets\plugins\jquery-morris-chart\css\morris.css" />
+    <Content Include="assets\plugins\jquery-morris-chart\js\morris.min.js" />
+    <Content Include="assets\plugins\jquery-nestable\jquery.nestable.css" />
+    <Content Include="assets\plugins\jquery-nestable\jquery.nestable.js" />
+    <Content Include="assets\plugins\jquery-numberAnimate\jquery.animateNumbers.js" />
+    <Content Include="assets\plugins\jquery-ricksaw-chart\css\rickshaw.css" />
+    <Content Include="assets\plugins\jquery-ricksaw-chart\js\d3.v2.js" />
+    <Content Include="assets\plugins\jquery-ricksaw-chart\js\raphael-min.js" />
+    <Content Include="assets\plugins\jquery-ricksaw-chart\js\rickshaw.min.js" />
+    <Content Include="assets\plugins\jquery-slider\css\jquery.sidr.light.css" />
+    <Content Include="assets\plugins\jquery-slider\jquery.sidr.min.js" />
+    <Content Include="assets\plugins\jquery-slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="assets\plugins\jquery-sparkline\jquery-sparkline.js" />
+    <Content Include="assets\plugins\jquery-superbox\css\style.css" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-1.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-10.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-11.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-12.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-13.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-14.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-15.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-16.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-17.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-18.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-19.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-2.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-20.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-21.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-22.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-23.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-24.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-3.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-4.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-5.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-6.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-7.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-8.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\img\superbox\superbox-thumb-9.jpg" />
+    <Content Include="assets\plugins\jquery-superbox\js\superbox.js" />
+    <Content Include="assets\plugins\jquery-ui-touch\jquery.ui.touch-punch.min.js" />
+    <Content Include="assets\plugins\jquery-ui\jquery-ui-1.10.1.custom.min.js" />
+    <Content Include="assets\plugins\jquery-unveil\jquery.unveil.min.js" />
+    <Content Include="assets\plugins\jquery-validation\js\jquery.validate.min.js" />
+    <Content Include="assets\plugins\modernizr.js" />
+    <Content Include="assets\plugins\pace\pace-theme-flash.css" />
+    <Content Include="assets\plugins\pace\pace.min.js" />
+    <Content Include="assets\plugins\skycons\skycons.js" />
+    <Content Include="a\account\activation.aspx" />
+    <Content Include="a\account\myaccount.aspx" />
+    <Content Include="a\account\withdraw.aspx" />
+    <Content Include="a\initialdata\initialDataElement.aspx" />
+    <Content Include="a\initialdata\initialDataGroup.aspx" />
+    <Content Include="a\stake\create.aspx" />
+    <Content Include="a\stake\pin.aspx" />
+    <Content Include="a\stake\stakekeylog.aspx" />
+    <Content Include="a\stake\stakekeymanage.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="Geneology\tree.aspx" />
+    <Content Include="index.aspx" />
+    <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
+    <Content Include="page\aboutUs.aspx" />
+    <Content Include="page\affiliate.aspx" />
+    <Content Include="page\contact.aspx" />
+    <Content Include="page\franchise.aspx" />
+    <Content Include="page\investment.aspx" />
+    <Content Include="page\product.aspx" />
+    <Content Include="page\registration.aspx" />
+    <Content Include="page\varify.aspx" />
+    <Content Include="page\withdraw.aspx" />
+    <Content Include="recoverypassword.aspx" />
+    <Content Include="setting\AppMenu\AdminMenuGroupList.aspx" />
+    <Content Include="setting\AppMenu\AdminMenuList.aspx" />
+    <Content Include="setting\AppMenu\AdminMenuSorting.aspx" />
+    <Content Include="setting\AppMenu\CreateMenu.aspx" />
+    <Content Include="setting\AppMenu\CreateMenuGroup.aspx" />
+    <Content Include="setting\AppMenu\MenuGroupList.aspx" />
+    <Content Include="setting\AppMenu\MenuList.aspx" />
+    <Content Include="setting\AppMenu\UpdateMenu.aspx" />
+    <Content Include="setting\AppMenu\UpdateMenuGroup.aspx" />
+    <Content Include="setting\UserGroup\Create.aspx" />
+    <Content Include="setting\UserGroup\DeletedList.aspx" />
+    <Content Include="setting\UserGroup\List.aspx" />
+    <Content Include="setting\UserGroup\ListView.aspx" />
+    <Content Include="setting\UserGroup\Update.aspx" />
+    <Content Include="setting\UserGroup\View.aspx" />
+    <Content Include="setting\UserPrivilege\PrivilegeUserList.aspx" />
+    <Content Include="setting\UserPrivilege\SetUserGroupMenu.aspx" />
+    <Content Include="setting\UserPrivilege\SetUserMenu.aspx" />
+    <Content Include="setting\UserPrivilege\UserPreviligeForBranch.aspx" />
+    <Content Include="setting\User\ChangePassword.aspx" />
+    <Content Include="setting\User\create.aspx" />
+    <Content Include="setting\User\DeletedList.aspx" />
+    <Content Include="setting\User\List.aspx" />
+    <Content Include="setting\User\pinset.aspx" />
+    <Content Include="setting\User\ResetUserPassword.aspx" />
+    <Content Include="setting\User\Update.aspx" />
+    <Content Include="setting\User\UserInfoList.aspx" />
+    <Content Include="setting\User\userProfile.aspx" />
+    <Content Include="setting\User\View.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="a\account\activation.aspx.cs">
+      <DependentUpon>activation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\account\activation.aspx.designer.cs">
+      <DependentUpon>activation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\account\myaccount.aspx.cs">
+      <DependentUpon>myaccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\account\myaccount.aspx.designer.cs">
+      <DependentUpon>myaccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\account\withdraw.aspx.cs">
+      <DependentUpon>withdraw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\account\withdraw.aspx.designer.cs">
+      <DependentUpon>withdraw.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\initialdata\initialDataElement.aspx.cs">
+      <DependentUpon>initialDataElement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\initialdata\initialDataElement.aspx.designer.cs">
+      <DependentUpon>initialDataElement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\initialdata\initialDataGroup.aspx.cs">
+      <DependentUpon>initialDataGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\initialdata\initialDataGroup.aspx.designer.cs">
+      <DependentUpon>initialDataGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\stake\create.aspx.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\stake\create.aspx.designer.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\stake\pin.aspx.cs">
+      <DependentUpon>pin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\stake\pin.aspx.designer.cs">
+      <DependentUpon>pin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\stake\stakekeylog.aspx.cs">
+      <DependentUpon>stakekeylog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\stake\stakekeylog.aspx.designer.cs">
+      <DependentUpon>stakekeylog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="a\stake\stakekeymanage.aspx.cs">
+      <DependentUpon>stakekeymanage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="a\stake\stakekeymanage.aspx.designer.cs">
+      <DependentUpon>stakekeymanage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Geneology\tree.aspx.cs">
+      <DependentUpon>tree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Geneology\tree.aspx.designer.cs">
+      <DependentUpon>tree.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\aboutUs.aspx.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\aboutUs.aspx.designer.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\affiliate.aspx.cs">
+      <DependentUpon>affiliate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\affiliate.aspx.designer.cs">
+      <DependentUpon>affiliate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\contact.aspx.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\contact.aspx.designer.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\franchise.aspx.cs">
+      <DependentUpon>franchise.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\franchise.aspx.designer.cs">
+      <DependentUpon>franchise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\investment.aspx.cs">
+      <DependentUpon>investment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\investment.aspx.designer.cs">
+      <DependentUpon>investment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\product.aspx.cs">
+      <DependentUpon>product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\product.aspx.designer.cs">
+      <DependentUpon>product.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\registration.aspx.cs">
+      <DependentUpon>registration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\registration.aspx.designer.cs">
+      <DependentUpon>registration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\varify.aspx.cs">
+      <DependentUpon>varify.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\varify.aspx.designer.cs">
+      <DependentUpon>varify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="page\withdraw.aspx.cs">
+      <DependentUpon>withdraw.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="page\withdraw.aspx.designer.cs">
+      <DependentUpon>withdraw.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="recoverypassword.aspx.cs">
+      <DependentUpon>recoverypassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recoverypassword.aspx.designer.cs">
+      <DependentUpon>recoverypassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuGroupList.aspx.cs">
+      <DependentUpon>AdminMenuGroupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuGroupList.aspx.designer.cs">
+      <DependentUpon>AdminMenuGroupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuList.aspx.cs">
+      <DependentUpon>AdminMenuList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuList.aspx.designer.cs">
+      <DependentUpon>AdminMenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuSorting.aspx.cs">
+      <DependentUpon>AdminMenuSorting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\AdminMenuSorting.aspx.designer.cs">
+      <DependentUpon>AdminMenuSorting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\CreateMenu.aspx.cs">
+      <DependentUpon>CreateMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\CreateMenu.aspx.designer.cs">
+      <DependentUpon>CreateMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\CreateMenuGroup.aspx.cs">
+      <DependentUpon>CreateMenuGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\CreateMenuGroup.aspx.designer.cs">
+      <DependentUpon>CreateMenuGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\MenuGroupList.aspx.cs">
+      <DependentUpon>MenuGroupList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\MenuGroupList.aspx.designer.cs">
+      <DependentUpon>MenuGroupList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\MenuList.aspx.cs">
+      <DependentUpon>MenuList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\MenuList.aspx.designer.cs">
+      <DependentUpon>MenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\UpdateMenu.aspx.cs">
+      <DependentUpon>UpdateMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\UpdateMenu.aspx.designer.cs">
+      <DependentUpon>UpdateMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\AppMenu\UpdateMenuGroup.aspx.cs">
+      <DependentUpon>UpdateMenuGroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\AppMenu\UpdateMenuGroup.aspx.designer.cs">
+      <DependentUpon>UpdateMenuGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\Create.aspx.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\Create.aspx.designer.cs">
+      <DependentUpon>Create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\DeletedList.aspx.cs">
+      <DependentUpon>DeletedList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\DeletedList.aspx.designer.cs">
+      <DependentUpon>DeletedList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\ListView.aspx.cs">
+      <DependentUpon>ListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\ListView.aspx.designer.cs">
+      <DependentUpon>ListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserGroup\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserGroup\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\PrivilegeUserList.aspx.cs">
+      <DependentUpon>PrivilegeUserList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\PrivilegeUserList.aspx.designer.cs">
+      <DependentUpon>PrivilegeUserList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\SetUserGroupMenu.aspx.cs">
+      <DependentUpon>SetUserGroupMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\SetUserGroupMenu.aspx.designer.cs">
+      <DependentUpon>SetUserGroupMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\SetUserMenu.aspx.cs">
+      <DependentUpon>SetUserMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\SetUserMenu.aspx.designer.cs">
+      <DependentUpon>SetUserMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\UserPreviligeForBranch.aspx.cs">
+      <DependentUpon>UserPreviligeForBranch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\UserPrivilege\UserPreviligeForBranch.aspx.designer.cs">
+      <DependentUpon>UserPreviligeForBranch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\create.aspx.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\create.aspx.designer.cs">
+      <DependentUpon>create.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\DeletedList.aspx.cs">
+      <DependentUpon>DeletedList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\DeletedList.aspx.designer.cs">
+      <DependentUpon>DeletedList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\pinset.aspx.cs">
+      <DependentUpon>pinset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\pinset.aspx.designer.cs">
+      <DependentUpon>pinset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\ResetUserPassword.aspx.cs">
+      <DependentUpon>ResetUserPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\ResetUserPassword.aspx.designer.cs">
+      <DependentUpon>ResetUserPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\Update.aspx.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\Update.aspx.designer.cs">
+      <DependentUpon>Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\UserInfoList.aspx.cs">
+      <DependentUpon>UserInfoList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\UserInfoList.aspx.designer.cs">
+      <DependentUpon>UserInfoList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\userProfile.aspx.cs">
+      <DependentUpon>userProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\userProfile.aspx.designer.cs">
+      <DependentUpon>userProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="setting\User\View.aspx.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="setting\User\View.aspx.designer.cs">
+      <DependentUpon>View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site.Master" />
+    <Content Include="Admin.Master" />
+    <Content Include="assets\fonts\custom-set.woff" />
+    <Content Include="assets\plugins\font-awesome\font\cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff" />
+    <Content Include="assets\plugins\font-awesome\font\custom-set.woff" />
+    <Content Include="assets\plugins\font-awesome\font\DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff" />
+    <Content Include="assets\plugins\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="assets\plugins\font-awesome\font\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\plugins\font-awesome\font\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\plugins\font-awesome\font\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\plugins\font-awesome\font\k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff" />
+    <Content Include="assets\plugins\font-awesome\font\MTP_ySUJH_bn48VBG8sNSnhCUOGz7vYGh680lGh-uXM.woff" />
+    <None Include="Properties\PublishProfiles\globalfx.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Global.Core\Global.Core.csproj">
+      <Project>{907e5d12-357e-4899-a11c-1951cbdb7ed7}</Project>
+      <Name>Global.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3550</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3550/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

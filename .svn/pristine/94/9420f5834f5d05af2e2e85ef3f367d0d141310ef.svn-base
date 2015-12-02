@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Global.Core.DAL
+{
+    public class UserAccountDLL
+    {
+        internal System.Data.DataTable GetTransiction(BLL.UserAccountBLL userAccountBLL, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+        internal System.Data.DataTable GetUserPlacementInfoById(string UserId, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+                dt = db.ExecuteDataTable("SELECT  [Serial],[UserId],[RefferId],[PleacementId],[PlacePosition],[StakeId],[StakeKey],[JoinDate],[isChecked],[CheckedDate],[ActiveDate],[JoinFrom],[ActiveFrom] FROM [dbo].[tblStakeJoining] where [UserId] =@UserId ");
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+        
+    }
+}

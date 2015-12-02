@@ -1,0 +1,99 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="ResetUserPassword.aspx.cs" Inherits="globalfx.setting.User.ResetUserPassword" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+ <%--   <link href="/Content/Style/PasswordStrength.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Style/CSSPages/ResetUserPassword.css" rel="stylesheet" type="text/css" />--%>
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+        <ContentTemplate>
+            <div class="page-content">
+            <%--<div class="title-sitemap grid-12">
+                <h1 class="grid-6">
+                    <i>&#xf132;</i>Reset User Password<span>Reseting User Password of System</span></h1>
+                <div class="sitemap grid-6">
+                    <ul>
+                        <li><span>Acura</span><i>/</i></li>
+                        <li><a href="Default.aspx">Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>--%>
+            <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+                <div class="row">
+                    <div class="span12">
+                        
+                    
+            <div class="panel panel-primary">
+                <header class="panel-heading">
+                         <%--   <div class="widget-header-icon">
+                                </div>--%>
+                            <h3 id="H1" runat="server" class="widget-header-title">
+                               <i class="icon-refresh"></i> Reset User Password</h3>
+                        </header>
+                <div class="grid-body">
+                    
+                        <div class="span12">
+
+                               <div class="span4">
+                                        <div class="control-group">
+                                            <h5>
+                                                Branch</h5>
+                                            <asp:DropDownList ID="BranchDropDownList" class="form-control select2-container" runat="server"
+                                                AutoPostBack="true" OnSelectedIndexChanged="drpdownCenter_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                            </div>
+                       
+                        <div class="span12">
+                            <asp:GridView ID="userListGridView" runat="server" AutoGenerateColumns="false" CssClass="table table-hover">
+                                <Columns>
+                                     <asp:TemplateField Visible="false">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblUserId" runat="server" Text='<%# Eval("UserId")%>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                  
+                                    <asp:BoundField DataField="UserName" HeaderText="User Name" />
+                                    <asp:BoundField DataField="Email" HeaderText="Email"/>
+                                    <asp:BoundField DataField="UserGroupName" HeaderText="User Group Name" />
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnresetPass" runat="server" Text="Reset Password" ToolTip="Update" AlternateText="Edit Center"
+                                                CssClass="btn btn-primary" OnClick="btnresetPass_click" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                
+                               
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
+                        </div>
+                </div>
+            </div>
+        </ContentTemplate>
+        <Triggers>
+            <%--  <asp:AsyncPostBackTrigger ControlID="getUserInfoButton" EventName="Click" />
+            <asp:AsyncPostBackTrigger ControlID="passwordResetButton" EventName="Click" />--%>
+        </Triggers>
+    </asp:UpdatePanel>
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+
+    <script type="text/javascript">
+        $(function () {
+            $("#userListGridView").dataTable();
+        });
+    </script>
+</asp:Content>

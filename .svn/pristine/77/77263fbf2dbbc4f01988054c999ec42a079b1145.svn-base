@@ -1,0 +1,79 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="userAccount.aspx.cs" Inherits="globalfx.a.account.userAccount" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <h3 class="text-center">User<span class="semi-bold"> Account Info:</span></h3>
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icontimes"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px;">Income <span class="semi-bold">Wallet</span></legend>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <asp:Label class="text-center font20" ID="lvlIncome" runat="server" Text=""></asp:Label>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px">Deposit <span class="semi-bold">Wallet</span></legend>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                               <asp:Label class="text-center font20" ID="lvlDeposit" runat="server" Text=""></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px">Commission <span class="semi-bold">Wallet</span></legend>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <asp:Label class="text-center font20" ID="lvlCommision" runat="server" Text=""></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px">Fx <span class="semi-bold">Fund</span></legend>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <asp:Label class="text-center font20" ID="lvlFund" runat="server" Text=""></asp:Label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

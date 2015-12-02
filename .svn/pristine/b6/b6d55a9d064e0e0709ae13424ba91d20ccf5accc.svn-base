@@ -1,0 +1,1303 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="globalfx.index" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+
+    <div class="row text-center" style="padding-bottom: 10px">
+        <p>
+            <span class="semi-bold">Risk Warning:</span>  Trading on financial markets carries risks.
+             
+        </p>
+    </div>
+    <div id="myCarousel" class="carousel slide ">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item">
+                <a href="#">
+                    <img style="width: 100%; height: 350px;" src="assets/img/slider/gold_banner.jpg" /></a>
+                <div class="carousel-caption car">
+                    <p class="text-center">
+                        <a href="/login.aspx" class="btn btn-primary btn-block">Sign IN </a>
+                    </p>
+                    <p class="text-center">
+                        <a href="/page/registration.aspx" class="btn btn-success btn-block">Register </a>
+
+                    </p>
+                    <p class="text-center">
+                        <a href="index.aspx">
+                            <img width="180px" src="assets/img/logo1.png" /></a>
+                    </p>
+                </div>
+
+            </div>
+            <div class="item">
+                <a href="#">
+                    <img style="width: 100%; height: 350px;" src="assets/img/slider/safe_big_cricket.jpg" /></a>
+                <div class="carousel-caption car">
+                    <p class="text-center">
+                        <a href="/login.aspx" class="btn btn-primary btn-block">Sign IN </a>
+                    </p>
+                    <p class="text-center">
+                        <a href="/page/registration.aspx" class="btn btn-success btn-block">Register </a>
+
+                    </p>
+                    <p class="text-center">
+                        <a href="index.html">
+                            <img width="180px" src="assets/img/logo1.png" /></a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <a href="#">
+                    <img style="width: 100%; height: 350px;" src="assets/img/slider/scalping-wars.jpg" /></a>
+                <div class="carousel-caption  car">
+                    <p class="text-center">
+                        <a href="/login.aspx" class="btn btn-primary btn-block">Sign IN </a>
+                    </p>
+                    <p class="text-center">
+                        <a href="/page/registration.aspx" class="btn btn-success btn-block">Register </a>
+
+                    </p>
+                    <p class="text-center">
+                        <a href="index.html">
+                            <img width="180px" src="/assets/img/logo1.png" /></a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+
+    </div>
+    <div class="clearfix"></div>
+
+
+    <marquee class="marqueetext">
+         <div style="display: block-inline; height: 25px; overflow: hidden;margin-top:10px;margin-bottom: 10px" class="pointer">
+                    <div style="float: left; white-space: nowrap; margin-left: -61.0944%;" id="j-marquee">
+                        <div class="pointer" style="display: block-inline; width: 5500px; height: 25px;  ">
+                            <div id="j-rate-area" style="float: left; white-space: nowrap;" class="rate-info rate-area">
+                                        <span>
+        <i class="up"></i>
+        GBPZAR        <span style="color: #777;">0.01030</span>
+        <span style="color: #2B6933;">21.3572</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDDKK        <span style="color: #777;">0.00109</span>
+        <span style="color: #2B6933;">6.82519</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDCHF        <span style="color: #777;">0.00016</span>
+        <span style="color: #2B6933;">0.99286</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDCAD        <span style="color: #777;">0.00019</span>
+        <span style="color: #2B6933;">1.3062</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NZDJPY        <span style="color: #777;">0.01600</span>
+        <span style="color: #2B6933;">80.59</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NZDCHF        <span style="color: #777;">0.00014</span>
+        <span style="color: #2B6933;">0.66031</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPUSD        <span style="color: #777;">0.00022</span>
+        <span style="color: #2B6933;">1.54294</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPNZD        <span style="color: #777;">0.00037</span>
+        <span style="color: #2B6933;">2.32009</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPJPY        <span style="color: #777;">0.02700</span>
+        <span style="color: #2B6933;">186.957</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDJPY        <span style="color: #777;">0.01600</span>
+        <span style="color: #2B6933;">121.177</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDMXN        <span style="color: #777;">0.00773</span>
+        <span style="color: #2B6933;">16.41132</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        USDPLN        <span style="color: #777;">0.00222</span>
+        <span style="color: #2B6933;">3.88932</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPSEK        <span style="color: #777;">0.00598</span>
+        <span style="color: #2B6933;">13.21903</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AUDJPY        <span style="color: #777;">0.01800</span>
+        <span style="color: #2B6933;">87.291</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        AUDCHF        <span style="color: #777;">0.00018</span>
+        <span style="color: #2B6933;">0.7152</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        XAUUSD        <span style="color: #777;">0.46000</span>
+        <span style="color: #2B6933;">1118.76</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        XAUEUR        <span style="color: #777;">0.66000</span>
+        <span style="color: #2B6933;">1023.81</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        XAGEUR        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">14</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDSGD        <span style="color: #777;">0.00029</span>
+        <span style="color: #2B6933;">1.39682</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDSEK        <span style="color: #777;">0.00343</span>
+        <span style="color: #2B6933;">8.568</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPCHF        <span style="color: #777;">0.00026</span>
+        <span style="color: #2B6933;">1.53185</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPCAD        <span style="color: #777;">0.00037</span>
+        <span style="color: #2B6933;">2.01532</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDNOK        <span style="color: #777;">0.00462</span>
+        <span style="color: #2B6933;">8.5276</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CADCHF        <span style="color: #777;">0.00019</span>
+        <span style="color: #2B6933;">0.76021</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURCHF        <span style="color: #777;">0.00016</span>
+        <span style="color: #2B6933;">1.08511</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURJPY        <span style="color: #777;">0.01800</span>
+        <span style="color: #2B6933;">132.432</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURNOK        <span style="color: #777;">0.00454</span>
+        <span style="color: #2B6933;">9.32018</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURAUD        <span style="color: #777;">0.00021</span>
+        <span style="color: #2B6933;">1.51725</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NOKSEK        <span style="color: #777;">0.00127</span>
+        <span style="color: #2B6933;">1.00539</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CADJPY        <span style="color: #777;">0.01800</span>
+        <span style="color: #2B6933;">92.78</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        CHFJPY        <span style="color: #777;">0.02400</span>
+        <span style="color: #2B6933;">122.063</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPAUD        <span style="color: #777;">0.00032</span>
+        <span style="color: #2B6933;">2.14192</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURTRY        <span style="color: #777;">0.00086</span>
+        <span style="color: #2B6933;">3.10816</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AUDCAD        <span style="color: #777;">0.00019</span>
+        <span style="color: #2B6933;">0.94095</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPNOK        <span style="color: #777;">0.00970</span>
+        <span style="color: #2B6933;">13.1572</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURZAR        <span style="color: #777;">0.00666</span>
+        <span style="color: #2B6933;">15.1288</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURHKD        <span style="color: #777;">0.00150</span>
+        <span style="color: #2B6933;">8.47105</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDTRY        <span style="color: #777;">0.00057</span>
+        <span style="color: #2B6933;">2.843</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURSGD        <span style="color: #777;">0.00050</span>
+        <span style="color: #2B6933;">1.5266</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURCAD        <span style="color: #777;">0.00007</span>
+        <span style="color: #2B6933;">1.42747</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURUSD        <span style="color: #777;">0.00016</span>
+        <span style="color: #2B6933;">1.09297</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPTRY        <span style="color: #777;">0.00237</span>
+        <span style="color: #2B6933;">4.38882</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURGBP        <span style="color: #777;">0.00012</span>
+        <span style="color: #2B6933;">0.70844</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDHUF        <span style="color: #777;">0.12300</span>
+        <span style="color: #2B6933;">287.712</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDCZK        <span style="color: #777;">0.00830</span>
+        <span style="color: #2B6933;">24.778</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURPLN        <span style="color: #777;">0.00236</span>
+        <span style="color: #2B6933;">4.25062</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURNZD        <span style="color: #777;">0.00018</span>
+        <span style="color: #2B6933;">1.64342</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURSEK        <span style="color: #777;">0.00379</span>
+        <span style="color: #2B6933;">9.36405</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPSGD        <span style="color: #777;">0.00060</span>
+        <span style="color: #2B6933;">2.1551</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AUDUSD        <span style="color: #777;">0.00015</span>
+        <span style="color: #2B6933;">0.72043</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NZDUSD        <span style="color: #777;">0.00017</span>
+        <span style="color: #2B6933;">0.66515</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPDKK        <span style="color: #777;">0.00160</span>
+        <span style="color: #2B6933;">10.5297</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NZDCAD        <span style="color: #777;">0.00019</span>
+        <span style="color: #2B6933;">0.86872</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        AUDNZD        <span style="color: #777;">0.00026</span>
+        <span style="color: #2B6933;">1.08325</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NZDSGD        <span style="color: #777;">0.00038</span>
+        <span style="color: #2B6933;">0.92909</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        XAGUSD        <span style="color: #777;">0.02100</span>
+        <span style="color: #2B6933;">15.283</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURHUF        <span style="color: #777;">0.11800</span>
+        <span style="color: #2B6933;">314.444</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDZAR        <span style="color: #777;">0.00560</span>
+        <span style="color: #2B6933;">13.8432</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        USDHKD        <span style="color: #777;">0.00105</span>
+        <span style="color: #2B6933;">7.751</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        ASX200        <span style="color: #777;">1.50000</span>
+        <span style="color: #2B6933;">5243.1</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USDCNH        <span style="color: #777;">0.00120</span>
+        <span style="color: #2B6933;">6.351</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURRUB        <span style="color: #777;">0.45614</span>
+        <span style="color: #2B6933;">69.1875</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        USDRUB        <span style="color: #777;">0.40900</span>
+        <span style="color: #2B6933;">63.3045</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        EURCZK        <span style="color: #777;">0.00900</span>
+        <span style="color: #2B6933;">27.0804</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURDKK        <span style="color: #777;">0.00114</span>
+        <span style="color: #2B6933;">7.45913</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPHUF        <span style="color: #777;">0.36000</span>
+        <span style="color: #2B6933;">426.786</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPHKD        <span style="color: #777;">0.00270</span>
+        <span style="color: #2B6933;">11.9056</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURMXN        <span style="color: #777;">0.01040</span>
+        <span style="color: #2B6933;">18.77795</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPPLN        <span style="color: #777;">0.00306</span>
+        <span style="color: #2B6933;">5.77678</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPCZK        <span style="color: #777;">0.15300</span>
+        <span style="color: #2B6933;">38.508</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GBPMXN        <span style="color: #777;">0.01540</span>
+        <span style="color: #2B6933;">23.82545</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        USDRUR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">58.2062</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GBPRUR        <span style="color: #777;">0.10000</span>
+        <span style="color: #2B6933;">49.832</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EURRUR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">65.827</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GPS.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">41.45</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        NKE.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">73.94</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        WFC.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">49.09</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        STX.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">51.2</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        HSY.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">96.61</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        IBM.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">187.15</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        STT.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">63.19</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SLB.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">99.74</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MCD.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">103.15</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MCO.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">81.38</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        VLO.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">55.1</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        HAL.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">62.88</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AIG.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">52.5</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CAT.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">106.04</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        CME.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">68.69</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CVX.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">123.24</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        UPS.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">101.35</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        LFL.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">14.84</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        FDX.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">138.25</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        XOM.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">100.75</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        ENI.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">16.32</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AXP.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">87.51</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        MMM.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">141.16</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        TXN.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">45</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        PEP.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">86.54</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        TIF.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">90.48</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DIS.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">80.4</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        HOG.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">72.02</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        JPM.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">53.32</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        HPQ.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">32.52</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        TWX.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">68.88</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        PFE.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">29.13</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        USB.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">40.9</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        COP.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">78.06</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MAR.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">58.36</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        RSH.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">1.22</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        WMT.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">77.02</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        JNJ.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">100.59</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ANF.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">38.03</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        AON.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">86.65</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        VOLX..        <span style="color: #777;">0.10000</span>
+        <span style="color: #2B6933;">14.63</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        KMB.US        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">111.07</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CPB.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">45.12</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SQM.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">28.53</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        FCX.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">35</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        LXK.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">43.24</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MSI.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">66.28</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        MRK.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">55.88</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        BMY.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">48.79</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        BAC.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">14.51</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        DPS.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">57.2</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        AMD.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">4.02</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        XRX.US        <span style="color: #777;">0.01000</span>
+        <span style="color: #2B6933;">11.94</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CORN..        <span style="color: #777;">0.34000</span>
+        <span style="color: #2B6933;">482.67</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        ZINC..        <span style="color: #777;">7.00000</span>
+        <span style="color: #2B6933;">2063</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        BES.PT        <span style="color: #777;">0.00400</span>
+        <span style="color: #2B6933;">1</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        OML.UK        <span style="color: #777;">0.00600</span>
+        <span style="color: #2B6933;">2.007</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        PRU.UK        <span style="color: #777;">0.04500</span>
+        <span style="color: #2B6933;">14.035</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GFS.UK        <span style="color: #777;">0.00600</span>
+        <span style="color: #2B6933;">2.581</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ADN.UK        <span style="color: #777;">0.00600</span>
+        <span style="color: #2B6933;">4.177</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        LHA.DE        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">17.7</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        MRW.UK        <span style="color: #777;">0.00300</span>
+        <span style="color: #2B6933;">2.135</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        ACA.FR        <span style="color: #777;">0.01500</span>
+        <span style="color: #2B6933;">11.255</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        TRE.ES        <span style="color: #777;">0.05500</span>
+        <span style="color: #2B6933;">44.205</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        WTB.UK        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">39.21</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        SSE.UK        <span style="color: #777;">0.03000</span>
+        <span style="color: #2B6933;">15.67</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SIE.DE        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">96.14</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        SHP.UK        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">32.64</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        SGO.FR        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">41.405</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        SAN.FR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">77.2</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SAB.UK        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">32.595</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        RWE.DE        <span style="color: #777;">0.01500</span>
+        <span style="color: #2B6933;">26.73</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        RRS.UK        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">45.34</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        RIO.UK        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">32.84</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        PUB.FR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">59.33</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        AAL.UK        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">15.62</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        VOW.DE        <span style="color: #777;">0.20000</span>
+        <span style="color: #2B6933;">187.95</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        IAG.UK        <span style="color: #777;">0.00300</span>
+        <span style="color: #2B6933;">3.582</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BTA.UK        <span style="color: #777;">0.00500</span>
+        <span style="color: #2B6933;">3.663</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BNP.FR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">52.51</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DGE.UK        <span style="color: #777;">0.04500</span>
+        <span style="color: #2B6933;">19.44</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GSK.UK        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">16.405</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        ALU.FR        <span style="color: #777;">0.00400</span>
+        <span style="color: #2B6933;">2.843</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DAI.DE        <span style="color: #777;">0.07000</span>
+        <span style="color: #2B6933;">65.13</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GAS.ES        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">20.525</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BLT.UK        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">19.53</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        FRE.DE        <span style="color: #777;">0.30000</span>
+        <span style="color: #2B6933;">111.15</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MTS.ES        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">11.665</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        EGL.PT        <span style="color: #777;">0.00400</span>
+        <span style="color: #2B6933;">4.799</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BMW.DE        <span style="color: #777;">0.03000</span>
+        <span style="color: #2B6933;">86.29</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        RNO.FR        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">64.29</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        DPW.DE        <span style="color: #777;">0.03500</span>
+        <span style="color: #2B6933;">26.575</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SAF.FR        <span style="color: #777;">0.04500</span>
+        <span style="color: #2B6933;">47.11</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        SON.PT        <span style="color: #777;">0.00400</span>
+        <span style="color: #2B6933;">1.242</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SVT.UK        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">19.08</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        VOD.UK        <span style="color: #777;">0.00200</span>
+        <span style="color: #2B6933;">2.1645</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        CAP.FR        <span style="color: #777;">0.03500</span>
+        <span style="color: #2B6933;">48.8</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GKN.UK        <span style="color: #777;">0.00700</span>
+        <span style="color: #2B6933;">3.655</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        KAZ.UK        <span style="color: #777;">0.00700</span>
+        <span style="color: #2B6933;">2.504</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ARM.UK        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">8.62</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BKT.ES        <span style="color: #777;">0.01600</span>
+        <span style="color: #2B6933;">5.239</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ALO.FR        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">28.12</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        GLE.FR        <span style="color: #777;">0.01500</span>
+        <span style="color: #2B6933;">41.595</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        GRF.ES        <span style="color: #777;">0.04000</span>
+        <span style="color: #2B6933;">38.72</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ANA.ES        <span style="color: #777;">0.15000</span>
+        <span style="color: #2B6933;">57.23</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SAP.DE        <span style="color: #777;">0.03000</span>
+        <span style="color: #2B6933;">55.1</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        IFX.DE        <span style="color: #777;">0.00500</span>
+        <span style="color: #2B6933;">8.448</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        BAS.DE        <span style="color: #777;">0.06000</span>
+        <span style="color: #2B6933;">82.1</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        REE.ES        <span style="color: #777;">0.07000</span>
+        <span style="color: #2B6933;">59.44</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DB1.DE        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">53.28</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BPI.PT        <span style="color: #777;">0.03100</span>
+        <span style="color: #2B6933;">1.651</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        MAP.ES        <span style="color: #777;">0.00400</span>
+        <span style="color: #2B6933;">2.948</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ADM.UK        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">14.21</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ACS.ES        <span style="color: #777;">0.03500</span>
+        <span style="color: #2B6933;">30.51</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DTE.DE        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">12.565</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        IDR.ES        <span style="color: #777;">0.05500</span>
+        <span style="color: #2B6933;">12.805</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        JMT.PT        <span style="color: #777;">0.03500</span>
+        <span style="color: #2B6933;">12.67</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        SRP.UK        <span style="color: #777;">0.00600</span>
+        <span style="color: #2B6933;">3.505</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        AZN.UK        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">48.225</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        DBK.DE        <span style="color: #777;">0.02000</span>
+        <span style="color: #2B6933;">30.695</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        BEI.DE        <span style="color: #777;">0.05000</span>
+        <span style="color: #2B6933;">73.9</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        IAG.ES        <span style="color: #777;">0.00800</span>
+        <span style="color: #2B6933;">4.406</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        FCC.ES        <span style="color: #777;">0.02500</span>
+        <span style="color: #2B6933;">15.34</span>
+    </span>
+        <span>
+        <i class="up"></i>
+        ENG.ES        <span style="color: #777;">0.03500</span>
+        <span style="color: #2B6933;">21.08</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        NXT.UK        <span style="color: #777;">0.20000</span>
+        <span style="color: #2B6933;">63.9</span>
+    </span>
+        <span>
+        <i class="down"></i>
+        CBK.DE        <span style="color: #777;">0.01500</span>
+        <span style="color: #2B6933;">11.215</span>
+    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </marquee>
+    <div class="row" style="padding-top: 0px">
+        <p class="text-center">Global FX USA Invest Your deposit only in Primary Share and Bonds.</p>
+    </div>
+    <div class="aboutus investment">
+        <div class="container">
+
+            <div class="row">
+            </div>
+            <h2 class="text-center">What is <strong class="semi-bold">GlobalFX </strong></h2>
+            <div class="row-fluid">
+                <p class="text-justify">
+                    <strong class="semi-bold">GlobalFX </strong>have managed to conquer the hearts and minds of many of their clients 
+                            with the effort and dedication that they put into providing top notch services
+                            to their clients. For those who are in the market for a reliable and efficient 
+                            forex broker, GlobalFX certainly comes highly recommended
+                       
+                </p>
+
+                <p>
+                    GLOBAL FX Investment Company makes trading rewarding and enjoyable with its user-friendly environment, fast execution, expertise and reliability. Moreover, our clients do not have to make large deposits to enjoy considerable benefits. Our attractive promotional packages, contests and compensation services make financial trading exciting for everyone.
+                            Thanks to our extensive daily coverage of events affecting the Forex market, our clients are always on top of the latest financial news.
+                       
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="row-fluid ">
+            <div class="span4">
+                <div class="aboutus investment" style="min-height: 370px;">
+                    <h3 class="semi-bold text-center">GobalFX</h3>
+                    <h4 class="text-center">Trust asset management on the Forex market</h4>
+                    <p>
+                        <strong class="semi-bold">GobalFX</strong> offers trust asset management 
+                        services on the international exchange Forex market. 
+                        There is no need for you to trade yourself. Entrust this job to our professional traders.
+                       
+                    </p>
+                    <p>
+                        <img style="width: 100%; height: 128px" src="assets/img/men.png" />
+                    </p>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <p>
+                                <strong class="semi-bold">Investor —</strong><br />
+                                a person who provides
+                                <br />
+                                his or her funds in trust
+                            </p>
+                        </div>
+                        <div class="span6">
+                            <p class="text-right">
+                                <strong class="semi-bold">GobalFX—</strong>
+                                <br />
+                                company, performs trust<br />
+                                management market
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="aboutus investment" style="min-height: 370px;">
+                    <h3 class="semi-bold text-center">Annual financial statistics</h3>
+                    <h4 class="text-center">Trust asset management on the Forex market</h4>
+                    <p>
+                        History of <strong class="semi-bold">GodalFX</strong> activities on the Forex market over 
+                            the period of 2007 – 2013 (average daily profit amount in %).
+                       
+                    </p>
+                    <p>
+                        <img style="width: 100%;" src="assets/img/annual.png" />
+                    </p>
+                    <p class="note"><strong class="semi-bold">Note:</strong> To calculate your expected future return, please use our financial calculator.</p>
+                </div>
+            </div>
+
+            <div class="span4">
+                <div class="aboutus investment" style="min-height: 370px;">
+                    <h3 class="semi-bold pull-left">QUOTES</h3>
+                    <h4 class="pull-right">EURUSD</h4>
+                    <div class="clearfix"></div>
+                    <p style="background-color: black">
+                        <img style="width: 100%; height: 150px;" src="/assets/img/others/canvas1.png" />
+                    </p>
+                    <p>Past performance is not indicative of results.</p>
+                    <table id="quotelist" class="rate-info">
+                        <tbody>
+                            <tr>
+                                <th style="background-image: none;">&nbsp;</th>
+                                <th><strong>Currencies</strong></th>
+                                <th><strong>Bid</strong></th>
+                                <th><strong>Ask</strong></th>
+                            </tr>
+
+                            <tr>
+                                <td class="down"></td>
+                                <td>NZDUSD</td>
+                                <td>
+                                    <asp:Label ID="lvlNZDUSD" runat="server" Text="0.67282"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlNZDUSD2" runat="server" Text="0.67303"></asp:Label></td>
+                            </tr>
+
+                            <tr>
+                                <td class="down"></td>
+                                <td>EURUSD</td>
+                                <td>
+                                    <asp:Label ID="lvlEURUSD1" runat="server" Text="1.09925"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlEURUSD2" runat="server" Text="0.042571"></asp:Label></td>
+                            </tr>
+
+                            <tr>
+                                <td class="up"></td>
+                                <td>USDJPY</td>
+                                <td>
+                                    <asp:Label ID="lvlUSDJPY1" runat="server" Text="120.776"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlUSDJPY2" runat="server" Text="120.793"></asp:Label></td>
+                            </tr>
+
+                            <tr>
+                                <td class="down"></td>
+                                <td>USDCAD</td>
+                                <td>1.31081</td>
+                                <td>1.311</td>
+                            </tr>
+
+                            <tr>
+                                <td class="down"></td>
+                                <td>GBPUSD</td>
+                                <td>
+                                    <asp:Label ID="lvlGBPUSD1" runat="server" Text="1.5421"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlGBPUSD2" runat="server" Text="1.542177"></asp:Label></td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="up"></td>
+                                <td>USDCHF</td>
+                                <td>
+                                    <asp:Label ID="lvlUSDCHF1" runat="server" Text="0.963254"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlUSDCHF2" runat="server" Text="0.963258"></asp:Label></td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="down"></td>
+                                <td>AUDUSD</td>
+                                <td>
+                                    <asp:Label ID="lvlAUDUSD1" runat="server" Text="1.23541"></asp:Label></td>
+                                <td>
+                                    <asp:Label ID="lvlAUDUSD2" runat="server" Text="1.500061"></asp:Label></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="clearfix"></div>
+    <div class="getway row-fluid">
+        <div class="text-center ">
+            <ul>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-american-express.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-discover.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-mastercard.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-paypal.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-visa.jpg" />
+                </a></li>
+            </ul>
+            <p class="text-center">
+                Risk Warning: Trading on financial markets carries risks. Contracts for Difference (‘CFDs’) 
+                        are complex financial products that are traded on margin. Trading CFDs carries a high level 
+                        of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all
+                        investors because you may lose all your invested capital. You should not risk more than you are prepared to lose.
+                        Before deciding to trade, you need to ensure that you understand the risks involved taking into account your investment 
+                        objectives and level of experience
+                   
+            </p>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.carousel').carousel();
+        });
+    </script>
+</asp:Content>

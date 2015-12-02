@@ -1,0 +1,313 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="registration.aspx.cs" Inherits="globalfx.page.registration" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="UpdatePanel1" ChildrenAsTriggers="False">
+        <ContentTemplate>
+            <div class="grid simple">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="margin-top: 0px; padding-top: 20px;">Ragistration <span class="semi-bold">From</span></h4>
+                    <div class="form-no-horizontal-spacing" id="form_iconic_validation">
+                        <div class="row-fluid column-seperation">
+                            <div class="span6">
+                                <h4>Basic Information</h4>
+                                <div class="row-fluid">
+                                    <div class="span5">
+                                        <asp:HiddenField ID="hdnfldduplicate" runat="server" />
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i id="iconuserName" runat="server" class=""></i>
+                                                <asp:TextBox ID="txtbxUserName" AutoPostBack="True" placeholder="Login Name" required="required" CssClass="span12" runat="server" OnTextChanged="txtbxUserName_TextChanged"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" Display="Dynamic"
+                                                    runat="server" ErrorMessage="User Name must be 6-15 char. can user Alpha char &  _ and . "
+                                                    ControlToValidate="txtbxUserName"
+                                                    CssClass="text-error"
+                                                    ValidationExpression="^[a-zA-Z0-9](_(?!(\.|_))|\.(?!(_|\.))|[a-zA-Z0-9]){6,15}[a-zA-Z0-9]$">
+                                                </asp:RegularExpressionValidator>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxFirstName" required="required" placeholder="First Name" CssClass="span12" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span5">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxLastName" required="required" placeholder="Last Name" CssClass="span12" runat="server"></asp:TextBox>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxPassportNo" placeholder="Passport No. or ID" CssClass="span12" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxAddress" required="required" placeholder="Address" CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span5">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxHouse" required="required" placeholder="House No." CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxStreet" required="required" placeholder="Street No." CssClass="span12" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row-fluid">
+                                    <div class="span5">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxArea" placeholder="Area" CssClass="span12" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="span6">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+
+                                                <asp:DropDownList ID="ddlCountry" required="required" CssClass="span12" runat="server"></asp:DropDownList>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxCell" required="required" placeholder="Cell No." CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxCellConfrm" required="required" placeholder="Retype Cell no.(Match Verify)" CssClass="span12" runat="server"></asp:TextBox>
+                                                <asp:CompareValidator ID="CompareValidator2" runat="server" Display="Dynamic" EnableClientScript="true"
+                                                    ValidationGroup="edit" ControlToValidate="txtbxCell" ValidateEmptyText="true"
+                                                    ErrorMessage="Do not match." ControlToCompare="txtbxCellConfrm"
+                                                    ForeColor="Red" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxEmail" required="required" placeholder="Email" CssClass="span12" runat="server"></asp:TextBox>
+                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" Display="Dynamic"
+                                                    runat="server" ErrorMessage="Please Enter Valid Email ID-(sample@domain.com)"
+                                                    ControlToValidate="txtbxEmail"
+                                                    CssClass="text-error"
+                                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                                                </asp:RegularExpressionValidator>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtpxPasswordset" type="password" placeholder="Password" CssClass="span12" runat="server"></asp:TextBox>
+
+                                                <asp:RegularExpressionValidator ID="revChPassword" runat="server" Display="dynamic"
+                                                    ControlToValidate="txtpxPasswordset" ErrorMessage="Password must be 4 - 8 char and containing at least an alphabet and one Number"
+                                                    ValidationExpression="(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{4,8})$" CssClass="text-danger" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="retypePassword" type="password" placeholder="Retype Password(Match Verify)" CssClass="span12" runat="server"></asp:TextBox>
+                                                <asp:CompareValidator ID="cmvPasswordRpt" runat="server" Display="Dynamic" EnableClientScript="true"
+                                                    ValidationGroup="edit" ControlToValidate="txtpxPasswordset" ValidateEmptyText="true"
+                                                    ErrorMessage="Do not match." ControlToCompare="retypePassword"
+                                                    ForeColor="Red" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxPin" required="required" type="password" placeholder="PIN" CssClass="span12" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span11">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtpinConfirm" type="password" placeholder="Retype PIN(Match Verify)" CssClass="span12" runat="server"></asp:TextBox>
+                                                <asp:CompareValidator ID="CompareValidator1" runat="server" Display="Dynamic" EnableClientScript="true"
+                                                    ValidationGroup="edit" ControlToValidate="txtbxPin" ValidateEmptyText="true"
+                                                    ErrorMessage="Do not match." ControlToCompare="txtpinConfirm"
+                                                    ForeColor="Red" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="span6">
+
+                                <h4>Emergency Contract Information</h4>
+
+
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtcontactPerson" placeholder="Contact Person" CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxContactAddress" placeholder="Contact Address" CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:DropDownList ID="ddlContactRelation" class="span12" runat="server"></asp:DropDownList>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtbxContactMobile" placeholder="Contact Cell No" CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:TextBox ID="txtContactEmail" placeholder="Contact Email" CssClass="span12" runat="server"></asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="control-group">
+                                            <div class="input-with-icon  right">
+                                                <i class=""></i>
+                                                <asp:DropDownList ID="ddlContactCountry" class="span12" runat="server"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-fluid small-text">NOTE - All Above information is true and relaiable. </div>
+
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <div class="pull-left">
+                                <button class="btn btn-primary btn-cons" type="submit"><i class="icon-ok"></i>Save</button>
+                                <button class="btn btn-danger btn-cons" type="button">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+        <Triggers>
+            
+            <asp:AsyncPostBackTrigger ControlID="txtbxUserName" EventName="TextChanged" />
+        </Triggers>
+    </asp:UpdatePanel>
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

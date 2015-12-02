@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Lumex.Tech;
+using Global.Core.BLL;
+
+namespace globalfx.a.stake
+{
+    public partial class create : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                StakeInfoBLL stakeBll = new StakeInfoBLL();
+                stakeBll.StakeName = txtBxStakeName.Text.Trim();
+                stakeBll.DailyAwardFrom = txtBxAwardFrom.Text.Trim();
+                stakeBll.DailyAwardTo = txtBxAwardTo.Text.Trim();
+                stakeBll.AvgAward = txtBxAvarage.Text.Trim();
+                stakeBll.TotalDuration = txtBxDuration.Text.Trim();
+                stakeBll.BinaryCap = txtBxBainoryCap.Text.Trim();
+                stakeBll.Parcentage = txtBxCommission.Text.Trim();
+
+                if (btnSave.Text != "Update")
+                {
+
+                    stakeBll.SaveStakeInfo();
+                    string message = " <span class='actionTopic'>" + " Data Saved Successfully as Id: " +
+                                     stakeBll.StakeId + "</span>.";
+                    MyAlertBox(
+                        "var callbackOk = function () { window.location = \"/a/stake/create.aspx\"; }; SuccessAlert(\"" +
+                        "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                }
+                else
+                {
+
+                }
+
+
+
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

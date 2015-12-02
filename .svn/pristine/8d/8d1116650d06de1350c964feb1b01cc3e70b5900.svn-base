@@ -1,0 +1,134 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class paymentmethod : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void ddlType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlType.SelectedValue == "0")
+            {
+                divCard.Visible = false;
+                divCardExpireDate.Visible = false;
+                divCardOwner.Visible = false;
+                divOnlineEmail.Visible = false;
+                divOwnerName.Visible = false;
+                divBankName.Visible = true;
+                divBank.Visible = true;
+                divSwift.Visible = true;
+            }
+            else if (ddlType.SelectedValue == "1")
+            {
+                divCard.Visible = true;
+                divCardExpireDate.Visible = true;
+                divCardOwner.Visible = true;
+                divOnlineEmail.Visible = false;
+                divOwnerName.Visible = false;
+                divBankName.Visible = false;
+                divBank.Visible = false;
+                divSwift.Visible = false;
+            }
+            else if (ddlType.SelectedValue == "2")
+            {
+                divCard.Visible = false;
+                divCardExpireDate.Visible = false;
+                divCardOwner.Visible = false;
+                divOnlineEmail.Visible = true;
+                divOwnerName.Visible = true;
+                divBankName.Visible = false;
+                divBank.Visible = false;
+                divSwift.Visible = false;
+            }
+
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserAccountBLL account = new UserAccountBLL();
+               
+                account.Type = ddlType.SelectedValue;
+                account.TypeName = ddlType.SelectedItem.Text.ToString().Trim();
+                account.UserId = (string) LumexSessionManager.Get("ActiveUserId");
+                account.BankName = txtbxBankName.Text.Trim();
+                account.BankAccountNo = txtbxAccountNo.Text.Trim();
+                account.SwiftCode = txtbxSwiftCode.Text.Trim();
+                account.CardOwnerName = txtbxCardOwnerName.Text.Trim();
+                account.CardNumber = txtbxCardNumber.Text.Trim();
+                account.CardExpireDate = txtbxCardExpireDate.Text.Trim();
+                account.GateWayOwnerName = txtbxOwnerName.Text.Trim();
+                account.OnlineEmail = txtbxEmail.Text.Trim();
+                string message = "";
+                bool status = account.SavePaymentInfo();
+                if (status)
+                {
+                    message = "Your"+ddlType.SelectedItem.Text +"payment Information has been saved.";
+                    MyAlertBox(
+                        "var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/paymentmethod.aspx\"; }; WarningAlert(\"" +
+                        "Warning!!" + "\", \"" + message + "\", \"\");");
+                }
+
+                //if (ddlType.SelectedValue == "0")
+                //{
+                   
+                //    bool status = account.SavePaymentInfo(account);
+                //    if (status)
+                //    {
+                //        message = "Your payment Information has been saved.";
+                //        MyAlertBox(
+                //            "var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/paymentmethod.aspx\"; }; WarningAlert(\"" +
+                //            "Warning!!" + "\", \"" + message + "\", \"\");");
+                //    }
+                //}
+
+                //else if (ddlType.SelectedValue == "1")
+                //{
+                   
+                    
+                //    bool status = account.SavePaymentInfo(account);
+                //    if (status)
+                //    {
+                //        message = "Your payment Information has been saved.";
+                //        MyAlertBox(
+                //            "var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/paymentmethod.aspx\"; }; WarningAlert(\"" +
+                //            "Warning!!" + "\", \"" + message + "\", \"\");");
+                //    }
+                //}
+                //else if (ddlType.SelectedValue == "2")
+                //{
+                    
+                //    bool status = account.SavePaymentInfo(account);
+                //    if (status)
+                //    {
+                //        message = "Your payment Information has been saved.";
+                //        MyAlertBox(
+                //            "var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/paymentmethod.aspx\"; }; WarningAlert(\"" +
+                //            "Warning!!" + "\", \"" + message + "\", \"\");");
+                //    }
+                //}
+            }
+
+            catch (Exception)
+            {
+                //throw;
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+    }
+}

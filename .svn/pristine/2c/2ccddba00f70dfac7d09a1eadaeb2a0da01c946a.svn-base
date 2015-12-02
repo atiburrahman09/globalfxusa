@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lumex.Tech;
+using Global.Core.DAL;
+using System.Data;
+
+namespace Global.Core.BLL
+{
+   public class genologyBLL
+    {
+        public DataTable find(string UserId)
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.find(UserId,db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

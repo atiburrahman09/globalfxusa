@@ -1,0 +1,220 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class accounthistory : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsPostBack)
+                {
+                    getmyAccountSummary((string)LumexSessionManager.Get("ActiveUserId"));
+                }
+                GridViewGeneratedMoneyList.DataSource = null;
+                GridViewGeneratedMoneyList.DataBind();
+                GridDailyBonusGenerate.DataSource = null;
+                GridDailyBonusGenerate.DataBind();
+                GridCommision.DataSource = null;
+                GridCommision.DataBind();
+                if (Convert.ToInt32(ddlHistory.SelectedValue) == 0)
+                {
+                    if (GridViewGeneratedMoneyList.Rows.Count > 0)
+                    {
+                        GridViewGeneratedMoneyList.UseAccessibleHeader = true;
+                        GridViewGeneratedMoneyList.HeaderRow.TableSection = TableRowSection.TableHeader;
+                    }
+                }
+                else if (Convert.ToInt32(ddlHistory.SelectedValue) == 1)
+                {
+                    if (GridDailyBonusGenerate.Rows.Count > 0)
+                    {
+                        GridDailyBonusGenerate.UseAccessibleHeader = true;
+                        GridDailyBonusGenerate.HeaderRow.TableSection = TableRowSection.TableHeader;
+                    }
+                }
+                else if (Convert.ToInt32(ddlHistory.SelectedValue) == 2)
+                {
+                    if (GridCommision.Rows.Count > 0)
+                    {
+                        GridCommision.UseAccessibleHeader = true;
+                        GridCommision.HeaderRow.TableSection = TableRowSection.TableHeader;
+                    }
+                }
+                else
+                {
+
+                }
+
+
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void getmyAccountSummary(string UserId)
+        {
+            try
+            {
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.getMoneyGenerateAmountById(UserId);
+                DataTable dt1 = userAccount.getCommissionById(UserId);
+                DataTable dt2 = userAccount.getDailyBonusById(UserId);
+
+                if (dt.Rows.Count > 0)
+                {
+                    lvlMoneyGenerate.Text = dt.Rows[0][0].ToString();
+                }
+
+                if (dt1.Rows.Count > 0)
+                {
+                    lvlCommission.Text = dt1.Rows[0][0].ToString();
+                }
+
+                if (dt2.Rows.Count > 0)
+                {
+                    lvlDailyBonus.Text = dt2.Rows[0][0].ToString();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
+        }
+        protected void ViewButton_Click(object sender, EventArgs e)
+        {
+            UserAccountBLL userAccount = new UserAccountBLL();
+            userAccount.historyOf = Convert.ToInt32(ddlHistory.SelectedValue);
+
+            if (userAccount.historyOf == 0)
+            {
+                try
+                {
+                    DataTable dt = userAccount.getMoneyGenerateAmountByDateRangeById(fromDateTextBox.Text, toDateTextBox.Text, (string)LumexSessionManager.Get("ActiveUserId"));
+                    GridViewGeneratedMoneyList.DataSource = dt;
+                    GridViewGeneratedMoneyList.DataBind();
+
+                    if (dt.Rows.Count < 1)
+                    {
+                        msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Data Not Found!!!"; msgDetailLabel.Text = "";
+                    }
+                    GridviewHeadStyle();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+            }
+            else if (userAccount.historyOf == 1)
+            {
+
+                try
+                {
+                    DataTable dt = userAccount.getDailyBonusById((string)LumexSessionManager.Get("ActiveUserId"));
+                    DataTable newTable = new DataTable();
+                    DateTime StartDate = Convert.ToDateTime(fromDateTextBox.Text);
+                    DateTime EndDate = Convert.ToDateTime(toDateTextBox.Text);
+                    for (var i = StartDate; i <= EndDate; i = i.AddDays(1))
+                    {
+                        var j = 0;
+                        var amount = 0;
+                        while (i.CompareTo(Convert.ToDateTime(dt.Rows[j]["BonusDate"])) < 0)
+                        {
+                            amount += Convert.ToInt32(dt.Rows[j]["DailyBonus"]);
+                            j++;
+                        }
+
+                        newTable.Rows[0]["BonusDate"] = i;
+                        newTable.Rows[0]["DailyBonus"] = amount;
+                    }
+                    GridDailyBonusGenerate.DataSource = newTable;
+                    GridDailyBonusGenerate.DataBind();
+
+                    if (dt.Rows.Count < 1)
+                    {
+                        msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Data Not Found!!!"; msgDetailLabel.Text = "";
+                    }
+                    GridviewHeadStyle();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+            }
+            else if (userAccount.historyOf == 2)
+            {
+                try
+                {
+                    DataTable dt = userAccount.getMatchingCommissionListbyDateRangeByUserId(fromDateTextBox.Text, toDateTextBox.Text, (string)LumexSessionManager.Get("ActiveUserId"));
+                    GridCommision.DataSource = dt;
+                    GridCommision.DataBind();
+
+                    if (dt.Rows.Count < 1)
+                    {
+                        msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Data Not Found!!!"; msgDetailLabel.Text = "";
+                    }
+                    GridviewHeadStyle();
+                }
+                catch (Exception)
+                {
+
+                    //throw;
+                }
+
+            }
+            else
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Select a list!!!"; msgDetailLabel.Text = "";
+            }
+        }
+        private void GridviewHeadStyle()
+        {
+            if (Convert.ToInt32(ddlHistory.SelectedValue) == 0)
+            {
+                if (GridViewGeneratedMoneyList.Rows.Count > 0)
+                {
+                    GridViewGeneratedMoneyList.UseAccessibleHeader = true;
+                    GridViewGeneratedMoneyList.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                }
+            }
+            if (Convert.ToInt32(ddlHistory.SelectedValue) == 1)
+            {
+                if (GridDailyBonusGenerate.Rows.Count > 0)
+                {
+                    GridDailyBonusGenerate.UseAccessibleHeader = true;
+                    GridDailyBonusGenerate.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                }
+            }
+            if (Convert.ToInt32(ddlHistory.SelectedValue) == 2)
+            {
+                if (GridCommision.Rows.Count > 0)
+                {
+                    GridCommision.UseAccessibleHeader = true;
+                    GridCommision.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+                }
+            }
+
+        }
+
+    }
+}

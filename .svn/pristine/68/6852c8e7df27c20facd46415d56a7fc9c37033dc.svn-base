@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Lumex.Tech;
+using Global.Core.BLL;
+
+namespace globalfx.a.stake
+{
+    public partial class create : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                GetStakeInfoList();
+            }
+            msgbox.Visible = false;
+        }
+
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                StakeInfoBLL stakeBll = new StakeInfoBLL();
+                stakeBll.StakeName = txtBxStakeName.Text.Trim();
+                stakeBll.Amount = txtBxAmount.Text;
+                stakeBll.DailyAwardFrom = txtBxAwardFrom.Text.Trim();
+                stakeBll.DailyAwardTo = txtBxAwardTo.Text.Trim();
+                stakeBll.AvgAward = txtBxAvarage.Text.Trim();
+                stakeBll.TotalDuration = txtBxDuration.Text.Trim();
+                stakeBll.BinaryCap = txtBxBainoryCap.Text.Trim();
+                stakeBll.Parcentage = txtBxCommission.Text.Trim();
+
+                if (btnSave.Text != "Update")
+                {
+                    bool status = stakeBll.SaveStakeInfo();
+                    if (status)
+                    {
+
+                        string message = " <span class='actionTopic'>" + " Data Saved Successfully as Id: " +
+                                         stakeBll.StakeId + "</span>.";
+                        MyAlertBox(
+                            "var callbackOk = function () { window.location = \"/a/stake/create.aspx\"; }; SuccessAlert(\"" +
+                            "Process Succeed" + "\", \"" + message + "\", \"\");");
+                        GetStakeInfoList();
+                    }
+                    else
+                    {
+                        msgbox.Visible = true;
+                        msgTitleLabel.Text = "Duplicate Data";
+                        msgTitleLabel.Text = "This Group is already Added.";
+                    }
+                }
+                else
+                {
+                    stakeBll.StakeId = hdbFieldId.Value;
+                    stakeBll.UpdateStakeInfo();
+                    btnSave.Text = "Save";
+                    string message = " <span class='actionTopic'>" + " Data Update Successfully as Id: " +
+                                         stakeBll.StakeId + "</span>.";
+                    MyAlertBox(
+                        "var callbackOk = function () { window.location = \"/a/stake/create.aspx\"; }; SuccessAlert(\"" +
+                        "Process Succeed" + "\", \"" + message + "\", \"\");");
+                    GetStakeInfoList();
+                    txtBxStakeName.Text = "";
+                    txtBxAmount.Text = "";
+                    txtBxAwardFrom.Text = "";
+                    txtBxAwardTo.Text = "";
+                    txtBxAvarage.Text = "";
+                    txtBxDuration.Text = "";
+                    txtBxBainoryCap.Text = "";
+                    txtBxCommission.Text = "";
+                    GetStakeInfoList();
+
+                }
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+
+        private void GetStakeInfoList()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                StakeInfoBLL stakeInfo = new StakeInfoBLL();
+                dt = stakeInfo.GetStakeInfoList();
+                if (dt.Rows.Count > 0)
+                {
+                    gridviewStake.DataSource = dt;
+                    gridviewStake.DataBind();
+                }
+                GridViewStyle();
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+
+        private void GridViewStyle()
+        {
+            if (gridviewStake.Rows.Count > 0)
+            {
+                gridviewStake.UseAccessibleHeader = true;
+                gridviewStake.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+
+        protected void EditLinkButton_OnClick(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkButton = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkButton.NamingContainer;
+                hdbFieldId.Value = gridviewStake.Rows[row.RowIndex].Cells[0].Text.ToString();
+                txtBxStakeName.Text = gridviewStake.Rows[row.RowIndex].Cells[1].Text.ToString();
+                txtBxAmount.Text = gridviewStake.Rows[row.RowIndex].Cells[2].Text.ToString();
+                txtBxAwardFrom.Text = gridviewStake.Rows[row.RowIndex].Cells[3].Text.ToString();
+                txtBxAwardTo.Text = gridviewStake.Rows[row.RowIndex].Cells[4].Text.ToString();
+                txtBxAvarage.Text = gridviewStake.Rows[row.RowIndex].Cells[5].Text.ToString();
+                txtBxDuration.Text = gridviewStake.Rows[row.RowIndex].Cells[6].Text.ToString();
+                txtBxBainoryCap.Text = gridviewStake.Rows[row.RowIndex].Cells[7].Text.ToString();
+                txtBxCommission.Text = gridviewStake.Rows[row.RowIndex].Cells[8].Text.ToString();
+
+                btnSave.Text = "Update";
+
+            }
+            catch (Exception ex)
+            {
+
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+    }
+}

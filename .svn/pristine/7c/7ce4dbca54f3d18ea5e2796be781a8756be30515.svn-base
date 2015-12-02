@@ -1,0 +1,267 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="registration.aspx.cs" Inherits="globalfx.page.registration" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="grid simple">
+        <div class="grid-body no-border">
+            <h4 class="text-center" style="margin-top: 0px; padding-top: 20px;">Ragistration <span class="semi-bold">From</span></h4>
+            <form class="form-no-horizontal-spacing" id="form_iconic_validation">
+                <div class="row-fluid column-seperation">
+                    <div class="span6">
+                        <h4>Basic Information</h4>
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxUserName" placeholder="Login Name" required="required" CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span6">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxFirstName" placeholder="First Name" CssClass="span12" runat="server"></asp:TextBox>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxLastName" placeholder="Last Name" CssClass="span12" runat="server"></asp:TextBox>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxPassportNo" placeholder="Passport No. or ID" CssClass="span12" runat="server"></asp:TextBox>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxAddress" placeholder="Address" CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxHouse" placeholder="House No." CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span6">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxStreet" placeholder="Street No." CssClass="span12" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row-fluid">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxArea" placeholder="Area" CssClass="span12" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="span6">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxCountry" placeholder="Country" CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxCell" placeholder="Cell No." CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxCellConfrm" placeholder="Retype Cell no.(Match Verify)" CssClass="span12" runat="server"></asp:TextBox>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtbxEmail" placeholder="Email" CssClass="span12" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <asp:TextBox ID="txtpxPasswordset" type="password" placeholder="Password" CssClass="span12" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                          <asp:TextBox ID="retypePassword" placeholder="Retype Password(Match Verify)" CssClass="span12" runat="server"></asp:TextBox>
+
+                                        <input name=" retypePassword" id="retypePassword" type="password" class="span12" placeholder="Retype Password(Match Verify)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span11">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name=" pin" id="pin" type="password" class="span12" placeholder="PIN">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="span6">
+
+                        <h4>Emergency Contract Information</h4>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractName" id="contractName" type="text" class="span12" placeholder="Contract Name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractAdress" id="contractAdress" type="text" class="span12" placeholder="Contract Adress">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractRelation" id="contractRelation" type="text" class="span12" placeholder=" Relation">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractMobile" id="contractMobile" type="text" class="span12" placeholder=" Mobile">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractEmail" id="contractEmail" type="email" class="span12" placeholder=" Email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="control-group">
+                                    <div class="input-with-icon  right">
+                                        <i class=""></i>
+                                        <input name="contractCountry" id="contractCountry" type="text" class="span12" placeholder="Country">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid small-text">NOTE - Facts to be considered, Simply remove or edit this as for what you desire. Disabled font Color and size</div>
+
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="pull-right">
+                        <button class="btn btn-primary btn-cons" type="submit"><i class="icon-ok"></i>Save</button>
+                        <button class="btn btn-danger btn-cons" type="button">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

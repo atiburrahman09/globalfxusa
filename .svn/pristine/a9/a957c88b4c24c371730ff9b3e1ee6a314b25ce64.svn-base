@@ -1,0 +1,78 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="initialDataElement.aspx.cs" Inherits="globalfx.a.initialdata.initialDataElement" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="grid simple">
+        <div class="grid-body no-border">
+            <legend class="text-center" style="padding-top: 20px">Initial Data <span class="semi-bold">Group</span></legend>
+            
+                <div class="row-fluid">
+                    <div class="span8">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+                                <label>Element Name:</label>
+                                <asp:TextBox class="span12" ID="txtbxElementName" runat="server"  placeholder="Element Name"></asp:TextBox>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+                                <label>Group</label>
+                                <asp:DropDownList class="span12" ID="ddlGroup" runat="server">
+                                    <asp:ListItem Text="Group 1" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Group 1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Group 1" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Group 1" Value="3"></asp:ListItem>
+                                </asp:DropDownList>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span11">
+                        <label>Description</label>
+                        <asp:TextBox class="span12" ID="txtbxDescription" runat="server"  placeholder="Description"></asp:TextBox>
+                        
+                        <br />
+                        <asp:GridView ID="gvInitialDataElement" runat="server" AutoGenerateColumns="False"  Width="903px">
+                            <Columns>
+                                <asp:BoundField HeaderText="Element Name" />
+                                <asp:BoundField HeaderText="Group " />
+                                <asp:BoundField HeaderText="Description" />
+                                <asp:TemplateField></asp:TemplateField>
+                                <%-- <asp:TemplateField HeaderText="">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="EditDataImageButton" runat="server" ImageUrl="~/Content/Images/edit-icon_24.png"
+                                        ToolTip="Edit" AlternateText="Edit" OnClick="EditDepartmetImageButton_Click" />
+                                </ItemTemplate>
+                            </asp:TemplateField>--%>
+                            </Columns>
+                        </asp:GridView>
+                        <br />
+                        
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="pull-right">
+                        <asp:Button class="btn btn-primary btn-cons" ID="btnSave" runat="server"  Text="Save" OnClick="btnSave_Click" />
+                        <asp:Button class="btn btn-primary btn-cons" ID="btnReject" runat="server" Text="Reject" OnClick="btnReject_Click" />
+                        
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function pageLoad(sender, args){
+            $("#gvInitialDataElement").dataTable();
+        });
+    </script>
+</asp:Content>

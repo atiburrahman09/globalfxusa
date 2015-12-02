@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using Lumex.Tech;
+using Global.Core.DAL;
+
+namespace Global.Core.BLL
+{
+    public class LoginBll
+    {
+
+
+        public string UserPass { get; set; }
+
+        //public bool signin()
+        //{
+        //    try
+        //    {
+        //        LumexDBPlayer db = LumexDBPlayer.Start(true);
+        //        bool status = userregDal.signin(this, db);
+        //        db.Stop();
+        //        return status;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
+        public bool VerifyPassword()
+        {
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                LoginDal logdal = new LoginDal();
+
+                bool status = logdal.VerifyPassword(this, db);
+
+                db.Stop();
+
+                return status;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public LoginBll GetUserById(string userId)
+        {
+            LumexDBPlayer db = LumexDBPlayer.Start();
+            try
+            {
+                LoginBll user = LoginDal.GetUserById(userId, db);
+
+                db.Stop();
+
+                return user;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                db.Stop();
+            }
+        }
+
+
+
+        public string UserId { get; set; }
+
+        public string Designation { get; set; }
+
+        public string UserGroup { get; set; }
+
+        public string UserName { get; set; }
+
+        public string PerPhoto { get; set; }
+
+        public string LastName { get; set; }
+
+        public string IsActive { get; set; }
+
+        public string IsVarified { get; set; }
+    }
+}

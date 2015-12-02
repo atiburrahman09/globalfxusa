@@ -1,0 +1,101 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="create.aspx.cs" Inherits="globalfx.a.stake.create" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+    
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <legend class="text-center" style="padding-top: 20px">Create <span class="semi-bold">Stake</span></legend>
+    <div class="row-fluid">
+        <div class="grid simple">
+            <div class="grid-body no-border">
+
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+                                <label>Stake Name:</label>
+                                <asp:TextBox class="span12" ID="txtBxStakeName" runat="server" placeholder="Stake Name"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+
+                                <label>Amount:</label>
+                                <asp:TextBox class="span12" ID="txtBxAmount" runat="server" placeholder="$"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+
+                                <label>Daily Award:</label>
+                                <asp:TextBox class="span12" Style="width: 46%;" ID="txtBx1" runat="server" placeholder="0%"></asp:TextBox>&nbsp; to &nbsp;
+                                    <asp:TextBox class="span12" Style="width: 46%;" ID="txtBx2" runat="server" placeholder="0%"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+
+                                <label>Avarage</label>
+                                <asp:TextBox class="span12" ID="txtBxAvarage" runat="server" placeholder="%"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+
+                                <label>Duration:</label>
+                                <asp:TextBox class="span12" ID="txtBxDuration" runat="server" placeholder="Months"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="control-group">
+                            <div class="input-with-icon  right">
+                                <label>Bainory Cap:</label>
+                                <asp:TextBox class="span12" ID="txtBxBainoryCap" runat="server" placeholder="Baionary Cap"></asp:TextBox>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span11">
+                        <label>Commission:</label>
+                        <asp:TextBox class="span12" ID="txtBxCommission" runat="server" placeholder="%"></asp:TextBox>
+
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="pull-right">
+                        <asp:Button class="btn btn-primary btn-cons" ID="btnSave" runat="server" Text="Save" />
+                        <asp:Button class="btn btn-primary btn-cons" ID="btnCancel" runat="server" Text="Cancel" />
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    
+</asp:Content>

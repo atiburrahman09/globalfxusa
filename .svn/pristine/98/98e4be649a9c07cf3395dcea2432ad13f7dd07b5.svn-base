@@ -1,0 +1,168 @@
+﻿using System;
+using System.Data;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.setting.UserGroup
+{
+    public partial class List : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                msgbox.Visible = false;
+
+            if (!IsPostBack)
+            {
+               
+                LumexSessionManager.Add("CenterId", "CNT001");
+                LumexSessionManager.Add("ActiveEmpId", "Developer");
+
+                GetUserGroupList();
+            }
+
+            if (userGroupListGridView.Rows.Count > 0)
+            {
+                userGroupListGridView.UseAccessibleHeader = true;
+                userGroupListGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+            }
+            catch (Exception ex)
+            {
+                
+               string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+        private void gridviewStyleSet()
+        {
+            if (userGroupListGridView.Rows.Count > 0)
+            {
+                userGroupListGridView.UseAccessibleHeader = true;
+                userGroupListGridView.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void GetUserGroupList()
+        {
+            UserGroupBLL userGroup = new UserGroupBLL();
+
+            try
+            {
+                DataTable dt = userGroup.GetUserGroupList();
+                userGroupListGridView.DataSource = dt;
+                userGroupListGridView.DataBind();
+                gridviewStyleSet();
+                if (dt.Rows.Count < 1)
+                {
+                    msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Data Not Found!!!"; msgDetailLabel.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+            finally
+            {
+                userGroup = null;
+            }
+        }
+
+        protected void editLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkBtn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+
+                LumexSessionManager.Add("UserGroupIdForUpdate", userGroupListGridView.Rows[row.RowIndex].Cells[0].Text.ToString());
+                Response.Redirect("~/setting/UserGroup/Update.aspx");
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+
+        protected void activateLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkBtn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+
+                UserGroupBLL userGroup = new UserGroupBLL();
+                userGroup.UpdateUserGroupActivation(userGroupListGridView.Rows[row.RowIndex].Cells[0].Text.ToString(), "True");
+
+                //MyAlertBox("alert(\"User Group Activated Successfully.\"); window.location=\"/HRUI/UserGroup/List.aspx\"");
+
+                GetUserGroupList();
+
+
+                string message = " <span class='actionTopic'>" + " User Group Activated Successfully.</span>.";
+                MyAlertBox("var callbackOk = function () { window.location = \"/setting/UserGroup/List.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+
+               
+
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+
+        protected void deactivateLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkBtn = (LinkButton)sender;
+                GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+
+                UserGroupBLL userGroup = new UserGroupBLL();
+                userGroup.UpdateUserGroupActivation(userGroupListGridView.Rows[row.RowIndex].Cells[0].Text.ToString(), "False");
+
+              //  MyAlertBox("alert(\"User Group Deactivated Successfully.\"); window.location=\"/HRUI/UserGroup/List.aspx\"");
+
+                GetUserGroupList();
+                string message = " <span class='actionTopic'>" + " User Group Deactivated Successfully.</span>.";
+                MyAlertBox("var callbackOk = function () { window.location = \"/setting/UserGroup/List.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+
+        //protected void deleteLinkButton_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        LinkButton lnkBtn = (LinkButton)sender;
+        //        GridViewRow row = (GridViewRow)lnkBtn.NamingContainer;
+
+        //        UserGroupBLL userGroup = new UserGroupBLL();
+        //        userGroup.DeleteUserGroup(userGroupListGridView.Rows[row.RowIndex].Cells[0].Text.ToString());
+
+        //        //MyAlertBox("alert(\"User Group Deleted Successfully.\"); window.location=\"/HRUI/UserGroup/List.aspx\"");
+
+        //        string message = " <span class='actionTopic'>" + " User Group Deleted Successfully.</span>.";
+        //        MyAlertBox("var callbackOk = function () { window.location = \"/setting/UserGroup/List.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+        //    }
+        //}
+    }
+}

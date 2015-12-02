@@ -1,0 +1,348 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Global.Core.DAL;
+using Lumex.Tech;
+using Global.Core;
+
+namespace Global.Core.BLL
+{
+    public class StakeInfoBLL
+    {
+        public string StakeId { get; set; }
+        public string StakeName { get; set; }
+
+        public string DailyAwardFrom { get; set; }
+
+        public string DailyAwardTo { get; set; }
+
+        public string AvgAward { get; set; }
+
+        public string TotalDuration { get; set; }
+
+        public string BinaryCap { get; set; }
+
+        public string Parcentage { get; set; }
+
+        public bool SaveStakeInfo()
+        {
+            StakeInfoDAL saveStakeInfo = new StakeInfoDAL();
+            bool status = false;
+            DataTable dt = new DataTable();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = saveStakeInfo.SaveStaKeInfo(this, db);
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                    StakeId = dt.Rows[0][0].ToString();
+                }
+                db.Stop();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                dt.Clear();
+            }
+            return status;
+        }
+
+        public bool UpdateStakeInfo()
+        {
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            bool status = false;
+            LumexDBPlayer db = LumexDBPlayer.Start(true);
+            try
+            {
+                stakeInfo.UpdateStakeInfo(this, db);
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+                db.Stop();
+            }
+            return status;
+        }
+
+        public DataTable GetStakeInfoList()
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.GetStakeInfoList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+
+        public object Amount { get; set; }
+
+        public bool SaveGeneratedPin(DataTable dt)
+        {
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            bool status = false;
+            LumexDBPlayer db = LumexDBPlayer.Start(true);
+            try
+            {
+                stakeInfo.SaveGeneratedPin(dt, db);
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+                db.Stop();
+            }
+            return status;
+        }
+
+        public DataTable getGeneratedPinList()
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.getGeneratedPinList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+
+        public bool CheckDuplicateKey(string pinserial)
+        {
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            bool status = false;
+            LumexDBPlayer db = LumexDBPlayer.Start(true);
+            try
+            {
+                status = stakeInfo.CheckDuplicateKey(pinserial, db);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+                db.Stop();
+            }
+            return status;
+        }
+
+        public bool UpdateStakePinActivation(string serial, string IsActive)
+        {
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            bool status = false;
+            LumexDBPlayer db = LumexDBPlayer.Start(true);
+            try
+            {
+                stakeInfo.UpdateStakePinActivation(serial, IsActive, db);
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+                db.Stop();
+            }
+            return status;
+        }
+
+        public DataTable getStakePinListByOwner(string UserId)
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.getStakePinListByOwner(UserId, db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+
+        public bool updateKeyonTransfer(DataTable dt)
+        {
+            bool status = false;
+            try
+            {
+                StakeInfoDAL stakeInfo = new StakeInfoDAL();
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                stakeInfo.updateKeyonTransfer(this,dt, db);
+                db.Stop();
+                status = true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return status;
+        }
+
+        public string sendto { get; set; }
+
+        public string transferBy { get; set; }
+
+        public string sendSms { get; set; }
+
+        public DataTable getStakePinListBySentto(string UserId)
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.getStakePinListBySentto(UserId, db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+
+        public bool updateKeyWhenReceived(string Serial, string UserId)
+        {
+            bool status = false;
+            try
+            {
+                StakeInfoDAL stakeInfo = new StakeInfoDAL();
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                stakeInfo.updateKeyWhenReceived(Serial,UserId,db);
+                db.Stop();
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return status;
+        }
+
+        public bool updateKeyWhenReject(string Serial, string UserId)
+        {
+            bool status = false;
+            try
+            {
+                StakeInfoDAL stakeInfo = new StakeInfoDAL();
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                stakeInfo.updateKeyWhenReject(Serial, UserId, db);
+                db.Stop();
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return status;
+        }
+
+        public DataTable getStakeKeyLogdatabyUser(string UserId)
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.getStakeKeyLogdatabyUser(UserId, db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+
+        public DataTable getStakeKeyLogdataAll()
+        {
+            DataTable dt = new DataTable();
+            StakeInfoDAL stakeInfo = new StakeInfoDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = stakeInfo.getStakeKeyLogdataAll(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                stakeInfo = null;
+            }
+        }
+    }
+}

@@ -1,0 +1,88 @@
+﻿using Lumex.Tech;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Global.Core.DAL
+{
+    class StakeInfoDAL
+    {
+        //            @StakeName	nvarchar(100)	,
+        //@DailyAwardFrom	decimal(18, 2)	,
+        //@DailyAwardTo	decimal(18, 2)	,
+        //@Avarage	decimal(18, 2)	,
+        //@TotalDuration	decimal(18, 2)	,
+        //@BinaryCap	decimal(18, 2)	,
+        //@Parcentage	decimal(18, 2)	,
+        //@CreatedBy	varchar(50)	,
+        //@CreatedFrom	varchar(50)	
+        internal System.Data.DataTable SaveStaKeInfo(BLL.StakeInfoBLL stakeInfoBLL,LumexDBPlayer db)
+        {
+
+            bool status = true;
+            DataTable dt=new DataTable();
+            try
+            {
+                db.AddParameters("@StakeName", stakeInfoBLL.StakeName);
+                db.AddParameters("@DailyAwardFrom", stakeInfoBLL.DailyAwardFrom);
+                db.AddParameters("@DailyAwardTo", stakeInfoBLL.DailyAwardTo);
+                db.AddParameters("@Avarage", stakeInfoBLL.AvgAward);
+                db.AddParameters("@TotalDuration", stakeInfoBLL.TotalDuration);
+                db.AddParameters("@BinaryCap", stakeInfoBLL.BinaryCap);
+                db.AddParameters("@Parcentage", stakeInfoBLL.Parcentage);
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                dt = db.ExecuteDataTable("[INSERT_STAKE_INFO]", true);
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return dt;
+        }
+
+        internal void UpdateStakeInfo(BLL.StakeInfoBLL stakeInfoBLL, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@StakeId", stakeInfoBLL.StakeId);
+                db.AddParameters("@StakeName", stakeInfoBLL.StakeName);
+                db.AddParameters("@DailyAwardFrom", stakeInfoBLL.DailyAwardFrom);
+                db.AddParameters("@DailyAwardTo", stakeInfoBLL.DailyAwardTo);
+                db.AddParameters("@Avarage", stakeInfoBLL.AvgAward);
+                db.AddParameters("@TotalDuration", stakeInfoBLL.TotalDuration);
+                db.AddParameters("@BinaryCap", stakeInfoBLL.BinaryCap);
+                db.AddParameters("@Parcentage", stakeInfoBLL.Parcentage);
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                db.ExecuteDataTable("[UPDATE_STAKE_INFO]", true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        internal DataTable GetStakeInfoList(LumexDBPlayer db)
+        {
+            DataTable dt=new DataTable();
+            try
+            {
+                dt = db.ExecuteDataTable("[GET_STAKE_INFO_LIST]", false);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            return dt;
+        }
+    }
+}

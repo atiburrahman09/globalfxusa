@@ -1,0 +1,539 @@
+﻿using System;
+using System.Data;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace Global.Core.DAL
+{
+    public class UserDAL
+    {
+        public DataTable SaveUser(UserBLL user, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", user.UserId.Trim());
+                db.AddParameters("@UserName", user.UserName.Trim());
+                db.AddParameters("@EmployeeId", "");
+                db.AddParameters("@UserGroupId", "UG001");
+                db.AddParameters("@Department", "");
+                db.AddParameters("@Designation", "");
+                db.AddParameters("@Address", "");
+                db.AddParameters("@ContactNumber", user.Cell.Trim());
+                db.AddParameters("@Email", user.Email.Trim());
+                db.AddParameters("@NationalId", "");
+                db.AddParameters("@PassportNumber", "");
+                db.AddParameters("@Password", ProtectPassword(user.Password.Trim()));
+                db.AddParameters("@CreatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                //db.AddParameters("@DOB",LumexLibraryManager.ParseAppDate(user.DOB.Trim()));
+                //db.AddParameters("@Gender",user.Gender.Trim());
+
+                if ((string)LumexSessionManager.Get("ActiveUserId") == "Developer")
+                {
+                    db.AddParameters("@BranchId", LumexSessionManager.Get("UserBranchId"));
+                }
+
+                else
+                {
+                    db.AddParameters("@BranchId", LumexSessionManager.Get("UserBranchId"));
+                }
+                db.AddParameters("@ValidDate", "");
+
+                DataTable dt = db.ExecuteDataTable("INSERT_USER", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                user = null;
+            }
+        }
+
+        public DataTable GetUserList(LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@BranchId", LumexSessionManager.Get("UserBranchId"));
+                DataTable dt = db.ExecuteDataTable("GET_USERS", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        protected static string ProtectPassword(string password)
+        {
+            return LumexLibraryManager.EncodeIntoMd5Hash("LTSsL[" + password.Trim() + "]0");
+        }
+        public void UpdateUserPassword(string userId, string password, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                db.AddParameters("@Password", ProtectPassword(password));
+                db.AddParameters("@ModifiedBy", LumexSessionManager.Get("ActiveUserId").ToString());
+                db.AddParameters("@ModifiedFrom", LumexLibraryManager.GetTerminal());
+
+                db.ExecuteNonQuery("UPDATE_USER_PASSWORD_BY_ID", true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static bool ValidateUser(UserBLL user, LumexDBPlayer db)
+        {
+            bool isValid = false;
+
+            try
+            {
+                db.AddParameters("@UserId", user.UserId);
+
+                DataTable dt = db.ExecuteDataTable("GET_USER_PASSWORD_BY_ID", true);
+
+                DataTableReader dtr = dt.CreateDataReader();
+
+                if (dtr.Read())
+                {
+                    if (ProtectPassword(user.Password) == dtr["Password"].ToString())
+                    {
+                        isValid = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                user = null;
+            }
+
+            return isValid;
+        }
+        public DataTable GetDeletedUserListByDateRangeAll(string fromDate, string toDate, string search, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@FromDate", fromDate.Trim());
+                db.AddParameters("@ToDate", toDate.Trim());
+                db.AddParameters("@Search", search.Trim());
+                db.AddParameters("@BranchId", LumexSessionManager.Get("UserBranchId"));
+
+                DataTable dt = db.ExecuteDataTable("GET_DELETED_USERS_BY_DATE_RANGE_ALL", true);
+
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DataTable GetActiveUserList(LumexDBPlayer db)
+        {
+            try
+            {
+                // db.AddParameters("@BranchId", LumexSessionManager.Get("UserBranchId"));
+                DataTable dt = db.ExecuteDataTable("GET_ACTIVE_USER_LIST", true);
+                return dt;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DataTable GetUserById(string userId, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                DataTable dt = db.ExecuteDataTable("GET_USER_BY_ID", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool CheckDuplicateUser(string userId, LumexDBPlayer db)
+        {
+            bool status = false;
+
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                DataTable dt = db.ExecuteDataTable("CHECK_DUPLICATE_USER", true);
+
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return status;
+        }
+
+        public bool CheckDuplicateUserEmail(string EmailId, LumexDBPlayer db)
+        {
+            bool status = false;
+
+            try
+            {
+
+                db.AddParameters("@EmailId", EmailId);
+                DataTable dt = db.ExecuteDataTable("[CHECK_DUPLICATE_USER_EMAIL]", true);
+
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return status;
+        }
+
+        public void UpdateUserActivation(string userId, string activationStatus, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                db.AddParameters("@IsActive", activationStatus);
+                db.AddParameters("@ActivatedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@ActivatedFrom", LumexLibraryManager.GetTerminal());
+
+                db.ExecuteNonQuery("UPDATE_USER_ACTIVATION", true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteUser(string userId, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                db.AddParameters("@DeletedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@DeletedFrom", LumexLibraryManager.GetTerminal());
+
+                db.ExecuteNonQuery("DELETE_USER_BY_ID", true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool UpdateUser(UserBLL user, LumexDBPlayer db)
+        {
+
+            bool status = false;
+            try
+            {
+
+                //db.AddParameters("@Serial", user.Serial.Trim());
+                db.AddParameters("@UserId", user.UserId.Trim());
+                db.AddParameters("@UserName", user.UserName.Trim());
+                //db.AddParameters("@EmployeeId", "");
+                db.AddParameters("@UserGroupId", user.UserGroupId.Trim());
+                //db.AddParameters("@Department", "");
+                //db.AddParameters("@Designation", "");
+                //db.AddParameters("@Address","");
+                db.AddParameters("@ContactNumber", user.Cell.Trim());
+                db.AddParameters("@Email", user.Email.Trim());
+                //db.AddParameters("@NationalId", "");
+                //db.AddParameters("@PassportNumber", "");
+                // db.AddParameters("@BaranchId", user.Branch);
+                db.AddParameters("@ModifiedBy", LumexSessionManager.Get("ActiveUserId"));
+                db.AddParameters("@ModifiedFrom", LumexLibraryManager.GetTerminal());
+                //db.AddParameters("@Password", LumexLibraryManager.EncodeIntoMd5Hash(user.Password));         
+
+                status = Convert.ToBoolean(db.ExecuteNonQuery("UPDATE_USER_BY_ID", true));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                user = null;
+            }
+            return status;
+        }
+
+        public DataTable GetUserListByBruchId(string BranchId, LumexDBPlayer db)
+        {
+
+            try
+            {
+                db.AddParameters("@BranchId", BranchId.Trim());
+                DataTable dt = db.ExecuteDataTable("GET_USERS", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public DataTable CheckUserIdOrMailForResetPass(string email, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@EmailId", email);
+                DataTable dt = db.ExecuteDataTable("[CHECK_USER_MAIL_OR_ID_FOR_RESET]", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public DataTable UpdateUserVarificationCode(UserBLL userBLL, LumexDBPlayer db)
+        {
+            bool status = false;
+
+            try
+            {
+                db.ClearParameters();
+                db.AddParameters("@UserId", userBLL.UserId.Trim());
+                db.AddParameters("@VarifyCode", userBLL.varifycode);
+                db.AddParameters("@ActivatedBy", "");
+                db.AddParameters("@ActivatedFrom", LumexLibraryManager.GetTerminal());
+
+                DataTable dt = db.ExecuteDataTable("[UPDATE_USER_VARIFICATION_CODE]", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
+        internal DataTable SaveUserInfo(UserBLL userBLL, LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", userBLL.UserId);
+                db.AddParameters("@FirstName", userBLL.FirstName);
+                db.AddParameters("@LastName", userBLL.LastName);
+                db.AddParameters("@PassportNo", userBLL.PassportNo);
+                db.AddParameters("@Address", userBLL.Address);
+                db.AddParameters("@Country", userBLL.Country);
+                db.AddParameters("@House", userBLL.House);
+                db.AddParameters("@Street", userBLL.Street);
+                db.AddParameters("@Area", userBLL.Area);
+                db.AddParameters("@MobileNo", userBLL.MobileNo);
+                db.AddParameters("@Email", userBLL.Email);
+                db.AddParameters("@EmrName", userBLL.EmrName);
+                db.AddParameters("@EmarRelation", userBLL.EmrRelation);
+                db.AddParameters("@EmrAdress", userBLL.EmrAddress);
+                db.AddParameters("@EmrMobile", userBLL.EmrMobile);
+                db.AddParameters("@EmrEmail", userBLL.EmeEmail);
+                db.AddParameters("@EmrCountry", userBLL.EmeCountry);
+                db.AddParameters("@IsActive", userBLL.IsActive);
+                db.AddParameters("@isVarified", userBLL.Isvarified);
+                db.AddParameters("@CreatedBy", userBLL.Createdby);
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                db.AddParameters("@UserGroupId", userBLL.UserGroupId);
+                db.AddParameters("@PerPhoto", userBLL.PerPhoto);
+                db.AddParameters("@Password", userBLL.Password);
+                db.AddParameters("@ActualPass", userBLL.ActualPass);
+                db.AddParameters("@UserPin", userBLL.UserPin);
+                dt = db.ExecuteDataTable("[INSERT_USER_INFO]", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal DataTable GetUserInfoList(LumexDBPlayer db)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                dt = db.ExecuteDataTable("[GET_USER_INFO_BY_ID]", false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal DataTable GetUserInfoById(string userId, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                DataTable dt = db.ExecuteDataTable("GET_USER_INFO_BY_ID", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal bool UpdateUserInfo(UserBLL userBLL, LumexDBPlayer db)
+        {
+            bool status = true;
+
+            try
+            {
+                db.AddParameters("@UserId", userBLL.UserId);
+                db.AddParameters("@FirstName", userBLL.FirstName);
+                db.AddParameters("@LastName", userBLL.LastName);
+                db.AddParameters("@PassportNo", userBLL.PassportNo);
+                db.AddParameters("@Address", userBLL.Address);
+                db.AddParameters("@Country", userBLL.Country);
+                db.AddParameters("@House", userBLL.House);
+                db.AddParameters("@Street", userBLL.Street);
+                db.AddParameters("@Area", userBLL.Area);
+                db.AddParameters("@MobileNo", userBLL.MobileNo);
+                db.AddParameters("@Email", userBLL.Email);
+                db.AddParameters("@EmrName", userBLL.EmrName);
+                db.AddParameters("@EmarRelation", userBLL.EmrRelation);
+                db.AddParameters("@EmrAdress", userBLL.EmrAddress);
+                db.AddParameters("@EmrMobile", userBLL.EmrMobile);
+                db.AddParameters("@EmrEmail", userBLL.EmeEmail);
+                db.AddParameters("@EmrCountry", userBLL.EmeCountry);
+                db.AddParameters("@IsActive", userBLL.IsActive);
+                db.AddParameters("@isVarified", userBLL.Isvarified);
+                db.AddParameters("@CreatedBy", userBLL.Createdby);
+                db.AddParameters("@CreatedFrom", LumexLibraryManager.GetTerminal());
+                db.AddParameters("@UserGroupId", "UG003");
+                db.AddParameters("@PerPhoto", userBLL.PerPhoto);
+
+                db.ExecuteDataTable("[Update_USER_INFO]", true);
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return status;
+        }
+
+        internal bool varifypin(string userid, string UserPin, LumexDBPlayer db)
+        {
+            bool status = false;
+            try
+            {
+                db.AddParameters("@UserId", userid);
+
+                DataTable dt = db.ExecuteDataTable("SELECT  [Serial],[UserId],[UserPin],[LastModfiied],[ModifyBy],[ModifyCount] FROM [dbo].[tblUserPin] Where UserId = @UserId");
+
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["UserPin"].ToString() == UserPin)
+                    {
+                        status = true;
+                    }
+                }
+
+                return status;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal void InsertIntoGenolgyTree(string placeId, string position, string referId, string UserId, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+                db.AddParameters("@RefferId", referId);
+                db.AddParameters("@PleacementId", placeId);
+                db.AddParameters("@PlacePosition", position);
+                db.AddParameters("@JoinFrom", LumexLibraryManager.GetTerminal());
+
+                int i = db.ExecuteNonQuery("INSERT INTO [dbo].[tblStakeJoining] (UserId,RefferId,PleacementId,PlacePosition,JoinDate,JoinFrom)VALUES(@UserId,@RefferId,@PleacementId,@PlacePosition,GETDATE(),@JoinFrom)");
+
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal DataTable GetUserInfoByIdforView(string userId, LumexDBPlayer db)
+        {
+            try
+            {
+                db.AddParameters("@UserId", userId);
+                DataTable dt = db.ExecuteDataTable("GET_USER_INFO_BY_ID", true);
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        internal DataTable GetUserByGroupId(LumexDBPlayer db, UserBLL aUser)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@GroupId", aUser.UserGroupId);
+                dt = db.ExecuteDataTable("[GET_USER_LIST_GROUPID]", true);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+
+        internal DataTable getUserPasswordsetValidity(LumexDBPlayer db, UserBLL userBLL)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", userBLL.UserId);
+                dt = db.ExecuteDataTable("[GET_USER_PASSWORD_SET_VALIDITY]", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+    }
+}

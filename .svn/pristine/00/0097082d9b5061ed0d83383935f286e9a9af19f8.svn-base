@@ -1,0 +1,212 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class activation : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsPostBack)
+                {
+
+                    loadtStakeList();
+                    GetUserPlacementInfoById((string)LumexSessionManager.Get("ActiveUserId"));
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+
+        }
+
+
+
+        private void GetUserPlacementInfoById(string UserId)
+        {
+            try
+            {
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.GetUserPlacementInfoById(UserId);
+                if (dt.Rows.Count > 0)
+                {
+                    if (dt.Rows[0]["StakeId"].ToString() == "")
+                    {
+                        txtbxPlacementId.Text = dt.Rows[0]["PleacementId"].ToString();
+                        txtbxReferId.Text = dt.Rows[0]["RefferId"].ToString();
+                        ddlPosition.SelectedValue = dt.Rows[0]["PlacePosition"].ToString();
+
+                        UserBLL userBll = new UserBLL();
+                        dt = userBll.GetUserInfoById(txtbxReferId.Text);
+                        if (dt.Rows.Count > 0)
+                        {
+                            hdnfldRefActive.Value = dt.Rows[0]["IsActive"].ToString();
+                        }
+                    }
+                    else
+                    {
+                        txtbxStakeKey.Enabled = false;
+                        btnActivation.Enabled = false;
+                        string message = " <span class='actionTopic'> Your Account is Already Activated successfully. Thanks" + "</span>.";
+                        MyAlertBox(
+                            "var callbackOk = function () { window.location = \"/a/initialdata/initialDataElement.aspx\"; }; SuccessAlert(\"" +
+                            "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+
+                    }
+                }
+                else
+                {
+                    // To do job
+                }
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void loadtStakeList()
+        {
+            DataTable dt = new DataTable();
+            StakeInfoBLL stakeInfo = new StakeInfoBLL();
+            try
+            {
+                dt = stakeInfo.GetStakeInfoList();
+                ddlStakeList.DataSource = dt;
+                ddlStakeList.DataTextField = "StakeName";
+                ddlStakeList.DataValueField = "StakeId";
+                ddlStakeList.DataBind();
+                ddlStakeList.Items.Insert(0, "Select Here..");
+                ddlStakeList.SelectedIndex = 0;
+                ddlStakeList.Items[0].Value = "";
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void txtbxStakeKey_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                StakeInfoBLL stakeInfo = new StakeInfoBLL();
+                if (stakeInfo.CheckStakeKeyAvailability(txtbxStakeKey.Text, (string)LumexSessionManager.Get("ActiveUserId"), ddlStakeList.SelectedValue))
+                {
+                    //  iconuserName.Attributes.Remove("class");
+                    iconStakeKey.Attributes.Add("class", "icon icon-ok-sign text-success");
+
+                    hdnStakeKey.Value = "1";
+                    txtbxStakeKey.Focus();
+                }
+                else
+                {
+                    // iconuserName.Attributes.Remove("class");
+                    iconStakeKey.Attributes.Add("class", "icon icon-ban-circle text-error");
+                    hdnStakeKey.Value = "0";
+                    txtbxUserPin.Focus();
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+
+        protected void btnActivation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserBLL user = new UserBLL();
+                if (user.varifypin((string)LumexSessionManager.Get("ActiveUserId"), txtbxUserPin.Text))
+                {
+                    UserAccountBLL userAccount = new UserAccountBLL();
+                    StakeInfoBLL stakeInfo = new StakeInfoBLL();
+                    MailContactBLL mailContactBll = new MailContactBLL();
+                    UserBLL userBll = new UserBLL();
+                    bool status = userAccount.UpdateUserAccount((string)LumexSessionManager.Get("ActiveUserId"),
+                        ddlStakeList.SelectedValue, txtbxStakeKey.Text.Trim());
+
+
+                    if (status)
+                    {
+                        if (hdnfldRefActive.Value == "Yes")
+                        {
+                            ReceivePaymentWhenActive();
+                        }
+                        string message = " <span class='actionTopic'> Your Account is Activated successfully. Thanks" + "</span>.";
+                        MyAlertBox(
+                            "var callbackOk = function () { window.location = \"/a/initialdata/initialDataElement.aspx\"; }; SuccessAlert(\"" +
+                            "Process Succeed" + "\", \"" + message + "\", \"\");");
+                    }
+                    else
+                    {
+
+                    }
+                    DataTable dt = stakeInfo.GetStakeInfoById(ddlStakeList.SelectedValue);
+                    string body = PopulateBody(dt);
+                    dt = userBll.GetUserInfoById((string) LumexSessionManager.Get("ActiveUserId"));
+                    mailContactBll.SendHtmlFormattedEmail(dt.Rows[0]["Email"].ToString(), "Money Receipt", body);
+
+
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+        private string PopulateBody(DataTable dt)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Server.MapPath("~/assets/oth/receipt.html")))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{StakeName}", dt.Rows[0]["StakeName"].ToString());
+            body = body.Replace("{StakeValue}", dt.Rows[0]["Amount"].ToString());
+            body = body.Replace("{ReceiveDate}", DateTime.Now.ToString("dd-MM-yyyy"));
+            body = body.Replace("{Duration}", dt.Rows[0]["TotalDuration"].ToString());
+            body = body.Replace("{RenewDate}", DateTime.Now.AddMonths(6).ToString("dd-MM-yyyy"));
+            return body;
+        }
+
+        private void ReceivePaymentWhenActive()
+        {
+            StakeInfoBLL stakeInfo = new StakeInfoBLL();
+            UserAccountBLL UserAccount = new UserAccountBLL();
+            DataTable dt = new DataTable();
+            dt = stakeInfo.GetStakeInfoById(ddlStakeList.SelectedValue);
+
+
+            UserAccount.InsertReceivePaymentWhenActive((string)LumexSessionManager.Get("ActiveUserId"), txtbxReferId.Text.Trim(), dt.Rows[0]["Commission"].ToString());
+
+        }
+    }
+}

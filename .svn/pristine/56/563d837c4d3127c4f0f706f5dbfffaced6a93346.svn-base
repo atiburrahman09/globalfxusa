@@ -1,0 +1,84 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+
+namespace globalfx.a.account
+{
+    public partial class dailybonus : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void ViewButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //GridViewWithdrawRequest.DataSource = dt;
+                //GridViewWithdrawRequest.DataBind();
+                //if (GridViewWithdrawRequest.Rows.Count > 0)
+                //{
+                //    // generateButton.Visible = true;
+                //    GridViewWithdrawRequest.UseAccessibleHeader = true;
+                //    GridViewWithdrawRequest.HeaderRow.TableSection = TableRowSection.TableHeader;
+                //}
+
+
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+            finally
+            {
+                MyAlertBox("MyOverlayStop();");
+            }
+        }
+       /* protected void dailyBonusGenerateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserAccountBLL accountBll = new UserAccountBLL();
+
+                bool status = accountBll.generateDailyBonus(DateTime.Now.ToString("dd/MM/yyyy") );
+                if (status)
+                {
+                    accountBll.InsertReceivePaymentWhenDailybonus();
+                }
+
+                //    GridViewWithdrawRequest.DataSource = dt;
+                //    GridViewWithdrawRequest.DataBind();
+                //    if (GridViewWithdrawRequest.Rows.Count > 0)
+                //    {
+                //        // generateButton.Visible = true;
+                //        GridViewWithdrawRequest.UseAccessibleHeader = true;
+                //        GridViewWithdrawRequest.HeaderRow.TableSection = TableRowSection.TableHeader;
+                //    }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+            finally
+            {
+                MyAlertBox("MyOverlayStop();");
+            }
+        }*/
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+    }
+}

@@ -1,0 +1,237 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="withdraw.aspx.cs" Inherits="globalfx.a.account.withdraw" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icontimes"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="span6">
+            <div class="grid simple">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px">Money <span class="semi-bold">withdraw</span></h4>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Type:</b></label>
+                                    <asp:DropDownList class="span12" ID="ddlType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlType_SelectedIndexChanged">
+                                        <asp:ListItem Text="Select Please" Value=""></asp:ListItem>
+                                        <asp:ListItem Text="Bank Transfer" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Personal Transfer" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Master Card Transfer" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="Online Transfer" Value="3"></asp:ListItem>
+
+                                    </asp:DropDownList>
+
+                                </div>
+
+                            </div>
+                            <div class="control-group" id="divPaymethod" runat="server" visible="False">
+                                <div class="input-with-icon  right">
+                                    <label>
+                                        <b>
+                                            <asp:Label ID="lblPaymentMethod" runat="server" Text="Label"></asp:Label></b></label>
+                                    <asp:DropDownList ID="ddlPaymentMethod" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="control-group" id="divBank" runat="server" visible="False">
+                                <div class="input-with-icon  right">
+                                    <label><b>Bank Account No:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxAccountNo" runat="server" placeholder="Account No"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="control-group" id="divPeson" runat="server" visible="False">
+                                <label class="semi-bold">Transfer To</label>
+                                <div class="controls">
+
+                                    <asp:TextBox ID="txtbxTransferTo" type="text" class="span10" placeholder="Transfer To" runat="server" AutoPostBack="True" OnTextChanged="txtbxTransferTo_TextChanged"></asp:TextBox>
+
+
+                                    <a type="button" class="eye popover1" data-original-title="Name: User Name" data-content="Here will info to confirm person" id="usernote" runat="server" title="" data-toggle="popover1">
+                                        <img src="/assets/img/1.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="control-group" id="divSwift" runat="server" visible="False">
+                                <div class="input-with-icon  right">
+                                    <label><b>Swift Code:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxSwiftCode" runat="server" placeholder="Swift Code"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Amount (min $30 for Bank):</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxAmount" runat="server" placeholder="0.00"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Your pin:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxTransferPin" type="password" runat="server" placeholder="Pin"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Transfer Note:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxTransferNote" runat="server" placeholder="Transfer Note"></asp:TextBox>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="text-center">
+
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnRequestSend" runat="server" Text="Request Send" OnClick="btnRequestSend_Click" />
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnCancel" runat="server" Text="Cancel" />
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="grid simple">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px">Short <span class="semi-bold">Summery</span></h4>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class="input-with-icon  right total_count">
+                                <p>
+                                    Income wallet :
+                                    <asp:Label ID="lvlIncomeWallet" runat="server" Text="500"></asp:Label>
+                                </p>
+                                <p>
+                                    Deposit wallet :
+                                    <asp:Label ID="lvlDepositWallet" runat="server" Text="400"></asp:Label>
+                                </p>
+                                <p>Commission wallet :<asp:Label ID="lvlCommisionWallet" runat="server" Text="300"></asp:Label></p>
+                                <p>
+                                    Fx Fund :
+                                    <asp:Label ID="lvlFxFund" runat="server" Text="200"></asp:Label>
+                                </p>
+
+                            </div>
+                        </div>
+                        <h5 class="help red">Minimum Transfer $30. and 5% will cutoff as transection charge.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-actions">
+            <br />
+            <div class="grid simple horizontal purple">
+                <div class="grid-title text-center">
+                    <h3 class="text-center"><span class="semi-bold">Transfer </span>History</h3>
+                </div>
+                <div class="grid-body">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <label>From Date</label>
+                            <div class="input-append success date">
+
+                                <asp:TextBox ID="fromDateTextBox" data-date-format="dd/mm/yyyy" CssClass="date-textbox span10"
+                                    runat="server"></asp:TextBox>
+                                <span class="add-on"><span class="arrow"></span><i class="icon-th"></i></span>
+                            </div>
+
+                        </div>
+                        <div class="span3">
+                            <label>To Date</label>
+                            <div class="input-append success date">
+                                <asp:TextBox ID="toDateTextBox" data-date-format="dd/mm/yyyy" CssClass="date-textbox span10"
+                                    runat="server"></asp:TextBox>
+                                <span class="add-on"><span class="arrow"></span><i class="icon-th"></i></span>
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <label>Status</label>
+                            <div class="controls">
+                                <asp:DropDownList ID="ddlStatus" CssClass="span10" runat="server">
+                                    <asp:ListItem Text="Select Please" Value=""></asp:ListItem>
+                                    <asp:ListItem Text="Pending" Value="P"></asp:ListItem>
+                                    <asp:ListItem Text="Rejected" Value="R"></asp:ListItem>
+                                    <asp:ListItem Text="Success" Value="A"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="span2">
+                            <label>Transfer Flow</label>
+                            <div class="controls">
+                                <asp:DropDownList ID="ddlTransFlow" CssClass="span10" runat="server">
+                                    <asp:ListItem Text="From My Account" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="To My Account" Value="2"></asp:ListItem>
+
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="pull-right span2">
+                            <label>&nbsp;</label>
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnShow" runat="server" OnClick="ViewButton_Click" Text="Show Income Statement" />
+
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="clearfix"></div>
+                        <asp:GridView ID="GridViewWithdrawRequest" runat="server" AutoGenerateColumns="false"
+                            CssClass="table table-hover">
+                            <Columns>
+                                <asp:BoundField DataField="TransferId" HeaderText="#" />
+                                <asp:BoundField DataField="UserId" HeaderText="From" />
+                                <asp:BoundField DataField="TransferTo" HeaderText="To" />
+                                <asp:BoundField DataField="BankName" HeaderText="Gateway" />
+                                <asp:BoundField DataField="SwiftCode" HeaderText="AC/No" />
+                                <asp:BoundField DataField="Amount" HeaderText="Amount ($)" />
+                                <asp:BoundField DataField="TransferNote" HeaderText="Note" />
+                                <asp:BoundField DataField="RejectNote" HeaderText="Reject Note" />
+                                <asp:BoundField DataField="SuccessNote" HeaderText="Sucess Note" />
+                                <asp:BoundField DataField="CreatedDate" HeaderText="Date" DataFormatString="{0:dd MMMM yy -hh:mm tt}" />
+                                <asp:BoundField DataField="CreatedFrom" HeaderText="Request From" />
+                            </Columns>
+                        </asp:GridView>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        function pageLoad(sender, args) {
+
+            var dateFormat = '<%= Session["DateFormatForDatePicker"] %>';
+            $(".date-textbox").datepicker({ format: dateFormat });
+            $(".date-textbox, .icon-calendar").click(function () {
+                $(this).parent().find(".date-textbox").focus();
+            })
+
+            $('#GridViewWithdrawRequest').dataTable({
+                "bStateSave": true,
+            });
+
+
+
+        }
+    </script>
+</asp:Content>

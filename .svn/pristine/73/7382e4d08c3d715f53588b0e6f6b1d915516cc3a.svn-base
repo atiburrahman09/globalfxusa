@@ -1,0 +1,88 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="activation.aspx.cs" Inherits="globalfx.a.account.activation" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="content">
+        <div class="grid simple">
+            <div class="grid-body no-border">
+                <legend class="text-center">Account <span class="semi-bold">Activation</span></legend>
+                <form class="form-no-horizontal-spacing" id="form_iconic_validation">
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="btn-group open">
+                                <label class="semi-bold">Referrals ID</label>
+                                <asp:TextBox ID="txtbxReferId" ReadOnly="True" runat="server"></asp:TextBox>
+                                <asp:HiddenField ID="hdnfldRefActive" runat="server" />
+                                <%-- <a type="button" class="eye popover1" data-original-title="Name: Ayon Sikder" data-content="ID: 003, Email:abc@gmail.com" id="infoReferId" runat="server" data-toggle="popover1">
+                                    <img src="/assets/img/1.png">
+                                </a>--%>
+                            </div>
+                        </div>
+                        <div class="span8">
+                            <div class="input-with-icon  right">
+                                <label class="semi-bold">position</label>
+                                <asp:DropDownList ID="ddlPosition" ReadOnly="True" runat="server">
+                                    <asp:ListItem Value="">Select Please</asp:ListItem>
+                                    <asp:ListItem Value="L">Left</asp:ListItem>
+                                    <asp:ListItem Value="R">Right</asp:ListItem>
+
+                                </asp:DropDownList>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="btn-group open">
+                                <label class="semi-bold">placement</label>
+                                <asp:TextBox ID="txtbxPlacementId" ReadOnly="True" runat="server"></asp:TextBox>
+                                <%-- <a type="button" class="eye" data-original-title="Name: Ayon Sikder" data-content="ID: 003, Email:abc@gmail.com" id="popover" title="" data-toggle="popover">
+                                    <img src="/assets/img/1.png">
+                                </a>--%>
+                            </div>
+                        </div>
+                        <div class="span8">
+                            <div class="input-with-icon  right">
+                                <label class="semi-bold">Stake</label>
+                                <asp:DropDownList ID="ddlStakeList" runat="server"></asp:DropDownList>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <asp:HiddenField ID="hdnStakeKey" runat="server" />
+                            <label class="semi-bold">Stake KEY</label>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <i id="iconStakeKey" runat="server" class=""></i>
+                                    <asp:TextBox ID="txtbxStakeKey" placeholder="Stake Key" AutoPostBack="True" required="required" runat="server" OnTextChanged="txtbxStakeKey_TextChanged"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span8">
+                            <label class="semi-bold">Your PIN</label>
+                            <asp:TextBox ID="txtbxUserPin" type="password" placeholder="Transection PIN" required="required" runat="server"></asp:TextBox>
+
+                        </div>
+
+                    </div>
+                    <div class="form-actions">
+                        <div class="pull-left">
+                            <asp:LinkButton ID="btnActivation" CssClass="btn btn-primary btn-cons" runat="server" OnClick="btnActivation_Click"> <i class="icon-ok"></i>Activation Request</asp:LinkButton>
+
+                            <%--  <button class="btn btn-danger btn-cons" type="submit"><i class="icon-ok"></i>Cancel</button>--%>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

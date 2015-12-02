@@ -1,0 +1,140 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="myaccount.aspx.cs" Inherits="globalfx.a.account.myaccount" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <h3 class="text-center">User<span class="semi-bold"> Account Info:</span></h3>
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icontimes"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px;">Income <span class="semi-bold">Wallet</span></h4>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <p>
+                                    <asp:Label class="text-center font20" ID="lvlIncome" runat="server" Text=""></asp:Label>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px">Deposit <span class="semi-bold">Wallet</span></h4>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <p>
+                                    <asp:Label class="text-center font20" ID="lvlDeposit" runat="server" Text=""></asp:Label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px">Commission <span class="semi-bold">Wallet</span></h4>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <p>
+                                    <asp:Label class="text-center font20" ID="lvlCommision" runat="server" Text=""></asp:Label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span3">
+            <div class="bg_whtie radius_top_bottom">
+                <div class="grid-body no-border">
+                    <h4 class="text-center" style="padding-top: 20px">Fx <span class="semi-bold">Fund</span></h4>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class=" total_count">
+                                <p>
+                                    <asp:Label class="text-center font20" ID="lvlFund" runat="server" Text=""></asp:Label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <h3 class="text-center"><span class="semi-bold">Income </span>Calender:</h3>
+            <div class="span3">
+                <asp:DropDownList ID="ddlDateFrom" runat="server">
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="0"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="1"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="2"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="3"></asp:ListItem>
+                </asp:DropDownList>
+
+            </div>
+            <p class="span1 font20 text-center">to</p>
+            <div class="span3">
+                <asp:DropDownList ID="ddlDateTo" runat="server">
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="0"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="1"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="2"></asp:ListItem>
+                    <asp:ListItem Text="Dt: 20-10-2015" Value="3"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <div class="pull-right">
+                <asp:Button class="btn btn-primary btn-cons" ID="btnShow" runat="server" Text="Show" />
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="showHistory">
+                <asp:Table class="table table-bordered no-more-tables " ID="tblHistoryHead" runat="server">
+
+                    <asp:TableHeaderRow runat="server">
+                        <asp:TableHeaderCell>History Head</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>History Head</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>History Head</asp:TableHeaderCell>
+                        <asp:TableHeaderCell>History Head</asp:TableHeaderCell>
+                    </asp:TableHeaderRow>
+                    <asp:TableRow ID="tblHistoryBody1" runat="server">
+                        <asp:TableCell>History Body</asp:TableCell>
+                        <asp:TableCell>History Body</asp:TableCell>
+                        <asp:TableCell>History Body</asp:TableCell>
+                         <asp:TableCell>History Body</asp:TableCell>
+                    </asp:TableRow>
+                    <asp:TableRow ID="tblHistoryBody2" runat="server">
+                        <asp:TableCell>History Body</asp:TableCell>
+                        <asp:TableCell>History Body</asp:TableCell>
+                        <asp:TableCell>History Body</asp:TableCell>
+                         <asp:TableCell>History Body</asp:TableCell>
+                    </asp:TableRow>
+
+                </asp:Table>
+
+                
+            </div>
+
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

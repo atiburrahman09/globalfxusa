@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Global.Core.DAL
+{
+    public class NewsFeedDAL
+    {
+        internal System.Data.DataTable SaveNewsInfo(BLL.NewsFeedBLL newsFeedBLL, Lumex.Tech.LumexDBPlayer db)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal System.Data.DataTable GetNewsFeedList(Lumex.Tech.LumexDBPlayer db)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal System.Data.DataTable GetBewsFeedDataById(BLL.NewsFeedBLL newsFeedBLL, Lumex.Tech.LumexDBPlayer db)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

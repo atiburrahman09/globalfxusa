@@ -1,0 +1,80 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="pin.aspx.cs" Inherits="globalfx.a.stake.pin" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="grid simple horizontal purple">
+                <div class="grid-title text-center">
+                    <h4 class="text-center">Stake <span class="semi-bold">PIN</span></h4>
+
+                </div>
+                <div class="grid-body">
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label>Stake Package</label>
+                                    <asp:DropDownList ID="ddlStakeList" runat="server"></asp:DropDownList>
+                                </div>
+
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label>Number of PIN:</label>
+                                    <asp:TextBox Class="span12" ID="txtbxGroupName" runat="server" placeholder="Group Name"></asp:TextBox>
+
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label>Status:</label>
+                                    <asp:TextBox Class="span12" ID="txtbxPassword" runat="server" placeholder="Group Name"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="pull-right">
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnGenerate" runat="server" Text="Generate" />
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnCancel" runat="server" Text="Cancel" />
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="grid simple horizontal purple">
+                <div class="grid-title text-center">
+                    <h4 class="text-center">Stake <span class="semi-bold">Status</span></h4>
+
+                </div>
+                <div class="grid-body">
+
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class="input-with-icon  right total_count">
+                                <p>Total Generate: <span>100</span></p>
+                                <p>Total Used: <span>50</span></p>
+                                <p>Active: <span>20</span></p>
+                                <p>Inactive <span>30</span></p>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

@@ -1,0 +1,242 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.generic
+{
+    public partial class tree : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                initializeTree();
+            }
+
+        }
+
+        private void initializeTree()
+        {
+            try
+            {
+                btnlbl1.Text = (string)LumexSessionManager.Get("ActiveUserId");
+                btnlbl2L.Text = "Add New";
+                btnlbl3R.Text = "Add New";
+                btnlbl21L.Text = "Add New";
+                btnlbl22R.Text = "Add New";
+                btnlbl31L.Text = "Add New";
+                btnlbl32R.Text = "Add New";
+                btnlbl211L.Text = "Add New";
+                btnlbl212R.Text = "Add New";
+                btnlbl311L.Text = "Add New";
+                btnlbl312R.Text = "Add New";
+                btnlbl221L.Text = "Add New";
+                btnlbl222R.Text = "Add New";
+                btnlbl321L.Text = "Add New";
+                btnlbl322R.Text = "Add New";
+
+                ilbl2L.ImageUrl = "/assets/img/add_user.png";
+                ilbl3R.ImageUrl = "/assets/img/add_user.png";
+                ilbl21L.ImageUrl = "/assets/img/add_user.png";
+                ilbl22R.ImageUrl = "/assets/img/add_user.png";
+                ilbl31L.ImageUrl = "/assets/img/add_user.png";
+                ilbl32R.ImageUrl = "/assets/img/add_user.png";
+                ilbl211L.ImageUrl = "/assets/img/add_user.png";
+                ilbl212R.ImageUrl = "/assets/img/add_user.png";
+                ilbl311L.ImageUrl = "/assets/img/add_user.png";
+                ilbl312R.ImageUrl = "/assets/img/add_user.png";
+                ilbl221L.ImageUrl = "/assets/img/add_user.png";
+                ilbl222R.ImageUrl = "/assets/img/add_user.png";
+                ilbl321L.ImageUrl = "/assets/img/add_user.png";
+                ilbl322R.ImageUrl = "/assets/img/add_user.png";
+
+
+
+
+                //lbl2L.Attributes.Add("data-original-title", "Help");
+                //lbl3R.Attributes.Add("data-original-title", "Help");
+                //lbl21L.Attributes.Add("data-original-title", "Help!!");
+                //lbl22R.Attributes.Add("data-original-title", "Help !!");
+                //lbl31L.Attributes.Add("data-original-title", "Help !!");
+                //lbl32R.Attributes.Add("data-original-title", "Help !!");
+                //lbl211L.Attributes.Add("data-original-title", "Help !!");
+                //lbl212R.Attributes.Add("data-original-title", "Help !!");
+                //lbl311L.Attributes.Add("data-original-title", "Help !!");
+                //lbl312R.Attributes.Add("data-original-title", "Help !!");
+                //lbl221L.Attributes.Add("data-original-title", "Help !!");
+                //lbl222R.Attributes.Add("data-original-title", "Help !!");
+                //lbl321L.Attributes.Add("data-original-title", "Help !!");
+                //lbl322R.Attributes.Add("data-original-title", "Help !!");
+
+
+
+                lbl2L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl3R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl21L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl22R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl31L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl32R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl211L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl212R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl311L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl312R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl221L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl222R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl321L.Attributes.Add("data-content", "Click Add New to add new Investor.");
+                lbl322R.Attributes.Add("data-content", "Click Add New to add new Investor.");
+
+                lbl2L.Attributes.Add("data-title", "Help");
+                lbl3R.Attributes.Add("data-title", "Help");
+                lbl21L.Attributes.Add("data-title", "Help!!");
+                lbl22R.Attributes.Add("data-title", "Help !!");
+                lbl31L.Attributes.Add("data-title", "Help !!");
+                lbl32R.Attributes.Add("data-title", "Help !!");
+                lbl211L.Attributes.Add("data-title", "Help !!");
+                lbl212R.Attributes.Add("data-title", "Help !!");
+                lbl311L.Attributes.Add("data-title", "Help !!");
+                lbl312R.Attributes.Add("data-title", "Help !!");
+                lbl221L.Attributes.Add("data-title", "Help !!");
+                lbl222R.Attributes.Add("data-title", "Help !!");
+                lbl321L.Attributes.Add("data-title", "Help !!");
+                lbl322R.Attributes.Add("data-title", "Help !!");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void btnlbl1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LinkButton lnkbtn = (LinkButton)sender;
+
+                if (lnkbtn.Text != "Add New")
+                {
+
+                }
+                else
+                {
+                    var position = lnkbtn.ID[lnkbtn.ID.Length - 1];
+                    var placementId = getPlacementId(lnkbtn);
+                    var refaralId = (string)LumexSessionManager.Get("ActiveUserId");
+                    if (placementId != "Add New")
+                    {
+                        string query = urlencrp.DESEncrypt(position + "#" + placementId + "#" + refaralId); // QueryStringModule.Encrypt("user=123&account=456");
+
+                      //  string decrypt = QueryStringModule.Decrypt()
+                        //string encrurldata =
+                        //    dataEncryptbll.EncryptRijndael(
+                        //        position + "#" + placementId + "#" + refaralId, dataEncryptbll.addforvarifycore);
+                        string encrurldata = "";
+                        var myurl = "/page/registration.aspx?enc=" + query;
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow",
+                            "window.open(" + "'" + myurl + "'" + ",'_newtab');", true);
+
+                    }
+                    else
+                    {
+                        string message = " <span class='actionTopic'> The Placement ID is not valid. Thanks" + "</span>.";
+                        MyAlertBox(
+                            "var callbackOk = function () { window.location = \"/a/initialdata/initialDataElement.aspx\"; }; WarningAlert(\"" +
+                            "Warning" + "\", \"" + message + "\", \"\");");
+
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private object getPlacementId(LinkButton lnkbtn)
+        {
+            try
+            {
+                string placementid = "";
+                string id = lnkbtn.ID.Remove(0, 3);
+                if (id == "lbl2L")
+                {
+                    placementid = btnlbl1.Text;
+                }
+                else if (id == "lbl3R")
+                {
+                    placementid = btnlbl1.Text;
+                }
+                else if (id == "lbl21L")
+                {
+                    placementid = btnlbl2L.Text;
+                }
+                else if (id == "lbl22R")
+                {
+                    placementid = btnlbl2L.Text;
+                }
+                else if (id == "lbl31L")
+                {
+                    placementid = btnlbl3R.Text;
+                }
+                else if (id == "lbl32R")
+                {
+                    placementid = btnlbl3R.Text;
+                }
+                else if (id == "lbl211L")
+                {
+                    placementid = btnlbl21L.Text;
+                }
+                else if (id == "lbl212R")
+                {
+                    placementid = btnlbl21L.Text;
+                }
+                else if (id == "lbl221L")
+                {
+                    placementid = btnlbl22R.Text;
+                }
+                else if (id == "lbl222R")
+                {
+                    placementid = btnlbl22R.Text;
+                }
+                else if (id == "lbl311L")
+                {
+                    placementid = btnlbl31L.Text;
+                }
+                else if (id == "lbl312R")
+                {
+                    placementid = btnlbl31L.Text;
+                }
+                else if (id == "lbl321L")
+                {
+                    placementid = btnlbl32R.Text;
+                }
+                else if (id == "lbl322R")
+                {
+                    placementid = btnlbl32R.Text;
+                }
+
+                return placementid;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+    }
+}

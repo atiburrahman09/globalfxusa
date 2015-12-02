@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class myaccount : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                getmyAccountSummary((string)LumexSessionManager.Get("ActiveUserId"));
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void getmyAccountSummary(string UserId)
+        {
+            try
+            {
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.getAccountSummaryById(UserId);
+                if (dt.Rows.Count > 0)
+                {
+                    lvlIncome.Text = dt.Rows[0]["Income"].ToString();
+                    lvlDeposit.Text = dt.Rows[0]["Deposit"].ToString();
+                    lvlCommision.Text = dt.Rows[0]["Commission"].ToString();
+                    lvlFund.Text = dt.Rows[0]["FxFund"].ToString();
+                }
+                else
+                {
+
+                    lvlIncome.Text = "0";
+                    lvlDeposit.Text = "0";
+                    lvlCommision.Text = "0";
+                    lvlFund.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
+        }
+    }
+}

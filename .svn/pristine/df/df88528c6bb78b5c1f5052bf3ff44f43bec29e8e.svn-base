@@ -1,0 +1,97 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="withdraw.aspx.cs" Inherits="globalfx.a.account.withdraw" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icontimes"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="span6">
+            <div class="grid simple">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px">Money <span class="semi-bold">withdraw</span></legend>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Type:</b></label>
+                                    <asp:DropDownList class="span12" ID="ddlType" runat="server">
+                                        <asp:ListItem Text="Withdraw" Value="0"></asp:ListItem>
+                                        <asp:ListItem Text="Transfer" Value="1"></asp:ListItem>
+
+                                    </asp:DropDownList>
+                                    
+                                </div>
+
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Account No:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxAccountNo" runat="server" placeholder="Account No"></asp:TextBox>
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Transfer to:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxTransferTo" runat="server" placeholder="Transfer To"></asp:TextBox>
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Your pin:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxTransferPin" runat="server" placeholder="Pin"></asp:TextBox>
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="input-with-icon  right">
+                                    <label><b>Transfer Note:</b></label>
+                                    <asp:TextBox class="span12" ID="txtbxTransferNote" runat="server" placeholder="Transfer Note"></asp:TextBox>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="text-center">
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnRequestSend" runat="server" Text="Request Send" />
+                            <asp:Button class="btn btn-primary btn-cons" ID="btnCancel" runat="server" Text="Cancel" />
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="grid simple">
+                <div class="grid-body no-border">
+                    <legend class="text-center" style="padding-top: 20px">Short <span class="semi-bold">Summery</span></legend>
+                    <div class="row-fluid">
+                        <div class="control-group" style="margin: 30px;">
+                            <div class="input-with-icon  right total_count">
+                                <p>Income wallet : <span>500</span></p>
+                                <p>Deposit wallet : <span>400</span></p>
+                                <p>Commission wallet : <span>300</span></p>
+                                <p>Fx Fund : <span>200</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Lumex.Tech;
+using Global.Core.DLL;
+using System.Data;
+using System.Net.Configuration;
+using System.Configuration;
+using System.Web.Configuration;
+
+namespace Global.Core.BLL
+{
+    public class SystemBLL
+    {
+        //public static string BaseUrl = "http://mail.lumextech.com";
+
+        public static string BaseUrl = "http://globalfxusa.com";
+
+        public static string MailServer = "mail.globalfxusa.com";
+        public static string MailAddess = "contact@globalfxusa.com";
+        public static string MailPass = "contact@3012#12";
+        public static int Port = 25;
+        public DataTable getActiveMessage()
+        {
+            SystemDAL systemDAL = new SystemDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                DataTable dt = systemDAL.getActiveMessage(db);
+                db.Stop();
+
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string Message { get; set; }
+
+        public bool updateActiveMessage(string Message)
+        {
+            SystemDAL systemDAL = new SystemDAL();
+            bool status = false;
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                systemDAL.updateActiveMessage(Message, db);
+                db.Stop();
+
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return status;
+        }
+
+    }
+}

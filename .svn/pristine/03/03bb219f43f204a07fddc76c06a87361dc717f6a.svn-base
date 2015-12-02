@@ -1,0 +1,201 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.a.account
+{
+    public partial class withdraw : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                getmyAccountSummary((string)LumexSessionManager.Get("ActiveUserId"));
+
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+            if (GridViewWithdrawRequest.Rows.Count > 0)
+            {
+                // generateButton.Visible = true;
+                GridViewWithdrawRequest.UseAccessibleHeader = true;
+                GridViewWithdrawRequest.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+
+        }
+        private void getmyAccountSummary(string UserId)
+        {
+            try
+            {
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.getAccountSummaryById(UserId);
+                if (dt.Rows.Count > 0)
+                {
+                    lvlIncomeWallet.Text = dt.Rows[0]["Income"].ToString();
+                    lvlDepositWallet.Text = dt.Rows[0]["Deposit"].ToString();
+                    lvlCommisionWallet.Text = dt.Rows[0]["Commission"].ToString();
+                    lvlFxFund.Text = dt.Rows[0]["FxFund"].ToString();
+                }
+                else
+                {
+
+                    lvlIncomeWallet.Text = "0";
+                    lvlDepositWallet.Text = "0";
+                    lvlCommisionWallet.Text = "0";
+                    lvlFxFund.Text = "0";
+                }
+            }
+            catch (Exception)
+            {
+
+                // throw;
+            }
+        }
+
+        public void btnRequestSend_Click(object sender, EventArgs e)
+        {
+            UserAccountBLL account = new UserAccountBLL();
+            account.Type = ddlType.SelectedValue;
+            account.BankAccountNo = txtbxAccountNo.Text.Trim();
+            account.TransferTo = txtbxTransferTo.Text.Trim();
+            account.SwiftCode = txtbxSwiftCode.Text.Trim();
+            account.Pin = txtbxTransferPin.Text.Trim();
+            account.TransferNote = txtbxTransferNote.Text.Trim();
+            account.Amount = txtbxAmount.Text.Trim();
+            account.transfarType = ddlType.SelectedValue;
+
+            if (Convert.ToDecimal(account.Amount) >= 30)
+            {
+                if (account.checkUserIncomeAmounttoActin(30, (string)LumexSessionManager.Get("ActiveUserId")))
+                {
+                    bool status = account.RequestToTransfer();
+                    if (status)
+                    {
+
+                        account.updateUserAccountforTransfer();
+                        string message = "Payment <span class='actionTopic'>Transfer Request</span> Successfully Done. Thanks.";
+                        MyAlertBox("var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/withdraw.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+
+                    }
+                    string message = "Money Transfered Successfully.";
+                    MyAlertBox("var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/withdraw.aspx\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                }
+                else
+                {
+                    string message = "You have no this sufficient  <span class='actionTopic'>Amount</span> to Transfer.";
+                    MyAlertBox("var callbackOk = function () { MyOverlayStart(); window.location = \"/a/account/withdraw.aspx\"; }; WarningAlert(\"" + "Warning!!" + "\", \"" + message + "\", \"\");");
+
+                }
+
+            }
+            else
+            {
+                string message = "You can not transfer less than <span class='actionTopic'>$30</span>, Thanks.";
+                MyAlertBox("var callbackOk = function () { MyOverlayStart(); window.location = \"/moneygerate.aspx\"; }; SuccessAlert(\"" + "Warning note!!" + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+
+        protected void ddlType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlType.SelectedValue == "0")
+            {
+                divPeson.Visible = false;
+                divBank.Visible = true;
+                divSwift.Visible = true;
+            }
+            else if (ddlType.SelectedValue == "1")
+            {
+                divPeson.Visible = true;
+                divBank.Visible = false;
+                divSwift.Visible = false;
+            }
+
+        }
+        protected void txtbxTransferTo_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                usernote.Attributes.Remove("data-content");
+                usernote.Attributes.Remove("data-original-title");
+                UserBLL userBll = new UserBLL();
+                if (txtbxTransferTo.Text != "")
+                {
+                    DataTable dt = userBll.GetUserInfoById(txtbxTransferTo.Text);
+                    if (dt.Rows.Count > 0)
+                    {
+                        string TransferToName = "Name:" + dt.Rows[0]["FirstName"].ToString() + " " + dt.Rows[0]["LastName"].ToString();
+                        string Contactinfo = "Cell:" + dt.Rows[0]["MobileNo"].ToString() + ", Email:" +
+                                             dt.Rows[0]["Email"].ToString();
+                        usernote.Attributes.Add("data-content", Contactinfo);
+                        usernote.Attributes.Add("data-original-title", TransferToName);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        protected void ViewButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlStatus.SelectedValue == "P")
+                {
+                    GridViewWithdrawRequest.Columns[6].Visible = false;
+                    GridViewWithdrawRequest.Columns[7].Visible = false;
+                }
+                else if (ddlStatus.SelectedValue == "R")
+                {
+                    GridViewWithdrawRequest.Columns[5].Visible = false;
+                    GridViewWithdrawRequest.Columns[7].Visible = false;
+                }
+                else if (ddlStatus.SelectedValue == "A")
+                {
+                    GridViewWithdrawRequest.Columns[5].Visible = false;
+                    GridViewWithdrawRequest.Columns[6].Visible = false;
+                }
+                UserAccountBLL userAccount = new UserAccountBLL();
+                DataTable dt = userAccount.getWithdrawRequestListForUser((string)LumexSessionManager.Get("ActiveUserId"), LumexLibraryManager.ParseAppDate(fromDateTextBox.Text), LumexLibraryManager.ParseAppDate(toDateTextBox.Text), ddlStatus.SelectedValue);
+
+                GridViewWithdrawRequest.DataSource = dt;
+                GridViewWithdrawRequest.DataBind();
+                if (GridViewWithdrawRequest.Rows.Count > 0)
+                {
+                    // generateButton.Visible = true;
+                    GridViewWithdrawRequest.UseAccessibleHeader = true;
+                    GridViewWithdrawRequest.HeaderRow.TableSection = TableRowSection.TableHeader;
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+            finally
+            {
+              //  MyAlertBox("MyOverlayStop();");
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+    }
+}

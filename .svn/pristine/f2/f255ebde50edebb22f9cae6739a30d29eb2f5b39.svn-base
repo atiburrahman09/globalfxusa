@@ -1,0 +1,276 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using Lumex.Tech;
+using Global.Core.DAL;
+
+namespace Global.Core.BLL
+{
+    public class initialDataBLL
+    {
+        public string ElementGroupId { get; set; }
+
+        public string ElementDataId { get; set; }
+
+        public string ElementGroupName { get; set; }
+
+        public string ElementGroupDes { get; set; }
+
+        public string ElementDataName { get; set; }
+
+        public bool checkDuplicateLookupGroup()
+        {
+            bool status = true;
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                status = LookUpDal.checkDuplicateLookupGroup(this, db);
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+                LookUpDal = null;
+
+            }
+            return status;
+        }
+
+        public bool SaveLookUpGroup()
+        {
+            initalDataDAL LookUpDal = new initalDataDAL();
+            bool Status = false;
+            DataTable dt = new DataTable();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = LookUpDal.SaveLookUpGroup(this, db);
+                db.Stop();
+                Status = true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                ElementGroupId = dt.Rows[0][0].ToString();
+                LookUpDal = null;
+                dt.Clear();
+            }
+
+            return Status;
+        }
+
+        public DataTable GetElementGroupList()
+        {
+            DataTable dt = new DataTable();
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                dt = LookUpDal.GetElementGroupList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                LookUpDal = null;
+            }
+        }
+
+        public bool UpdateLookUpGroup()
+        {
+            initalDataDAL LookUpDal = new initalDataDAL();
+            bool Status = false;
+            LumexDBPlayer db = LumexDBPlayer.Start(true);
+            try
+            {
+
+                LookUpDal.UpdateLookUpGroup(this, db);
+
+                Status = true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                LookUpDal = null;
+                db.Stop();
+            }
+
+            return Status;
+        }
+
+        public DataTable GetElementGroupNameIdList()
+        {
+            DataTable dt = new DataTable();
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                dt = LookUpDal.GetElementGroupNameIdList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                LookUpDal = null;
+            }
+        }
+
+
+
+        public bool checkDuplicateLookupData()
+        {
+            bool status = true;
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                status = LookUpDal.checkDuplicateLookupData(this, db);
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+                LookUpDal = null;
+
+            }
+            return status;
+        }
+
+        public bool SaveLookUpElementData()
+        {
+            initalDataDAL LookUpDal = new initalDataDAL();
+            bool Status = false;
+            DataTable dt = new DataTable();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = LookUpDal.SaveLookUpElementData(this, db);
+                db.Stop();
+                Status = true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                ElementDataId = dt.Rows[0][0].ToString();
+                LookUpDal = null;
+                dt.Clear();
+            }
+
+            return Status;
+        }
+
+        public DataTable GetElementDataListByGroupId()
+        {
+            DataTable dt = new DataTable();
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                dt = LookUpDal.GetElementDataListByGroupId(this, db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                LookUpDal = null;
+            }
+        }
+
+        public bool UpdateLookUpElementData()
+        {
+            initalDataDAL LookUpDal = new initalDataDAL();
+            bool Status = false;
+            DataTable dt = new DataTable();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                LookUpDal.UpdateLookUpElementData(this, db);
+                db.Stop();
+                Status = true;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+
+                LookUpDal = null;
+            }
+
+            return Status;
+        }
+
+        public DataTable GetlookupdataNameIdbyGroup()
+        {
+            DataTable dt = new DataTable();
+            initalDataDAL LookUpDal = new initalDataDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                dt = LookUpDal.GetlookupdataNameIdbyGroup(this, db);
+                db.Stop();
+              
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                LookUpDal = null;
+            }
+            return dt;
+        }
+
+        public string ElementDataDescp { get; set; }
+    }
+}

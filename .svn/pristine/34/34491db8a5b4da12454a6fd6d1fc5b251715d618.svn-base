@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{907E5D12-357E-4899-A11C-1951CBDB7ED7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Global.Core</RootNamespace>
+    <AssemblyName>Global.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lumex.Tech, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>G:\Document &amp; ETC\Document &amp; ETC\Content\DBBackup\Lumex.Tech_Secure (Default-develop)\Lumex.Tech.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\AppMenuBLL.cs" />
+    <Compile Include="BLL\AutoIdGenerateBLL.cs" />
+    <Compile Include="BLL\genologyBLL.cs" />
+    <Compile Include="BLL\LoginBll.cs" />
+    <Compile Include="BLL\initialDataBLL.cs" />
+    <Compile Include="BLL\dataEncryptbll.cs" />
+    <Compile Include="BLL\MailContactBLL.cs" />
+    <Compile Include="BLL\QueryStringModule.cs" />
+    <Compile Include="BLL\StakeInfoBLL.cs" />
+    <Compile Include="BLL\SystemBLL.cs" />
+    <Compile Include="BLL\urlencrp.cs" />
+    <Compile Include="BLL\UserAcoountBLL.cs" />
+    <Compile Include="BLL\userActivityBLL.cs" />
+    <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="BLL\UserGroupBLL.cs" />
+    <Compile Include="DAL\AppMenuDAL.cs" />
+    <Compile Include="DAL\AutoIdGenerateDAL.cs" />
+    <Compile Include="DAL\genologyDAL.cs" />
+    <Compile Include="DAL\LoginDal.cs" />
+    <Compile Include="DAL\initalDataDAL.cs" />
+    <Compile Include="DAL\StakeInfoDAL.cs" />
+    <Compile Include="DAL\SystemDAL.cs" />
+    <Compile Include="DAL\UserAccountDLL.cs" />
+    <Compile Include="DAL\userActivityDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="DAL\UserGroupDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Lumex.Tech;
+using Global.Core.DLL;
+using System.Data;
+using System.Net.Configuration;
+using System.Configuration;
+using System.Web.Configuration;
+
+namespace Global.Core.BLL
+{
+    public class SystemBLL
+    {
+        //public static string BaseUrl = "http://mail.lumextech.com";
+       
+        static Configuration config = WebConfigurationManager.OpenWebConfiguration(HttpContext.Current.Request.ApplicationPath);
+       static MailSettingsSectionGroup credential = (MailSettingsSectionGroup)config.GetSectionGroup("system.net/mailSettings");
+  
+        static bool issslEnable = Boolean.Parse(WebConfigurationManager.AppSettings["mailSSL"]);
+        public static string MailServer = credential.Smtp.Network.Host;
+        public static string MailAddess = credential.Smtp.Network.UserName;
+        public static string MailPass = credential.Smtp.Network.Password;
+        public static int Port =credential.Smtp.Network.Port;
+        public static bool Enablessl = issslEnable;
+        public DataTable getActiveMessage()
+        {
+            SystemDAL systemDAL = new SystemDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                DataTable dt = systemDAL.getActiveMessage(db);
+                db.Stop();
+
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string Message { get; set; }
+
+        public bool updateActiveMessage(string Message)
+        {
+            SystemDAL systemDAL = new SystemDAL();
+            bool status = false;
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                systemDAL.updateActiveMessage(Message, db);
+                db.Stop();
+
+                status = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return status;
+        }
+
+    }
+}

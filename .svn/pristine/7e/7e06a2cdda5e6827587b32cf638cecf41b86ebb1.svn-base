@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lumex.Tech;
+using Global.Core.BLL;
+using System.Data;
+
+namespace Global.Core.DAL
+{
+    public class genologyDAL
+    {
+        internal System.Data.DataTable find(string UserId, LumexDBPlayer db)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+               // dt = db.ExecuteDataTable("SELECT [Serial],[UserId],[RefferId],[PleacementId],[PlacePosition],[StakeId],[StakeKey],[JoinDate],[isChecked],[CheckedDate],[ActiveDate],[JoinFrom],[ActiveFrom] FROM [dbo].[tblStakeJoining] where PleacementId=@UserId ");
+
+                dt = db.ExecuteDataTable("[GET_PLACED_USER_BY_PLACEMENT_ID]", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return dt;
+        }
+    }
+}

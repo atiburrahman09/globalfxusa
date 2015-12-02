@@ -1,0 +1,192 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace globalfx.a.manage
+{
+    public partial class upload : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //string[] filesindirectory = Directory.GetFiles(Server.MapPath("~/download"));
+            //List<String> images = new List<string>(filesindirectory.Count());
+
+            //foreach (string item in filesindirectory)
+            //{
+            //    images.Add(String.Format("/download/{0}", System.IO.Path.GetFileName(item)));
+            //}
+
+            //RepeaterImages.DataSource = images;
+            //RepeaterImages.DataBind();
+            string[] filePaths = Directory.GetFiles(Server.MapPath("~/download"));
+            List<ListItem> files = new List<ListItem>();
+            foreach (string filePath in filePaths)
+            {
+                files.Add(new ListItem(Path.GetFileName(filePath), filePath));
+            }
+            GridView1.DataSource = files;
+            GridView1.DataBind();
+            GridViewStyle();
+        }
+        private void GridviewHeadStyle()
+        {
+            if (GridView1.Rows.Count > 0)
+            {
+                GridView1.UseAccessibleHeader = true;
+                GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
+
+            }
+        }
+        private void GridViewStyle()
+        {
+            if (GridView1.Rows.Count > 0)
+            {
+                GridView1.UseAccessibleHeader = true;
+                GridView1.HeaderRow.TableSection = TableRowSection.TableHeader;
+            }
+        }
+
+        protected void uploadButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FileUpload FilePP = new FileUpload();
+                FilePP = pptflupload;
+                if (FilePP.HasFile)
+                {
+                    //string PPImg = "logo.png";
+
+                    //string location = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings["AttachmentPath"]);
+
+                    //if (!Directory.Exists(location))
+                    //{
+                    //    Directory.CreateDirectory(location);
+                    //}
+
+                    string getExtention = Path.GetExtension(FilePP.FileName);
+
+                    //path = path + @"\" + PPImg;
+
+                    //FilePP.PostedFile.SaveAs(path);
+
+                    if (getExtention == ".ppt" || getExtention == ".pptx")
+                    {
+
+                        // hidFileName.Value = filename;
+                        // string path = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings["AttachmentPath"] + "/ModuleContents/");
+                        string loc = "/download/";
+                        string path = HttpContext.Current.Server.MapPath(loc);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        path = path + "presentation" + getExtention;
+
+                        FilePP.PostedFile.SaveAs(path);
+                        string message = "Message is <span class='actionTopic'>Your File Uploaded successfully.</span> Successfully.";
+                        MyAlertBox("var callbackOk = function () { window.location = \"\"; }; SuccessAlert(\"" +
+                                   "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+
+                    }
+                    else
+                    {
+                        string message = "Message is <span class='actionTopic'>Your File extension does not match.</span> Successfully.";
+                        MyAlertBox("var callbackOk = function () { window.location = \"\"; }; WarningAlert(\"" +
+                                   "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                    }
+
+
+                }
+                else
+                {
+                    string message = " <span class='actionTopic'>" + "Sorry Please Select Your File." + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"\"; }; WarningAlert(\"" + "Warning!!" + "\", \"" + message + "\",\"\");");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+        protected void btnpdfUpload_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FileUpload FilePP = new FileUpload();
+                FilePP = pdfFileUpload;
+                if (FilePP.HasFile)
+                {
+
+
+                    string getExtention = Path.GetExtension(FilePP.FileName);
+
+                    //path = path + @"\" + PPImg;
+
+                    //FilePP.PostedFile.SaveAs(path);
+
+                    if (getExtention == ".pdf" || getExtention == ".PDF")
+                    {
+
+                        // hidFileName.Value = filename;
+                        // string path = HttpContext.Current.Server.MapPath(WebConfigurationManager.AppSettings["AttachmentPath"] + "/ModuleContents/");
+                        string loc = "/download/";
+                        string path = HttpContext.Current.Server.MapPath(loc);
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+
+                        path = path + "fxpresent" + getExtention;
+
+                        FilePP.PostedFile.SaveAs(path);
+                        string message = "Message is <span class='actionTopic'>Your File Uploaded successfully.</span> Successfully.";
+                        MyAlertBox("var callbackOk = function () { window.location = \"\"; }; SuccessAlert(\"" +
+                                   "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+
+                    }
+                    else
+                    {
+                        string message = "Message is <span class='actionTopic'>Your File extension does not match.</span> Successfully.";
+                        MyAlertBox("var callbackOk = function () { window.location = \"\"; }; WarningAlert(\"" +
+                                   "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                    }
+
+
+                }
+                else
+                {
+                    string message = " <span class='actionTopic'>" + "Sorry Please Select Your File." + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"\"; }; WarningAlert(\"" + "Warning!!" + "\", \"" + message + "\",\"\");");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+    }
+}

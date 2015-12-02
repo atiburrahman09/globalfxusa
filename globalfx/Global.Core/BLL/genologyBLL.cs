@@ -1,0 +1,561 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lumex.Tech;
+using Global.Core.DAL;
+using System.Data;
+
+namespace Global.Core.BLL
+{
+    public class genologyBLL
+    {
+        Stack<string> viststack = new Stack<string>();
+        private DataTable InserNode;
+        public DataTable find(string UserId)
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.find(UserId, db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public DataTable getStakeJoiningList()
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.getStakeJoiningList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool GenerateBinaryNodeByChileId(string UserId,string Amount)
+        {
+            bool status = false;
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+           
+            DataRow dr = null;
+            try
+            {
+                dt = getStakeJoiningList();
+                InserNode = new DataTable();
+
+                InserNode.Columns.Add(new DataColumn("NodeId"));
+                InserNode.Columns.Add(new DataColumn("ChildId"));
+                InserNode.Columns.Add(new DataColumn("Amount"));
+                InserNode.Columns.Add(new DataColumn("Position"));
+                viststack.Push(UserId);
+
+                while (viststack.Count>0)
+                {
+                    string childId = viststack.Pop();
+                     DataView view = new DataView(dt);
+                     view.RowFilter = "UserId = '" + childId + "'";
+                     if (view.Count > 0)
+                     {
+                           dr = InserNode.NewRow();
+                           dr["NodeId"] = view[0]["PleacementId"].ToString();
+                           dr["ChildId"] = UserId;
+                           dr["Amount"] = Amount.ToString();
+                           dr["Position"] =view[0]["PlacePosition"].ToString();
+                           InserNode.Rows.Add(dr);
+                                
+
+                            viststack.Push(view[0]["PleacementId"].ToString());
+                     }
+                    
+                }
+
+
+
+                if (InserNode.Rows.Count > 0)
+                {
+                   insertIntoNodeList(InserNode);
+                    status = true;
+                }
+
+
+                //LumexDBPlayer db = LumexDBPlayer.Start(true);
+                //dt = genology.getStakeJoiningList(db);
+                //db.Stop();
+                // return dt;
+                return status;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public bool generateBainaryMatchData()
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            string LeftChild = "";
+            string RightChild = "";
+            bool status = false;
+            DataRow dr = null;
+            try
+            {
+                dt = getStakeJoiningList();
+                DataTable dtnode = getMatchingNodeList();
+                DataTable dtParent = getStakeJoiningParentList();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    InserNode = new DataTable();
+
+                    InserNode.Columns.Add(new DataColumn("NodeId"));
+                    InserNode.Columns.Add(new DataColumn("ChildId"));
+                    InserNode.Columns.Add(new DataColumn("Amount"));
+                    InserNode.Columns.Add(new DataColumn("Position"));
+                    LeftChild = "";
+                    RightChild = "";
+
+                    findLeftRight(dt.Rows[i]["PleacementId"].ToString(), out LeftChild, out RightChild);
+                    if (LeftChild != "")
+                    {
+                        viststack.Push(LeftChild);
+                        DataView view = new DataView(dt);
+                        view.RowFilter = "UserId = '" + LeftChild + "'";
+                        DataView viewNode = new DataView(dtnode);
+                        viewNode.Sort = "ChildId";
+                        viewNode.RowFilter = "NodeID = '" + dt.Rows[i]["PleacementId"].ToString() + "'";
+                        if (viewNode.Count > 0)
+                        {
+                            int index = viewNode.Find(view[0]["UserId"].ToString());
+                            if (index == -1)
+                            {
+                                if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                                {
+                                    dr = InserNode.NewRow();
+                                    dr["NodeId"] = dt.Rows[i]["PleacementId"].ToString();
+                                    dr["ChildId"] = view[0]["UserId"].ToString();
+                                    dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                    dr["Position"] = "L";
+                                    InserNode.Rows.Add(dr);
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                            {
+                                dr = InserNode.NewRow();
+                                dr["NodeId"] = dt.Rows[i]["PleacementId"].ToString();
+                                dr["ChildId"] = view[0]["UserId"].ToString();
+                                dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                dr["Position"] = "L";
+                                InserNode.Rows.Add(dr);
+                            }
+
+                        }
+
+
+                        VisitChildrenByParentId(dt.Rows[i]["PleacementId"].ToString(), dt, dtnode, "L");
+                    }
+
+                    if (RightChild != "")
+                    {
+                        viststack.Push(RightChild);
+                        DataView view = new DataView(dt);
+                        view.RowFilter = "UserId = '" + RightChild + "'";
+                        DataView viewNode = new DataView(dtnode);
+                        viewNode.Sort = "ChildId";
+                        viewNode.RowFilter = "NodeID = '" + dt.Rows[i]["PleacementId"].ToString() + "'";
+                        if (viewNode.Count > 0)
+                        {
+                            int index = viewNode.Find(view[0]["UserId"].ToString());
+                            if (index == -1)
+                            {
+                                if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                                {
+                                    dr = InserNode.NewRow();
+                                    dr["NodeId"] = dt.Rows[i]["PleacementId"].ToString();
+                                    dr["ChildId"] = view[0]["UserId"].ToString();
+                                    dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                    dr["Position"] = "R";
+                                    InserNode.Rows.Add(dr);
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                            {
+                                dr = InserNode.NewRow();
+                                dr["NodeId"] = dt.Rows[i]["PleacementId"].ToString();
+                                dr["ChildId"] = view[0]["UserId"].ToString();
+                                dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                dr["Position"] = "R";
+                                InserNode.Rows.Add(dr);
+                            }
+
+
+                        }
+
+                        VisitChildrenByParentId(dt.Rows[i]["PleacementId"].ToString(), dt, dtnode, "R");
+                    }
+                    if (InserNode.Rows.Count > 0)
+                    {
+                        insertIntoNodeList(InserNode);
+                        status = true;
+                    }
+
+                }
+                //LumexDBPlayer db = LumexDBPlayer.Start(true);
+                //dt = genology.getStakeJoiningList(db);
+                //db.Stop();
+                // return dt;
+                return status;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private DataTable getStakeJoiningParentList()
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.getStakeJoiningParentList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void insertIntoNodeList(DataTable dt)
+        {
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.insertIntoNodeList(dt, db);
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private int CountParen = 0;
+        private bool VisitChildrenByParentId(string Node, DataTable alldata, DataTable dtnode, string position)
+        {
+
+            bool status = false;
+            while (viststack.Count > 0)
+            {
+                string MainUser = viststack.Pop();
+                DataView view = new DataView(alldata);
+                view.RowFilter = "PleacementId = '" + MainUser + "'";
+
+                DataView viewNode = new DataView(dtnode);
+                viewNode.Sort = "ChildId";
+                viewNode.RowFilter = "NodeID = '" + Node + "'";
+                DataRow dr = null;
+
+
+                if (view.Count > 1)
+                {
+                    if (viewNode.Count > 0)
+                    {
+                        int index = viewNode.Find(view[0]["UserId"].ToString());
+                        if (index == -1)
+                        {
+                            if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                            {
+                                dr = InserNode.NewRow();
+                                dr["NodeId"] = Node;
+                                dr["ChildId"] = view[0]["UserId"].ToString();
+                                dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                dr["Position"] = position;
+                                InserNode.Rows.Add(dr);
+                            }
+                        }
+
+                        index = viewNode.Find(view[1]["UserId"].ToString());
+                        if (index == -1)
+                        {
+                            if (Convert.ToDecimal(view[1]["StakeAmount"].ToString()) > 0)
+                            {
+                                dr = InserNode.NewRow();
+                                dr["NodeId"] = Node;
+                                dr["ChildId"] = view[1]["UserId"].ToString();
+                                dr["Amount"] = view[1]["StakeAmount"].ToString();
+                                dr["Position"] = position;
+                                InserNode.Rows.Add(dr);
+                            }
+
+                        }
+                        //  viststack.Push(view[0]["UserId"].ToString());
+                        //viststack.Push(view[1]["UserId"].ToString());
+                    }
+                    else
+                    {
+                        if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                        {
+                            dr = InserNode.NewRow();
+                            dr["NodeId"] = Node;
+                            dr["ChildId"] = view[0]["UserId"].ToString();
+                            dr["Amount"] = view[0]["StakeAmount"].ToString();
+                            dr["Position"] = position;
+                            InserNode.Rows.Add(dr);
+                        }
+                        if (Convert.ToDecimal(view[1]["StakeAmount"].ToString()) > 0)
+                        {
+                            dr = InserNode.NewRow();
+                            dr["NodeId"] = Node;
+                            dr["ChildId"] = view[1]["UserId"].ToString();
+                            dr["Amount"] = view[1]["StakeAmount"].ToString();
+                            dr["Position"] = position;
+                            InserNode.Rows.Add(dr);
+                        }
+                    }
+                    //if (view[0]["UserId"].ToString() != Node)
+                    //{
+                    viststack.Push(view[0]["UserId"].ToString());
+                    // }
+                    // if (view[1]["UserId"].ToString() != Node)
+                    // {
+                    viststack.Push(view[1]["UserId"].ToString());
+                    // }
+
+                    //  viststack.Push(view[1]["UserId"].ToString());
+
+
+                }
+                else if (view.Count == 1)
+                {
+                    if (viewNode.Count > 0)
+                    {
+                        int index = viewNode.Find(view[0]["UserId"].ToString());
+                        if (index == -1)
+                        {
+                            if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                            {
+                                dr = InserNode.NewRow();
+                                dr["NodeId"] = Node;
+                                dr["ChildId"] = view[0]["UserId"].ToString();
+                                dr["Amount"] = view[0]["StakeAmount"].ToString();
+                                dr["Position"] = position;
+                                InserNode.Rows.Add(dr);
+                            }
+                            // viststack.Push(view[0]["UserId"].ToString());
+                            //  if (view[0]["UserId"].ToString() != Node)
+                            // {
+
+                            // }
+
+                        }
+                        viststack.Push(view[0]["UserId"].ToString());
+
+                    }
+                    else
+                    {
+                        if (Convert.ToDecimal(view[0]["StakeAmount"].ToString()) > 0)
+                        {
+                            dr = InserNode.NewRow();
+                            dr["NodeId"] = Node;
+                            dr["ChildId"] = view[0]["UserId"].ToString();
+                            dr["Amount"] = view[0]["StakeAmount"].ToString();
+                            dr["Position"] = position;
+                            InserNode.Rows.Add(dr);
+                        }
+                        // viststack.Push(view[0]["UserId"].ToString());
+                        // if (view[0]["UserId"].ToString() != Node)
+                        // {
+                        viststack.Push(view[0]["UserId"].ToString());
+                        //}
+
+
+                    }
+
+
+                }
+                //if (viststack.Count >= 1)
+                //{
+                //    VisitChildrenByParentId(Node, alldata, dtnode, position);
+
+                //}
+                //else if (VisitChildrenByParentId(Node, alldata, dtnode, position))
+                //{
+                //    break;
+
+
+
+                //}
+                status = false;
+
+            }
+            return status;
+
+        }
+
+        private DataTable getMatchingNodeList()
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.getMatchingNodeList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        private void findLeftRight(string UserId, out string Left, out string Right)
+        {
+
+            Left = "";
+            Right = "";
+            genologyBLL genology = new genologyBLL();
+
+            DataTable dt = genology.find(UserId);
+
+
+            if (dt.Rows.Count > 1)
+            {
+                if (dt.Rows[0]["PlacePosition"].ToString().Trim() == "L")
+                {
+                    Left = dt.Rows[0]["UserId"].ToString();
+                }
+                else if (dt.Rows[0]["PlacePosition"].ToString().Trim() == "R")
+                {
+                    Right = dt.Rows[0]["UserId"].ToString(); ;
+                }
+
+                if (dt.Rows[1]["PlacePosition"].ToString().Trim() == "L")
+                {
+                    Left = dt.Rows[1]["UserId"].ToString();
+                }
+                else if (dt.Rows[1]["PlacePosition"].ToString().Trim() == "R")
+                {
+                    Right = dt.Rows[1]["UserId"].ToString(); ;
+                }
+            }
+            else if (dt.Rows.Count == 1)
+            {
+                if (dt.Rows[0]["PlacePosition"].ToString() == "L")
+                {
+                    Left = dt.Rows[0]["UserId"].ToString();
+                }
+                if (dt.Rows[0]["PlacePosition"].ToString() == "R")
+                {
+                    Right = dt.Rows[0]["UserId"].ToString();
+                }
+            }
+
+        }
+
+
+        bool srcstatus = false;
+
+
+        public DataTable getNodeList()
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.getNodeList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void getNodeLeftRightAmount(string UserId, out decimal LeftAmount, out decimal RightAmount)
+        {
+            LeftAmount = 0;
+            RightAmount = 0;
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.getNodeLeftRightAmount(UserId, db);
+                db.Stop();
+                if (dt.Rows.Count > 0)
+                {
+                    decimal.TryParse(dt.Rows[0][0].ToString(), out LeftAmount);
+                    decimal.TryParse(dt.Rows[0][1].ToString(), out RightAmount);
+                }
+                //  return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        public void CalculateMatchingCommission(string UserId, decimal LeftAmount, decimal rightAmount)
+        {
+            DataTable dt = new DataTable();
+            genologyDAL genology = new genologyDAL();
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = genology.CalculateMatchingCommission(UserId, LeftAmount, rightAmount, db);
+                db.Stop();
+                //return dt;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

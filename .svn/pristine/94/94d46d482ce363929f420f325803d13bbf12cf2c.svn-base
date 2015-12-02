@@ -1,0 +1,192 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.page
+{
+    public partial class varify : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!IsPostBack)
+                {
+                    string surl = Request.QueryString["UID"].Replace(" ", "+");
+                    if ((!string.IsNullOrEmpty(surl)))
+                    {
+
+                        getUserPasswordresetvalidity(dataEncryptbll.DecryptRijndael(surl, dataEncryptbll.addforvarifycore));
+
+                    }
+                    verificationCodeTextBox.Focus();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string message = "Somthing goes worng!! Try later. Thanks.";
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+        private void getUserPasswordresetvalidity(string UserId)
+        {
+
+            try
+            {
+                string[] id = UserId.Split('#');
+                UserBLL usrbll = new UserBLL();
+                hdnfldUserID.Value = usrbll.UserId = id[0];
+                DataTable dt = usrbll.getUserPasswordsetValidity();
+                if (dt.Rows.Count > 0)
+                {
+
+                    userNameLabel.Text = dt.Rows[0][0].ToString();
+                    if (dt.Rows[0]["IsBlocked"].ToString() == "No")
+                    {
+                        if (dt.Rows[0]["Isvarify"].ToString() == "No")
+                        {
+
+
+                            string message = " <span class='actionTopic'>" +
+                                             "Your Email id Succesfully Varified. You may LOG IN in now. Click ok to log in." +
+                                             "</span>.";
+                            MyAlertBox(
+                                "var callbackOk = function () { window.location = \"/login.aspx\"; }; SuccessAlert(\"" +
+                                "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+                            //  hdnfldVarifiCode.Value = dataEncryptbll.EncryptRijndael(dt.Rows[0]["VarificationCode"].ToString(), dataEncryptbll.addforvarifycore);
+                        }
+                        else if (dt.Rows[0]["Isvarify"].ToString() == "Yes" &&
+                                 !string.IsNullOrEmpty(dt.Rows[0]["VarificationCode"].ToString()))
+                        {
+                            varificationSection.Visible = true;
+                            string message = " <span class='actionTopic'>" +
+                                             "Please Insert your varification code and Change Your Password!!" +
+                                             "</span>.";
+                            MyAlertBox("var callbackOk = function () { window.location = \"\"; }; SuccessAlert(\"" +
+                                       "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                            hdnfldVarifiCode.Value =
+                                dataEncryptbll.EncryptRijndael(dt.Rows[0]["VarificationCode"].ToString(),
+                                    dataEncryptbll.addforvarifycore);
+
+                        }
+                        else
+                        {
+                            string message = " <span class='actionTopic'>" +
+                                             "Your Request Time out or this link already used. Please Try again leter or Contact with System Admin" +
+                                             "</span>.";
+                            MyAlertBox(
+                                "var callbackOk = function () { window.location = \"/login.aspx\"; }; WarningAlert(\"" +
+                                "Warning!!" + "\", \"" + message + "\", callbackOk);");
+
+                            // MyAlertBox("var callbackOk = function () { window.location = \"/login\"; }; ErrorAlert(\"" + "Warning" + "\", \"" + message + "\", callbackOk);");
+
+                        }
+                    }
+                    else
+                    {
+                        string message = " <span class='actionTopic'>" +
+                                             "This account is blocked. Please Try again leter or Contact with System Admin" +
+                                             "</span>.";
+                        MyAlertBox(
+                            "var callbackOk = function () { window.location = \"/login.aspx\"; }; WarningAlert(\"" +
+                            "Warning!!" + "\", \"" + message + "\", callbackOk);");
+                    }
+
+
+                }
+                else
+                {
+                    string message = " <span class='actionTopic'>" + "Your Request Time out Please Try again leter or Contact with System Admin" + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"/login.aspx\"; }; WarningAlert(\"" + "Warning!!" + "\", \"" + message + "\", callbackOk);");
+                    //   MyAlertBox("var callbackOk = function () { window.location = \"/login\"; }; ErrorAlert(\"" + "Warning" + "\", \"" + message + "\", callbackOk);");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+            }
+
+        }
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void verifyButton_Click(object sender, EventArgs e)
+        {
+            UserBLL usrbll = new UserBLL();
+            string varifyCode = hdnfldVarifiCode.Value.Replace(" ", "+");
+            if ((!string.IsNullOrEmpty(varifyCode)))
+            {
+                if (verificationCodeTextBox.Text.Trim() == dataEncryptbll.DecryptRijndael(varifyCode, dataEncryptbll.addforvarifycore))
+                {
+                    varificationSection.Visible = false;
+                    changePasswordSection.Visible = true;
+
+                    // UserActivityBLL userActivityBll = new UserActivityBLL();
+                    //string activity = (string)LumexSessionManager.Get("ActiveUserId") + " is Varified.";
+                    //string AffectedUser = (string)LumexSessionManager.Get("ActiveUserId");
+                    //userActivityBll.AddIntoUserActivity(activity, AffectedUser);
+
+                    string message = " <span class='actionTopic'>" + "Your are Varified Successfully. Please Set Password to login." + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                }
+                else
+                {
+                    string message = " <span class='actionTopic'>" + "Your Varification Code is Incorrect or Expire!!" + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"\"; }; ErrorAlert(\"" + "Process Succeed" + "\", \"" + message + "\", \"\");");
+
+                }
+
+            }
+        }
+        protected void okButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserBLL usrbll = new UserBLL();
+                //string userID = usrbll.UserId = hdnfldUserID.Value;
+                //usrbll.Password = newPasswordTextBox.Text;
+                bool status = usrbll.UpdateUserPassword(hdnfldUserID.Value, newPasswordTextBox.Text);
+                if (status)
+                {
+
+                    //UserActivityBLL userActivityBll = new UserActivityBLL();
+                    //string activity = (string)LumexSessionManager.Get("ActiveUserId") + " Changed Password.";
+                    //string AffectedUser = (string)LumexSessionManager.Get("ActiveUserId");
+                    //userActivityBll.AddIntoUserActivity(activity, AffectedUser);
+
+                    string message = " <span class='actionTopic'>" + "Your Password is Changed Successfully" + "</span>.";
+                    MyAlertBox("var callbackOk = function () { window.location = \"/login\"; }; SuccessAlert(\"" + "Process Succeed" + "\", \"" + message + "\", callbackOk);");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                string message = ex.Message;
+                if (ex.InnerException != null) { message += " --> " + ex.InnerException.Message; }
+                MyAlertBox("ErrorAlert(\"" + ex.GetType() + "\", \"" + message + "\", \"\");");
+
+            }
+        }
+
+    }
+}

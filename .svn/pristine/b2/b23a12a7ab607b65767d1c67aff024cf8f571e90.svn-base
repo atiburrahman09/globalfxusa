@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Lumex.Tech;
+using Global.Core.BLL;
+
+namespace globalfx.a.stake
+{
+    public partial class stakekeylog : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                getStakeKeyLogdata();
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        private void getStakeKeyLogdata()
+        {
+            try
+            {
+                StakeInfoBLL stakeInfo = new StakeInfoBLL();
+                DataTable dt = new DataTable();
+                if ((string) LumexSessionManager.Get("UserGroupId") == "UG003")
+                {
+                    dt = stakeInfo.getStakeKeyLogdatabyUser((string) LumexSessionManager.Get("ActiveUserId"));
+                }
+                else
+                {
+                    dt = stakeInfo.getStakeKeyLogdataAll();
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+    }
+}

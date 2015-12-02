@@ -1,0 +1,133 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="product.aspx.cs" Inherits="globalfx.page.product" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <div class="aboutus investment franchise">
+            <div class="container">
+                <h2 class="text-center">Our<span class="semi-bold"> Products</span></h2>
+                <table class="table table-bordered no-more-tables">
+                    <thead>
+                        <tr>
+                            <th class="text-center ">product Name</th>
+                            <th class="text-center">Value</th>
+                            <th class="text-center">Daily Return</th>
+                            <th class="text-center">Expire</th>
+                            <th class="text-center">Affiliate margin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-left">Business Stake</td>
+                            <td class="text-center">$125</td>
+                            <td class="text-center">1.00-1.50%</td>
+                            <td class="text-center">8 months</td>
+                            <td class="text-center">$2100(per day)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Executive Stake</td>
+                            <td class="text-center">$499</td>
+                            <td class="text-center">1.00-1.50%</td>
+                            <td class="text-center">10 months</td>
+                            <td class="text-center">$2100(per day)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Professional Stake</td>
+                            <td class="text-center">$1199</td>
+                            <td class="text-center">1.25-1.75%</td>
+                            <td class="text-center">12 months</td>
+                            <td class="text-center">$2500(per day)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Dynamic Stake</td>
+                            <td class="text-center">$2915</td>
+                            <td class="text-center">1.50-2.00%</td>
+                            <td class="text-center">15 months</td>
+                            <td class="text-center">$2500(per day)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Grand Dynamic Stake</td>
+                            <td class="text-center">$5028</td>
+                            <td class="text-center">1.50-2.00%</td>
+                            <td class="text-center">18 months</td>
+                            <td class="text-center">$3000(per day)</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="row-fluid">
+            <div class="aboutus investment franchise">
+                <div class="container">
+                    <h2 class="text-center"><span class="semi-bold">Affiliation</span></h2>
+                    <p>
+                        Welcome! Chances are, you’ve landed here because you aren't quite sure how this whole affiliate marketing thing works. Maybe you’ve discovered <strong class="semi-bold">Global FX </strong>while searching the web for online marketing solutions, or maybe you’ve heard of affiliate marketing but still don’t know: what is affiliate marketing? Thankfully, some good folks at <strong class="semi-bold">Global FX </strong>want to help you master the art of affiliate marketing and how to make more money online.
+                           
+                    </p>
+                    <h4 class="text-center"><span class="semi-bold">Affiliate marketing </span>at its very core is about relationships,a relationship between three parties:</h4>
+                    <div class="text-center">
+                        <ul class="inline-list ">
+                            <li>
+                                <img src="../assets/img/affilite3.png" />
+                            </li>
+                            <li>
+                                <img src="../assets/img/affilite1.png" /></li>
+                            <li>
+                                <img src="../assets/img/affilite2.png" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="clearfix"></div>
+
+        <div class="getway">
+            <div class="container text-center ">
+                <ul>
+                    <li><a href="#">
+                        <img src="../assets/img/cc/ico-american-express.jpg" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="../assets/img/cc/ico-discover.jpg" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="../assets/img/cc/ico-mastercard.jpg" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="../assets/img/cc/ico-paypal.jpg" />
+                    </a></li>
+                    <li><a href="#">
+                        <img src="../assets/img/cc/ico-visa.jpg" />
+                    </a></li>
+                </ul>
+                <p>
+                    Risk Warning: Trading on financial markets carries risks. Contracts for Difference (‘CFDs’) 
+                        are complex financial products that are traded on margin. Trading CFDs carries a high level 
+                        of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all
+                        investors because you may lose all your invested capital. You should not risk more than you are prepared to lose.
+                        Before deciding to trade, you need to ensure that you understand the risks involved taking into account your investment 
+                        objectives and level of experience
+                   
+                </p>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script src="../assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".btn-navbar").click(function () {
+                $(".nav").slideToggle(500);
+                $(".nav li").css('float', 'none');
+                $("ul.nav").css('width', '100%');
+            });
+        });
+    </script>
+</asp:Content>

@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Global.Core.DAL;
+using Lumex.Tech;
+using Global.Core;
+
+namespace Global.Core.BLL
+{
+    public class StakeInfoBLL
+    {
+        public string StakeId { get; set; }
+        public string StakeName { get; set; }
+
+        public string DailyAwardFrom { get; set; }
+
+        public string DailyAwardTo { get; set; }
+
+        public string AvgAward { get; set; }
+
+        public string TotalDuration { get; set; }
+
+        public string BinaryCap { get; set; }
+
+        public string Parcentage { get; set; }
+
+        public bool SaveStakeInfo()
+        {
+            StakeInfoDAL saveStakeInfo=new StakeInfoDAL();
+            bool status = false;
+            DataTable dt=new DataTable();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                dt = saveStakeInfo.SaveStaKeInfo(this, db);
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                    StakeId = dt.Rows[0][0].ToString();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                dt.Clear();
+            }
+            return status;
+        }
+    }
+}

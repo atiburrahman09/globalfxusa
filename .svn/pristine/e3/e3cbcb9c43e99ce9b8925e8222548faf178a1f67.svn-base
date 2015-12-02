@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Global.Core.DAL
+{
+    public class UserAccountDLL
+    {
+        internal System.Data.DataTable GetTransiction(BLL.UserAccountBLL userAccountBLL, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+    }
+}

@@ -1,0 +1,70 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="List.aspx.cs" Inherits="globalfx.setting.User.List" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="row-fluid">
+
+            <div class="row-fluid" style="min-height: 261px;">
+                <div class="grid simple horizontal purple">
+                    <div class="grid-title">
+                        <h5 class="widget-title bigger lighter">
+                            <i class="icon icon-table white"></i>&nbsp;; User Group Create
+                        </h5>
+                    </div>
+                    <div class="grid-body">
+                        <div class="row-fluid">
+
+                            <asp:GridView ID="userListGridView" runat="server" AutoGenerateColumns="false" CssClass="table table-hover table-condensed">
+                                <Columns>
+
+                                    <asp:BoundField DataField="UserId" HeaderText="User Id" />
+                                    <asp:BoundField DataField="FirstName" HeaderText="First Name" />
+                                    <asp:BoundField DataField="LastName" HeaderText="Last Name" />
+                                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                                    <asp:BoundField DataField="UserGroupId" HeaderText="User Group Name" />
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="EditLinkButton" CssClass="btn btn-success" runat="server" OnClick="EditLinkButton_OnClick">Edit</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="viewLinkButton" CssClass="btn btn-info" runat="server" OnClick="viewLinkButton_Click">View</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnIsDelete" runat="server" ToolTip="Delete" CssClass="btn btn-danger" OnClick="btnIsDelete_Click">Block</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function () {
+            $("#userListGridView").dataTable();
+        });
+    </script>
+</asp:Content>

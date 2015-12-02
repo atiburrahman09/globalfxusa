@@ -1,0 +1,134 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="MenuGroupList.aspx.cs" Inherits="globalfx.setting.AppMenu.MenuGroupList" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+    <link href="/Content/Style/CSSPages/AppMenuGroupList.css" rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="page-content">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="row widget-container-col ui-sortable" style="min-height: 261px;">
+            <div class="panel panel-primary" style="opacity: 1;">
+                <div class="panel-heading">
+                    <h5 class="widget-title bigger lighter">
+                        <i class="icon icon-table"></i> App. Menu Group List
+                    </h5>
+                </div>
+                <div class="grid-body">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For App.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuForAppDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuForAppDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Type
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuTypeDropDownList" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="control-group">
+                                    <h6>
+                                        &nbsp
+                                    </h6>
+                                    <asp:Button ID="getGroupListButton" runat="server" Text="Get Group List" CssClass="btn btn-info btn-sm"
+                                        OnClick="getGroupListButton_Click" />
+                                    <asp:Button ID="getAllGroupListButton" runat="server" Text="Get All Group List" CssClass="btn btn-info btn-sm"
+                                        OnClick="getAllGroupListButton_Click" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span12">
+                            <div id="menuGroupListGridContainer">
+                                <asp:GridView ID="menuGroupListGridView" runat="server" AutoGenerateColumns="false"
+                                    CssClass="table table-hover gridView">
+                                    <Columns>
+                                        <asp:BoundField DataField="MenuGroupId" HeaderText="ID" />
+                                        <asp:BoundField DataField="MenuGroupName" HeaderText="Group Name" />
+                                        <asp:BoundField DataField="ToolTipDescription" HeaderText="Description" />
+                                        <asp:BoundField DataField="IsActive" HeaderText="Active" />
+                                        <asp:BoundField DataField="MenuType" HeaderText="Type" />
+                                        <asp:BoundField DataField="MenuForApp" HeaderText="For" />
+                                        <asp:TemplateField HeaderText="">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="editLinkButton" runat="server" CssClass="btn btn-mini btn-warning"
+                                                    OnClick="editLinkButton_Click">Edit</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="activateLinkButton" runat="server" CssClass="btn btn-mini btn-success"
+                                                    OnClick="activateLinkButton_Click" OnClientClick="return confirm('Are you sure you want to activate this Menu Group?');">Activate</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="deactivateLinkButton" runat="server" CssClass="btn btn-mini btn-inverse"
+                                                    OnClick="deactivateLinkButton_Click" OnClientClick="return confirm('Are you sure you want to deactivate this Menu Group?');">Deactivate</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="deleteLinkButton" runat="server" CssClass="btn btn-mini btn-danger"
+                                                    OnClick="deleteLinkButton_Click" OnClientClick="return confirm('Are you sure you want to delete this Menu Group?');">Delete</asp:LinkButton>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function () {
+            $("#getGroupListButton").on("click", function (e) {
+                if ($('#menuForAppDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu For App. field is required.');
+                    $('#menuForAppDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuTypeDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Type field is required.');
+                    $('#menuTypeDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+            });
+
+            $("#menuGroupListGridView").dataTable({
+                "bProcessing": true,
+                "sPaginationType": "full_numbers",
+                "aLengthMenu": [[10, 15, 20, 25, 50, 100, -1], [10, 15, 20, 25, 50, 100, "All"]],
+                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [6, 7, 8, 9]}]
+            });
+        });
+    </script>
+</asp:Content>

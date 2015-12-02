@@ -1,0 +1,214 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="SetUserMenu.aspx.cs" Inherits="globalfx.setting.UserPrivilege.SetUserMenu" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+
+    <link href="/content/css/AppMenuTest.css" rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="page-content">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="row">
+            <div class="span12">
+        <div class="row widget-container-col ui-sortable" style="min-height: 261px;">
+            <div class="panel panel-primary" style="opacity: 1;">
+                <div class="panel-heading">
+                    <h5 class="widget-title bigger lighter">
+                        <i class="icon icon-table"></i>UserPrivilege <small class="white"><i class="icon icon-angle-double-right"></i>Set User Menu </small>
+                    </h5>
+                </div>
+                <div class="grid-body">
+                    <%--<div id="MenuContent">
+                        <div id="allMenuList">
+                            <asp:Menu ID="testAllMenu" runat="server" Orientation="Horizontal" StaticEnableDefaultPopOutImage="false"
+                                DynamicEnableDefaultPopOutImage="false" MaximumDynamicDisplayLevels="9" CssClass="navigation">
+                            </asp:Menu>
+                        </div>
+                        <div id="allMenuImg">
+                            <asp:ImageButton ID="refreshMenuImageButton" runat="server" AlternateText="All Menu"
+                                ToolTip="Refresh Menu" ImageUrl="~/Content/Images/Refresh-icon.png" OnClick="refreshMenuImageButton_Click" />
+                            <asp:ImageButton ID="allMenuImageButton" runat="server" AlternateText="All Menu"
+                                ToolTip="Get All Menu" ImageUrl="~/Content/Images/database-icon.png" OnClick="allMenuImageButton_Click" />
+                        </div>
+                        <div class="empty">
+                        </div>
+                    </div>--%>
+                    <hr />
+                    <div id="userPriviligePane" runat="server" visible="true">
+
+                        <div class="row">
+                            <div class="span12">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="span4">
+                                            User ID:
+                                        </div>
+                                        <div class="span8">
+                                            <asp:Label ID="userIdLabel" runat="server" CssClass="infoLabel" Text=""></asp:Label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="span4">
+                                            User Name:
+                                        </div>
+                                        <div class="span8">
+                                            <asp:Label ID="userNameLabel" runat="server" CssClass="infoLabel" Text=""></asp:Label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="span4">
+                                            User Group Id:
+                                        </div>
+                                        <div class="span8">
+                                            <asp:Label ID="userGroupNameLabel" runat="server" CssClass="infoLabel" Text=""></asp:Label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <div class="span12">
+                                <div id="userMenuSearch">
+
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <h5>Menu For App.</h5>
+                                            <asp:DropDownList ID="menuForAppDropDownList" class="form-control" runat="server"
+                                                AutoPostBack="true" OnSelectedIndexChanged="menuForAppDropDownList_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <h5 class="typo">Menu Type</h5>
+                                            <asp:DropDownList ID="menuTypeDropDownList" runat="server" class="form-control" AutoPostBack="true"
+                                                OnSelectedIndexChanged="menuTypeDropDownList_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="control-group">
+                                            <h5 class="typo">Menu Group</h5>
+                                            <asp:DropDownList ID="menuGroupDropDownList" runat="server" class="form-control"
+                                                AutoPostBack="true" OnSelectedIndexChanged="menuGroupDropDownList_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div class="span2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr id="hrList" />
+
+
+                        <div id="userMenuPane" runat="server" visible="false">
+                            <div id="listPane" class="widget-separator grid-12">
+                                <div class="row">
+                                    <div class="span12">
+                                        <div class="span5">
+
+                                            <h4>Group Wise Menu List</h4>
+                                            <asp:ListBox ID="groupWiseMenuListListBox" runat="server" CssClass="width-100"></asp:ListBox>
+                                            <asp:Label ID="countMenuLabel" runat="server" Text="Total: 0"></asp:Label>
+
+                                        </div>
+                                        <div class="span2">
+                                            <div class="margin-top-bottom-3px">
+                                                <asp:Button ID="addButton" CssClass="btn btn-warning clickProcessing width-full"
+                                                    Style="width: 100%;" runat="server" Text="Add" OnClick="addButton_Click" />
+                                            </div>
+                                            <div class="margin-top-bottom-3px">
+                                                <asp:Button ID="removeButton" CssClass="btn btn-danger clickProcessing" Style="width: 100%;"
+                                                    runat="server" Text="Remove" OnClick="removeButton_Click" />
+                                            </div>
+                                            <hr />
+                                            <div class="margin-top-bottom-3px">
+                                                <asp:Button ID="addAllButton" CssClass="btn btn-warning clickProcessing" Style="width: 100%;"
+                                                    runat="server" Text="Add All" OnClick="addAllButton_Click" />
+                                            </div>
+                                            <div class="margin-top-bottom-3px">
+                                                <asp:Button ID="removeAllButton" CssClass="btn btn-danger clickProcessing" Style="width: 100%;"
+                                                    runat="server" Text="Remove All" OnClick="removeAllButton_Click" />
+                                            </div>
+                                        </div>
+                                        <div class="span5">
+
+                                            <h4>Group Wise User Group's Menu List</h4>
+                                            <asp:ListBox ID="groupWiseUserMenuListListBox" runat="server" CssClass="width-100"></asp:ListBox>
+                                            <asp:Label ID="countUserMenuLabel" runat="server" Text="Total: 0"></asp:Label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="padding-all-5px">
+                                    <asp:Button ID="saveButton" CssClass="btn btn-primary" runat="server" Text="Save"
+                                        OnClick="saveButton_Click" />
+                                    <asp:Button ID="cancelButton" CssClass="btn btn-inverse" runat="server" Text="Cancel"
+                                        OnClick="cancelButton_Click" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+    </div>
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function () {
+            $("#saveButton").on("click", function (e) {
+                if ($('#menuForAppDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu For App. field is required.');
+                    $('#menuForAppDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuTypeDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Type field is required.');
+                    $('#menuTypeDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuGroupDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Group field is required.');
+                    $('#menuGroupDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+            });
+
+            //$(".navigation ul ul:hover").css({ display: "none" });
+            $(".navigation ul li").click(function () {
+                $(this).find('ul:first').slideToggle(400);
+            });
+        });
+    </script>
+</asp:Content>

@@ -1,0 +1,15 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="newsfeed.aspx.cs" Inherits="globalfx.a.manage.newsfeed" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="grid simple horizontal purple">
+        <div class="grid-title">
+            <h3>NEWS <span class="semi-bold">FEED</span></h3>
+        </div>
+        <div class="grid-body">
+            
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

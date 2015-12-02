@@ -1,0 +1,284 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="CreateMenu.aspx.cs" Inherits="globalfx.setting.AppMenu.CreateMenu" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="row-fluid widget-container-col ui-sortable" style="min-height: 261px;">
+            <div class="panel panel-primary" style="opacity: 1;">
+                <div class="panel-heading">
+                    <h5 class="widget-title bigger lighter">
+                        <i class="icon icon-table"></i> Create Menu
+                    </h5>
+                </div>
+                <div class="grid-body">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For App.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuForAppDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuForAppDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For Type.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuTypeDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuTypeDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For Group.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuGroupDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuGroupDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Parent Menu Level
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuLevelDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuLevelDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Filter By Sub-Parent
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="filterBySubParentDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="filterBySubParentDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Parent Menu
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="parentMenuDropDownList" runat="server">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Display
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuDisplayDropDownList" runat="server">
+                                        <asp:ListItem>----------Select----------</asp:ListItem>
+                                        <asp:ListItem Value="True" Selected="True">Yes</asp:ListItem>
+                                        <asp:ListItem Value="False">No</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Default
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuDefaultDropDownList" runat="server">
+                                        <asp:ListItem>----------Select----------</asp:ListItem>
+                                        <asp:ListItem Value="True">Yes</asp:ListItem>
+                                        <asp:ListItem Value="False" Selected="True">No</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Use as Sub-Parent
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="subParentMenuDropDownList" runat="server">
+                                        <asp:ListItem>----------Select----------</asp:ListItem>
+                                        <asp:ListItem Value="True">Yes</asp:ListItem>
+                                        <asp:ListItem Value="False" Selected="True">No</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Target
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuTargetDropDownList" runat="server">
+                                        <asp:ListItem>_blank</asp:ListItem>
+                                        <asp:ListItem Selected="True">_parent</asp:ListItem>
+                                        <asp:ListItem>_search</asp:ListItem>
+                                        <asp:ListItem>_self</asp:ListItem>
+                                        <asp:ListItem>_top</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Name
+                                    </h6>
+                                    <asp:TextBox CssClass="form-control" ID="menuNameTextBox" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Display Name
+                                    </h6>
+                                    <asp:TextBox CssClass="form-control" ID="displayNameTextBox" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Description
+                                    </h6>
+                                    <asp:TextBox CssClass="form-control" ID="descriptionTextBox" runat="server" ></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu Url
+                                    </h6>
+                                    <asp:TextBox CssClass="form-control" ID="urlTextBox" runat="server" ></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h6>
+                                        Image Url
+                                    </h6>
+                                    <asp:TextBox CssClass="form-control" ID="imageURLTextBox" runat="server" ></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid ">
+                        <div class="span12">
+                            <asp:Button ID="saveButton" runat="server" ValidationGroup="6" Text="Save" CssClass="btn btn-primary"
+                                Width="105px" Height="45px" style="margin-left: 25px;" Font-Bold="True" OnClick="saveButton_Click" />
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function () {
+            $("#saveButton").on("click", function (e) {
+                if ($('#menuForAppDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu For App. field is required.');
+                    $('#menuForAppDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuTypeDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Type field is required.');
+                    $('#menuTypeDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuGroupDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Group field is required.');
+                    $('#menuGroupDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuLevelDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Level field is required.');
+                    $('#menuLevelDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#parentMenuDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Parent Menu field is required.');
+                    $('#parentMenuDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuDisplayDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Display field is required.');
+                    $('#menuDisplayDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#menuDefaultDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Menu Default field is required.');
+                    $('#menuDefaultDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+
+                if ($('#subParentMenuDropDownList option:selected').text() == '----------Select----------') {
+                    alert('Use as Sub-Parent field is required.');
+                    $('#subParentMenuDropDownList').focus();
+                    e.preventDefault();
+                    $("#form1").valid();
+                    //return false;
+                }
+            });
+
+            $("#menuNameTextBox").rules("add", {
+                required: true
+            });
+
+            $("#displayNameTextBox").rules("add", {
+                required: true
+            });
+
+            $("#urlTextBox").rules("add", {
+                required: true
+            });
+        });
+    </script>
+</asp:Content>

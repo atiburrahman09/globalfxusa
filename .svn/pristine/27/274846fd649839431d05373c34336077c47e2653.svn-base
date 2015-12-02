@@ -1,0 +1,140 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="globalfx.index" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    
+    <div id="myCarousel" class="carousel slide">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+
+        </ol>
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            <div class="active item"><a href="#">
+                <img src="assets/img/slider/gold_banner.jpg" /></a></div>
+            <div class="item"><a href="#">
+                <img src="assets/img/slider/safe_big_cricket.jpg" /></a></div>
+            <div class="item"><a href="#">
+                <img src="assets/img/slider/scalping-wars.jpg" /></a></div>
+
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+        
+    <div class="aboutus investment">
+        <div class="container">
+            <h2 class="text-center">What is <strong class="semi-bold">GlobalFX </strong></h2>
+            <div class="row-fluid">
+                <p class="text-justify">
+                    <strong class="semi-bold">GlobalFX </strong>have managed to conquer the hearts and minds of many of their clients 
+                            with the effort and dedication that they put into providing top notch services
+                            to their clients. For those who are in the market for a reliable and efficient 
+                            forex broker, GlobalFX certainly comes highly recommended
+                       
+                </p>
+
+                <p>
+                    GLOBAL FX Investment Company makes trading rewarding and enjoyable with its user-friendly environment, fast execution, expertise and reliability. Moreover, our clients do not have to make large deposits to enjoy considerable benefits. Our attractive promotional packages, contests and compensation services make financial trading exciting for everyone.
+                            Thanks to our extensive daily coverage of events affecting the Forex market, our clients are always on top of the latest financial news.
+                       
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="aboutus investment">
+                    <h2 class="semi-bold text-center">GobalFX</h2>
+                    <h3 class="text-center">trust asset management on the Forex market</h3>
+                    <p>
+                        <strong class="semi-bold">GobalFX</strong> offers trust asset management 
+                        services on the international exchange Forex market. 
+                        There is no need for you to trade yourself. Entrust this job to our professional traders.
+                       
+                    </p>
+                    <p>
+                        <img style="width: 100%;" src="assets/img/men.png" />
+                    </p>
+
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <p><strong class="semi-bold">Investor —</strong><br />
+                                a person who provides
+                                <br />
+                                his or her funds in trust</p>
+                        </div>
+                        <div class="span6">
+                            <p class="text-right"><strong class="semi-bold">GobalFX—</strong>
+                                <br />
+                                company, which performs trust<br />
+                                management on the Forex market</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="aboutus investment">
+                    <h2 class="semi-bold text-center">Annual financial statistics</h2>
+                    <h3 class="text-center">trust asset management on the Forex market</h3>
+                    <p>
+                        History of <strong class="semi-bold">GodalFX</strong> activities on the Forex market over 
+                            the period of 2007 – 2013 (average daily profit amount in %).
+                       
+                    </p>
+                    <p>
+                        <img style="width: 100%;" src="assets/img/annual.png" />
+                    </p>
+                    <p class="note"><strong class="semi-bold">Note:</strong> To calculate your expected future return, please use our financial calculator.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+   
+    <div class="clearfix" ></div>
+    <div class="getway row-fluid">
+        <div class="text-center ">
+            <ul>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-american-express.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-discover.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-mastercard.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-paypal.jpg" />
+                </a></li>
+                <li><a href="#">
+                    <img src="assets/img/cc/ico-visa.jpg" />
+                </a></li>
+            </ul>
+            <p>
+                Risk Warning: Trading on financial markets carries risks. Contracts for Difference (‘CFDs’) 
+                        are complex financial products that are traded on margin. Trading CFDs carries a high level 
+                        of risk since leverage can work both to your advantage and disadvantage. As a result, CFDs may not be suitable for all
+                        investors because you may lose all your invested capital. You should not risk more than you are prepared to lose.
+                        Before deciding to trade, you need to ensure that you understand the risks involved taking into account your investment 
+                        objectives and level of experience
+                   
+            </p>
+        </div>
+</div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.carousel').carousel();
+        });
+            </script>
+</asp:Content>

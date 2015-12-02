@@ -1,0 +1,111 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Global.Core.DAL;
+using Lumex.Tech;
+
+namespace Global.Core.BLL
+{
+    public class NewsFeedBLL
+    {
+        public bool SaveNewsInfo()
+        {
+            NewsFeedDAL newsFeedDal = new NewsFeedDAL();
+            bool status = false;
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                DataTable dt = newsFeedDal.SaveNewsInfo(this, db);
+
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                }
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return status;
+        }
+
+        public string Title { get; set; }
+
+        public string BodyText { get; set; }
+
+        public string Value { get; set; }
+
+        public DataTable GetNewsFeedList()
+        {
+            NewsFeedDAL newsFeedDal = new NewsFeedDAL();
+            
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                DataTable dt = newsFeedDal.GetNewsFeedList(db);
+                db.Stop();
+                return dt;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+         
+        }
+
+        public string NewsFeedId { get; set; }
+
+        public DataTable GetNewsFeedDataById()
+        {
+            DataTable dt = new DataTable();
+            NewsFeedDAL newsFeedDal=new NewsFeedDAL();
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start();
+                dt = newsFeedDal.GetNewsFeedDataById(this, db);
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            return dt;
+        }
+
+        public bool UpdateNewsInfo()
+        {
+            NewsFeedDAL newsFeedDal = new NewsFeedDAL();
+            bool status = false;
+
+            try
+            {
+                LumexDBPlayer db = LumexDBPlayer.Start(true);
+                DataTable dt = newsFeedDal.UpdateNewsInfo(this, db);
+
+                if (dt.Rows.Count > 0)
+                {
+                    status = true;
+                }
+                db.Stop();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return status;
+        }
+    }
+}
+

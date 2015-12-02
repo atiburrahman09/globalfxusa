@@ -1,0 +1,184 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true"
+    CodeBehind="AdminMenuSorting.aspx.cs" Inherits="globalfx.setting.AppMenu.AdminMenuSorting" %>
+
+<asp:Content ID="headContent" ContentPlaceHolderID="headPlaceHolder" runat="server">
+    <link href="/Content/Style/PageCSS/AdminMenuSorting.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/Style/PageCSS/AppMenuTest.css" rel="stylesheet" type="text/css" />
+</asp:Content>
+<asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="page-content">
+        <div id="msgbox" runat="server" visible="false" class="alert alert-block alert-success">
+            <button data-dismiss="alert" class="close" type="button">
+                <i class="icon icon-times"></i>
+            </button>
+            <h4>
+                <asp:Label ID="msgTitleLabel" runat="server" Text=""></asp:Label>
+            </h4>
+            <asp:Label ID="msgDetailLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div class="row widget-container-col ui-sortable" style="min-height: 261px;">
+            <div class="panel panel-primary" style="opacity: 1;">
+                <div class="panel-heading">
+                    <h5 class="widget-title bigger lighter">
+                        <i class="icon icon-table"></i> Sorting Menu List
+                    </h5>
+                </div>
+                <div class="grid-body">
+                    <div class="row">
+                        <div class="span12">
+                            <div id="MenuContent">
+                                <div id="allMenuList">
+                                    <asp:Menu ID="testAllMenu" runat="server" Orientation="Horizontal" StaticEnableDefaultPopOutImage="false"
+                                        DynamicEnableDefaultPopOutImage="false" MaximumDynamicDisplayLevels="9" CssClass="navigation">
+                                    </asp:Menu>
+                                </div>
+                                <div id="allMenuImg">
+                                    <asp:ImageButton ID="refreshMenuImageButton" runat="server" AlternateText="All Menu"
+                                        ToolTip="Refresh Menu" ImageUrl="~/Content/Images/Refresh-icon.png" OnClick="refreshMenuImageButton_Click" />
+                                    <asp:ImageButton ID="allMenuImageButton" runat="server" AlternateText="All Menu"
+                                        ToolTip="Get All Menu" Height="48px" ImageUrl="~/Content/Images/database-icon.png" OnClick="allMenuImageButton_Click" />
+                                </div>
+                                <div class="empty">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For App.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuForAppDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuForAppDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For Type.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuTypeDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuTypeDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Menu For Group.
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuGroupDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuGroupDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="control-group">
+                                    <h6>
+                                        Parent Menu Level
+                                    </h6>
+                                    <asp:DropDownList CssClass="form-control" ID="menuLevelDropDownList" runat="server"
+                                        AutoPostBack="true" OnSelectedIndexChanged="menuLevelDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%--<table class="inputControlContainer">
+                        <tr>
+                            <td>
+                                <label>
+                                    Menu For App.
+                                </label>
+                                <asp:DropDownList ID="menuForAppDropDownList" runat="server" AutoPostBack="true"
+                                    OnSelectedIndexChanged="menuForAppDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <label>
+                                    Menu Type
+                                </label>
+                                <asp:DropDownList ID="menuTypeDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="menuTypeDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <label>
+                                    Menu Group
+                                </label>
+                                <asp:DropDownList ID="menuGroupDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="menuGroupDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <label>
+                                    Parent Menu Level
+                                </label>
+                                <asp:DropDownList ID="menuLevelDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="menuLevelDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>--%>
+                    <hr id="hrList" />
+                    <div id="menuSortingPane" runat="server" visible="false">
+                        <div class="row">
+                            <div class="span12">
+                                <div class="col-md-3">
+                                    <div class="control-group">
+                                        <h6>
+                                            Parent Menu List
+                                        </h6>
+                                        <asp:ImageButton ID="refreshImageButton" ToolTip="Refresh" runat="server" Enabled="false"
+                                            ImageUrl="~/Content/Images/refresh1.png" OnClick="refreshImageButton_Click" />
+                                        <asp:ListBox ID="groupWiseMenuListListBox" runat="server"></asp:ListBox>
+                                        <asp:Label ID="countSubParentMenuLabel" runat="server" Text="Total: 0"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="control-group">
+                                        <h6>
+                                            &nbsp
+                                        </h6>
+                                        <asp:Button ID="getChildsButton" CssClass="btn btn-info" runat="server" Enabled="false"
+                                            Text=">>" OnClick="getChildsButton_Click" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="control-group">
+                                        <h6>
+                                            Child Menu List
+                                        </h6>
+                                        <asp:ImageButton ID="upImageButton" ToolTip="Up" runat="server" Enabled="false" ImageUrl="~/Content/Images/uparrow.png"
+                                            OnClick="upImageButton_Click" />
+                                        <asp:ImageButton ID="downImageButton" ToolTip="Down" runat="server" Enabled="false"
+                                            ImageUrl="~/Content/Images/downarrow.png" OnClick="downImageButton_Click" />
+                                        <asp:ListBox ID="groupWiseUserMenuListListBox" runat="server"></asp:ListBox>
+                                        <asp:Label ID="countChildMenuLabel" runat="server" Text="Total: 0"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-sm-12">
+                                <asp:Button ID="saveButton" runat="server" ValidationGroup="6" Text="Save" CssClass="btn btn-primary"
+                                    Width="105px" Height="35px" Font-Bold="True" OnClick="saveButton_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <asp:HiddenField ID="parentMenuIdHiddenField" runat="server" />
+</asp:Content>
+<asp:Content ID="scriptContent" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        $(function () {
+            //$(".navigation ul ul").css({ display: "none" });
+            $(".navigation ul li").click(function () {
+                $(this).find('ul:first').slideToggle(400);
+            });
+        });
+    </script>
+</asp:Content>

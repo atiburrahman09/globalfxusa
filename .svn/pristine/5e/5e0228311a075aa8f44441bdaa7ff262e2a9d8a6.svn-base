@@ -1,0 +1,65 @@
+﻿using System;
+using System.Data;
+using System.Web.UI;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.setting.UserGroup
+{
+    public partial class View : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                msgbox.Visible = false;
+
+                if (!IsPostBack)
+                {
+                    LumexSessionManager.Add("CenterId", "CNT001");
+                    LumexSessionManager.Add("ActiveEmpId", "Developer");
+
+                    idLabel.Text = userGroupIdForViewHiddenField.Value = LumexSessionManager.Get("UserGroupIdForView").ToString().Trim();
+                    GetUserGroupById(userGroupIdForViewHiddenField.Value.Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+        }
+
+        protected void MyAlertBox(string alertScript)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ServerControlScript", alertScript, true);
+        }
+
+        protected void GetUserGroupById(string userGroupId)
+        {
+            UserGroupBLL userGroup = new UserGroupBLL();
+
+            try
+            {
+                DataTable dt = userGroup.GetUserGroupById(userGroupId);
+
+                if (dt.Rows.Count > 0)
+                {
+                    userGroupNameLabel.Text = dt.Rows[0]["UserGroupName"].ToString();
+                    descriptionLabel.Text = dt.Rows[0]["Description"].ToString();
+                }
+                else
+                {
+                    msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Data Not Found!!!"; msgDetailLabel.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                msgbox.Attributes.Add("Class", "alert alert-warning"); msgbox.Visible = true; msgTitleLabel.Text = "Exception!!!"; msgDetailLabel.Text = ex.Message;
+            }
+            finally
+            {
+                userGroup = null;
+            }
+        }
+    }
+}

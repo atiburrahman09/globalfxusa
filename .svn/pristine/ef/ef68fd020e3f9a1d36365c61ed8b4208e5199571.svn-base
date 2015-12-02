@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.setting.User
+{
+    public partial class UserInfoList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UpdateUserInfo();
+            btnSave.Text = "Update";
+        }
+        protected void txtbxUserName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                iconuserName.Attributes.Remove("class");
+                lblUsernameNote.Visible = false;
+                UserBLL user = new UserBLL();
+                Regex reg = new Regex(@"^[a-z0-9_-]{5,15}$");
+
+                if (reg.IsMatch(txtbxUserName.Text))
+                {
+                    if (user.CheckDuplicateUser(txtbxUserName.Text.Trim()))
+                    {
+                        //  iconuserName.Attributes.Remove("class");
+                        iconuserName.Attributes.Add("class", "icon icon-ban-circle text-error");
+                        hdnfldduplicate.Value = "1";
+                        txtbxUserName.Focus();
+                    }
+                    else
+                    {
+                        // iconuserName.Attributes.Remove("class");
+                        iconuserName.Attributes.Add("class", "icon icon-ok-sign text-success");
+                        hdnfldduplicate.Value = "0";
+                        txtbxFirstName.Focus();
+                    }
+                }
+                else
+                {
+                    lblUsernameNote.Visible = true;
+                    lblUsernameNote.Text = "User Name must be 5-15 char small letter alpha char (_ allow) ei. jhonsmith_ or jhonsmith ";
+
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void UpdateUserInfo()
+        {
+            UserBLL aUser = new UserBLL();
+           
+            try
+            {
+                
+                aUser.UserId = LumexSessionManager.Get("UserIdForUpdate").ToString(); 
+                DataTable dt=new DataTable();
+                dt = aUser.GetUserInfoById(aUser.UserId);
+                //hdnfldduplicate.Value = aUser.UserId;
+                if(dt.Rows.Count>0)
+                {
+
+                    txtbxFirstName.Text = dt.Rows[0]["FirstName"].ToString();
+                    txtbxLastName.Text = dt.Rows[0]["LastName"].ToString();
+                    txtbxPassportNo.Text = dt.Rows[0]["PassportNo"].ToString();
+                    txtbxAddress.Text = dt.Rows[0]["Address"].ToString();
+                    ddlCountry.SelectedValue = dt.Rows[0]["Country"].ToString();
+                    txtbxHouse.Text = dt.Rows[0]["House"].ToString();
+                    txtbxStreet.Text = dt.Rows[0]["Street"].ToString();
+                    txtbxArea.Text = dt.Rows[0]["Area"].ToString();
+                    txtbxCell.Text = dt.Rows[0]["MobileNo"].ToString();
+                    txtbxEmail.Text = dt.Rows[0]["Email"].ToString();
+                    txtcontactPerson.Text = dt.Rows[0]["EmrName"].ToString();
+                    ddlContactRelation.SelectedValue = dt.Rows[0]["RelationName"].ToString();
+                    txtbxContactAddress.Text = dt.Rows[0]["EmrAdress"].ToString();
+                    txtbxContactMobile.Text = dt.Rows[0]["EmrMobile"].ToString();
+                    txtContactEmail.Text = dt.Rows[0]["EmrEmail"].ToString();
+                    ddlContactCountry.SelectedValue = dt.Rows[0]["EmarCountryName"].ToString();
+                    aUser.IsActive = dt.Rows[0]["IsActive"].ToString(); 
+                    aUser.Isvarified = dt.Rows[0]["IsVarified"].ToString();
+                    aUser.Createdby = dt.Rows[0]["CreatedBy"].ToString();
+                    aUser.CreatedFrom = dt.Rows[0]["CreatedFrom"].ToString();
+                    aUser.UserGroupId = dt.Rows[0]["UserGroupId"].ToString();
+                    aUser.PerPhoto=dt.Rows[0]["PerPhoto"].ToString();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+    }
+}

@@ -1,0 +1,10 @@
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\Global.Core\bin\Debug\Global.Core.dll
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\Global.Core\bin\Debug\Global.Core.pdb
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.dll
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.pdb
+C:\Users\lmxDev\Documents\Visual Studio 2013\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.csprojResolveAssemblyReference.cache
+E:\Atib\Projects\globalfx\globalfx\Global.Core\bin\Debug\Global.Core.dll
+E:\Atib\Projects\globalfx\globalfx\Global.Core\bin\Debug\Global.Core.pdb
+E:\Atib\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.dll
+E:\Atib\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.pdb
+E:\Atib\Projects\globalfx\globalfx\Global.Core\obj\Debug\Global.Core.csprojResolveAssemblyReference.cache

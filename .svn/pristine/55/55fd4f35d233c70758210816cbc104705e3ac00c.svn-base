@@ -1,0 +1,115 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Global.Core.BLL;
+using Lumex.Tech;
+
+namespace globalfx.setting.User
+{
+    public partial class UserInfoList : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UpdateUserInfo();
+            btnSave.Text = "Update";
+        }
+        protected void txtbxUserName_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                iconuserName.Attributes.Remove("class");
+                lblUsernameNote.Visible = false;
+                UserBLL user = new UserBLL();
+                Regex reg = new Regex(@"^[a-z0-9_-]{5,15}$");
+
+                if (reg.IsMatch(txtbxUserName.Text))
+                {
+                    if (user.CheckDuplicateUser(txtbxUserName.Text.Trim()))
+                    {
+                        //  iconuserName.Attributes.Remove("class");
+                        iconuserName.Attributes.Add("class", "icon icon-ban-circle text-error");
+                        hdnfldduplicate.Value = "1";
+                        txtbxUserName.Focus();
+                    }
+                    else
+                    {
+                        // iconuserName.Attributes.Remove("class");
+                        iconuserName.Attributes.Add("class", "icon icon-ok-sign text-success");
+                        hdnfldduplicate.Value = "0";
+                        txtbxFirstName.Focus();
+                    }
+                }
+                else
+                {
+                    lblUsernameNote.Visible = true;
+                    lblUsernameNote.Text = "User Name must be 5-15 char small letter alpha char (_ allow) ei. jhonsmith_ or jhonsmith ";
+
+                }
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void UpdateUserInfo()
+        {
+            UserBLL aUser = new UserBLL();
+           
+            try
+            {
+                
+                aUser.UserId = LumexSessionManager.Get("UserIdForUpdate").ToString(); 
+                DataTable dt=new DataTable();
+                dt = aUser.GetUserInfoById(aUser.UserId);
+                //hdnfldduplicate.Value = aUser.UserId;
+                foreach (DataRow row in dt.Rows)
+                {
+
+
+                    txtbxFirstName.Text = row["FirstName"].ToString();
+                    txtbxLastName.Text = aUser.LastName;
+                    txtbxPassportNo.Text = aUser.PassportNo;
+                    txtbxAddress.Text = aUser.Address;
+                    ddlCountry.SelectedValue = aUser.Country;
+                    txtbxHouse.Text = aUser.House;
+                    txtbxStreet.Text = aUser.Street;
+                    txtbxArea.Text = aUser.Area;
+                    txtbxCell.Text = aUser.MobileNo;
+                    txtbxEmail.Text = aUser.Email;
+                    txtcontactPerson.Text = aUser.EmrName;
+                    ddlContactRelation.SelectedValue = aUser.EmrRelation;
+                    txtbxContactAddress.Text = aUser.EmrAddress;
+                    txtbxContactMobile.Text = aUser.EmrMobile;
+                    txtContactEmail.Text = aUser.EmeEmail;
+                    ddlContactCountry.SelectedValue = aUser.EmeCountry;
+                    //aUser.UserGroupId; 
+                    txtpxPasswordset.Text = aUser.Password;
+                    retypePassword.Text = aUser.ActualPass;
+                    txtbxPin.Text = aUser.UserPin;
+                    //aUser.IsActive = 
+                    //aUser.PerPhoto 
+                    //aUser.Isvarified = 
+                    //aUser.Createdby = 
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+    }
+}

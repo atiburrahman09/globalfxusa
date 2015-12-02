@@ -1,0 +1,71 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="globalfx._default" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="headPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContentPlaceHolder" runat="server">
+    <div class="row-fluid">
+        <asp:Label ID="lblUserId" Visible="False" runat="server" Text='<%# Eval("UserId")%>' />
+        <div class="span6">
+            <div class=" tiles white span12">
+               
+                <div class="tiles white">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div class="user-profile-pic">
+                                <img width="69" height="69"  src="/assets/img/user.png">
+                            </div>
+                          <%--  <div class="user-mini-description">
+                                <h3 class="text-success semi-bold">
+                                    <asp:Label ID="lvlLeft" runat="server" Text="2548"></asp:Label>
+                                </h3>
+                                <h5>Left</h5>
+                                <h3 class="text-success semi-bold">
+                                    <asp:Label ID="lvlRight" runat="server" Text="457"></asp:Label>
+                                </h3>
+                                <h5>Right</h5>
+                            </div>--%>
+                        </div>
+                        <div class="span8 user-description-box text-right pull-right ">
+                            <h4 class="semi-bold no-margin">
+                                <asp:Label ID="lvlName" runat="server" Text=""></asp:Label></h4>
+                            <h6 class="no-margin">
+                                <asp:Label ID="lvlPosition" runat="server" Text=""></asp:Label></h6>
+                            <br>
+                            <p>
+                                <i class="icon-mobile-phone"></i>
+                                <asp:Label ID="lvlMobile" runat="server" Text=""></asp:Label>
+                            </p>
+                            <p>
+                                <i class="icon-globe"></i>
+                                <asp:Label ID="lvlEmail" runat="server" Text=""></asp:Label>
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+
+            <h3 class="text-center">Account <span class="semi-bold">Activity</span></h3>
+            <asp:Label ID="lvlIsActive" runat="server" Text=""></asp:Label>
+            <asp:Button ID="btnActive" runat="server" CssClass="btn btn-primary" Text="Active" Visible="False" />
+            <asp:Label ID="lvlLeftInfo" runat="server" Text="" Visible="False"></asp:Label>
+            <asp:Label ID="lvlRightInfo" runat="server" Text="" Visible="False"></asp:Label>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="span6 pull-left" >
+        </div>
+        <div class="span6 pull-right">
+
+
+            <div class="row-fluid">
+                <h3 class="text-center">Total <span class="semi-bold">Account</span><span class="semi-bold">Summary</span></h3>
+            </div>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="scriptContentPlaceHolder" runat="server">
+</asp:Content>

@@ -1,0 +1,148 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lumex.Tech;
+
+namespace Global.Core.DAL
+{
+    public class UserAccountDLL
+    {
+        internal System.Data.DataTable GetTransiction(BLL.UserAccountBLL userAccountBLL, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+        internal System.Data.DataTable GetUserPlacementInfoById(string UserId, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+                dt = db.ExecuteDataTable("SELECT  [Serial],[UserId],[RefferId],[PleacementId],[PlacePosition],[StakeId],[StakeKey],[JoinDate],[isChecked],[CheckedDate],[ActiveDate],[JoinFrom],[ActiveFrom] FROM [dbo].[tblStakeJoining] where [UserId] =@UserId ");
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+
+
+        internal DataTable getAccountSummaryById(string UserId, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                db.AddParameters("@UserId", UserId);
+                dt = db.ExecuteDataTable("SELECT [Serial],[UserId],isnull( [Income],0),isnull( [Deposit],0),isnull( [Commission],0),isnull( [FxFund],0),isnull( [TotalIncome],0) FROM [dbo].[tblUserAccounts] where [UserId] =@UserId ");
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+
+        internal DataTable getUserIncomeStatementById(string UserId, string FromDate, string ToDate, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+
+                db.AddParameters("@UserId", UserId);
+                db.AddParameters("@FromDate", FromDate);
+                db.AddParameters("@ToDate", ToDate);
+                dt = db.ExecuteDataTable("GET_USER_RECEIVE_PAYMENT_BY_DATE_RANGE", true);
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+
+        internal DataTable UpdateUserAccount(string UserId, string StakeId, string StakeKey, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+//                @UserId	varchar(50)	,
+//@StakeId	nvarchar(10)	,
+//@StakeKey varchar(10),
+
+                db.AddParameters("@UserId", UserId);
+                db.AddParameters("@StakeId", StakeId);
+                db.AddParameters("@StakeKey", StakeKey);
+                db.AddParameters("@ActiveFrom", LumexLibraryManager.GetTerminal());
+                dt = db.ExecuteDataTable("[Update_USER_ACCOUNT_ACTIVATION_BY_STAKE_KEY]");
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+
+
+        internal DataTable InsertReceivePayment(BLL.StakeInfoBLL aUserBll, Lumex.Tech.LumexDBPlayer db)
+        {
+            bool status = true;
+            DataTable dt = new DataTable();
+            try
+            {
+                //@UserId varchar(30),
+            //@RefferId varchar(30),
+            //@Commission decimal(18,2),
+            //@CreatedFrom varchar(50)
+                db.AddParameters("@UserId", aUserBll.UserId);
+                db.AddParameters("@RefferId", aUserBll.RefferId);
+                db.AddParameters("@StakeKey", aUserBll.StakeId);
+                db.AddParameters("@ActiveFrom", aUserBll.ActiveFrom);
+                dt = db.ExecuteDataTable("[INSERT_RECEIVE_PAYMENT_WHEN_COMMISSION]");
+            }
+            catch (Exception)
+            {
+
+                throw;
+
+            }
+
+            return dt;
+        }
+    }
+}
